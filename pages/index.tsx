@@ -1,4 +1,6 @@
+import OurStorySection from "@/components/Home/OurStorySection";
 import Navbar from "../components/Navbar";
+import HeroSection from "@/components/Home/HerSection";
 
 export default function Home() {
   return (
@@ -6,15 +8,13 @@ export default function Home() {
       <Navbar />
 
       {/* Add padding top equal to navbar height (e.g., 80px) */}
-      <main className="container pt-5 " style={{ marginTop: "8rem" }}>
+      <main className="container pt-5 " style={{  }}>
         <section className="mb-5">
-          <h2 className="text-primary fw-bold mb-3">Section 1</h2>
-          <p>This is the first section content.</p>
+        <HeroSection/>
         </section>
 
         <section className="mb-5">
-          <h2 className="text-primary fw-bold mb-3">Section 2</h2>
-          <p>This is the second section content.</p>
+        <OurStorySection />
         </section>
 
         <section className="mb-5">

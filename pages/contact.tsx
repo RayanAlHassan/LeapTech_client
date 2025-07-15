@@ -6,7 +6,7 @@ export default function Home() {
       <Navbar />
 
       {/* Add padding top equal to navbar height (e.g., 80px) */}
-      <main className="container pt-5 " style={{ marginTop: "8rem" }}>
+      <main className="container pt-5 " style={{ }}>
         <section className="mb-5">
           <h2 className="text-primary fw-bold mb-3">Section 1</h2>
           <p>This is the first section content.</p>
