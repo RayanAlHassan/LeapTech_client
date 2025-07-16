@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 export default function Home() {
   return (
     <>
-      <Navbar />
 
       {/* Add padding top equal to navbar height (e.g., 80px) */}
       <main className="container pt-5 " style={{  }}>

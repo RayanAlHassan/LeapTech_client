@@ -1,14 +1,24 @@
+/* In global.css */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+
 :root {
   --navbar-bg: #19335d;
   --text-color: #ffffff;
   --accent-blue: #007bff;
+
+
+  --font-title: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+
+  font-family: var(--font-body);
 }
 
 /* ========== HERO SECTION ========== */
@@ -17,12 +27,43 @@ body {
 }
 
 .hero-title {
-  font-size: 2.75rem;
+  font-size: clamp(1.75rem, 4vw, 2.75rem); /* fluid size */
   font-weight: 700;
-  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  font-family: var(--font-title);
+  text-shadow: 1px 1px 3px rgba(25, 51, 93, 0.2);
   line-height: 1.3;
   color: var(--navbar-bg);
 }
+
+.hero-section {
+  height: 75vh;
+  background: linear-gradient(to left, #ffffff, #f0f4f8);
+}
+
+@media (max-width: 767px) {
+  .hero-section {
+    height: auto; /* allow content to define height */
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (max-width: 991.98px) {
+  .hero-section .col-lg-6 {
+    text-align: center; /* Center text horizontally on stacked */
+    align-items: center !important; /* Center flex items vertically if flex */
+  }
+
+  .hero-section .col-lg-6 .animated-text-box {
+    margin: 0 auto;
+  }
+}
+
+
 
 /* ========== LOTTIE CONTAINER ========== */
 .animation-transform {
@@ -42,40 +83,22 @@ body {
 /* Text entrance + shakiness */
 .animated-text-box {
   opacity: 0;
-  transform: translateY(-40px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  font-weight: 500; /* Match button thickness */
+  transform: translateY(20px);
+  animation: fadeSlideUp 1s ease forwards;
+  animation-delay: 0.3s;
 }
 
-.show-text {
-  opacity: 1;
-  transform: translateY(0);
-  animation: smoothDropAndShake 1.6s ease forwards;
-}
-
-@keyframes smoothDropAndShake {
+@keyframes fadeSlideUp {
   0% {
-    transform: translateY(-60px);
     opacity: 0;
-  }
-  50% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  70% {
-    transform: translateY(-3px);
-  }
-  85% {
-    transform: translateY(2px);
-  }
-  95% {
-    transform: translateY(-1px);
+    transform: translateY(40px);
   }
   100% {
-    transform: translateY(0);
     opacity: 1;
+    transform: translateY(0);
   }
 }
+
 
 /* ========== Button ========== */
 .primary-button {
@@ -110,4 +133,163 @@ body {
   75% {
     transform: translateY(-2px);
   }
+}
+/* ///////////////Our story section//////////// */
+.our-story-section {
+  background: linear-gradient(135deg, var(--navbar-bg) 30%, var(--accent-blue) 100%);
+  width: 99vw;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.story-text {
+  max-width: 800px;
+  margin-bottom: 1.5rem;
+  transition: max-height 0.3s ease;
+}
+
+.story-text.clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.story-text.expanded {
+  -webkit-line-clamp: unset;
+  display: block;
+}
+.our-story-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  position: relative;
+}
+
+.story-underline {
+  height: 4px;
+  width: 0; /* start closed */
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.5) 50%, #ffffff 100%);
+  border-radius: 10px;
+  margin: 0 auto 1rem auto;
+  animation: underlineSlide 4s ease-in-out infinite;
+}
+
+  
+@keyframes underlineSlide {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  50% {
+    width: 80px; /* full width */
+    opacity: 1;
+  }
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+/* Base Our Story background — animated continuously */
+/* Our Story base section */
+/* Base Our Story background - stable dark blue */
+.our-story-section {
+  background: #19335d; /* solid dark blue (navbar color) */
+  transition: background 1.5s ease;
+  width: 99vw;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Patched gradient background animation only when NOT expanded */
+.our-story-section.collapsed-animated {
+  background: linear-gradient(
+    135deg,
+    #19335d 30%,         /* dark blue patch */
+    #2c4072 40%,         /* slightly lighter blue patch */
+    #1f365f 50%,         /* patch of darkish blue */
+    #273a68 60%,         /* subtle grey-blue patch */
+    #19335d 70%
+  );
+  background-size: 300% 300%;
+  animation: patchedBackground 2s steps(4, end) infinite;
+}
+
+/* Stable solid background when expanded */
+.our-story-section.expanded-bg {
+  background: #19335d; /* stable dark blue, no gradient */
+  animation: none;
+}
+
+/* Patched stepped animation */
+@keyframes patchedBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+.story-underline {
+  height: 4px;
+  width: 0; /* start closed */
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.5) 50%, #ffffff 100%);
+  border-radius: 10px;
+  margin: 0 auto 1rem auto;
+  animation: underlineSlide 4s ease-in-out infinite;
+}
+
+/* Stop underline animation and keep width on expanded */
+.our-story-section.expanded-bg .story-underline {
+  width: 80px;
+  opacity: 1;
+  animation: none;
+}
+
+@keyframes underlineSlide {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  50% {
+    width: 80px; /* full width */
+    opacity: 1;
+  }
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+.highlight-word {
+  position: relative;
+  cursor: pointer; /* pointer cursor on each word */
+  color: white;
+  font-weight: 400;
+  outline: none;
+  transition: color 0.3s ease;
+}
+
+.highlight-word::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 4px;
+  transition: background 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+}
+
+.highlight-word:hover,
+.highlight-word:focus {
+  color: white;
+}
+
+.highlight-word:hover::after,
+.highlight-word:focus::after {
+  background: rgba(255, 255, 255, 0.25);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
 }
