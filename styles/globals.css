@@ -6,7 +6,7 @@
   --navbar-bg: #19335d;
   --text-color: #ffffff;
   --accent-blue: #007bff;
-
+  --gray-bg: #f1f3f5;
 
   --font-title: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -20,6 +20,28 @@ body {
 
   font-family: var(--font-body);
 }
+/* ///////////////////// scroll Bar color.............. */
+/* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px; /* scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--navbar-bg);
+  border-radius: 6px;
+  border: 3px solid transparent; /* for some padding around thumb */
+  background-clip: content-box;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--navbar-bg) transparent;
+}
 
 /* ========== HERO SECTION ========== */
 .text-blue {
@@ -27,7 +49,7 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(1.75rem, 4vw, 2.75rem); /* fluid size */
+  font-size: clamp(2.25rem, 5vw, 4.5rem); /* Small on phones, large on wide screens */
   font-weight: 700;
   font-family: var(--font-title);
   text-shadow: 1px 1px 3px rgba(25, 51, 93, 0.2);
@@ -39,7 +61,7 @@ body {
   height: 75vh;
   background: linear-gradient(to left, #ffffff, #f0f4f8);
 }
-
+ 
 @media (max-width: 767px) {
   .hero-section {
     height: auto; /* allow content to define height */
@@ -52,8 +74,12 @@ body {
     max-width: 720px;
   }
 }
-@media (max-width: 991.98px) {
+@media (max-width:1124px) {
   .hero-section .col-lg-6 {
+    width: 100%;
+    height: 50%;
+    flex-wrap: wrap;
+    flex-direction:column ;
     text-align: center; /* Center text horizontally on stacked */
     align-items: center !important; /* Center flex items vertically if flex */
   }
@@ -63,6 +89,29 @@ body {
   }
 }
 
+@media (min-width: 345px) and (max-width: 540px) {
+  .hero-section {
+    height: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Target the right column (animation container) */
+  .hero-section .col-lg-6:last-child {
+    max-height:200px;
+    overflow: hidden;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Shrink the animation */
+  .hero-section .col-lg-6:last-child canvas,
+  .hero-section .col-lg-6:last-child svg {
+    max-width: 50%;
+    height: auto;
+    transform: scale(0.65); /* Shrinks image more */
+  }
+}
 
 
 /* ========== LOTTIE CONTAINER ========== */
@@ -140,6 +189,8 @@ body {
   width: 99vw;
   padding-left: 1rem;
   padding-right: 1rem;
+  position: relative;
+overflow: hidden;
 }
 
 .story-text {
@@ -190,47 +241,145 @@ body {
   }
 }
 /* Base Our Story background — animated continuously */
-/* Our Story base section */
-/* Base Our Story background - stable dark blue */
+/* //////////////////Our Story base section///////////////// */
 .our-story-section {
-  background: #19335d; /* solid dark blue (navbar color) */
-  transition: background 1.5s ease;
+  position: relative;
+  overflow: hidden;
   width: 99vw;
   padding-left: 1rem;
   padding-right: 1rem;
-  position: relative;
-  overflow: hidden;
+  color: white;
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  font-family: var(--font-body);
+
+  /* container for backgrounds */
+  --background-opacity: 1;
+  --solid-opacity: 0;
+}
+/* 
+.background-gradient,
+.background-solid {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  transition: opacity 2s ease-in-out;
+  will-change: opacity;
+}
+.background-solid {
+  background-color: #19335d;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  z-index: -1;
+} */
+/* .background-gradient {
+  background: linear-gradient(90deg, #007bff 0%, rgba(0, 123, 255, 0.5) 50%, #007bff 100%);
+} */
+.background-solid {
+  background: blue !important;
 }
 
-/* Patched gradient background animation only when NOT expanded */
-.our-story-section.collapsed-animated {
-  background: linear-gradient(
-    135deg,
-    #19335d 30%,         /* dark blue patch */
-    #2c4072 40%,         /* slightly lighter blue patch */
-    #1f365f 50%,         /* patch of darkish blue */
-    #273a68 60%,         /* subtle grey-blue patch */
-    #19335d 70%
-  );
-  background-size: 300% 300%;
-  animation: patchedBackground 2s steps(4, end) infinite;
+.background-gradient {
+  position: absolute;
+  inset: 0;
+  /* background: linear-gradient(
+    -45deg,
+    #19335d,
+    #2c4072,
+    #1f365f,
+    #273a68,
+    #19335d
+  ); */
+  background: linear-gradient(-45deg, #19335d, #8895a64d, #1f365f, #273a68, #2655a1);
+
+  background-size: 400% 400%;
+  animation: gradientMove 6s ease-in-out infinite;
+  filter: brightness(1.1) saturate(1.2);
+  transition: opacity 1.5s ease;
+  opacity: 1;
+  z-index: -2;
 }
 
-/* Stable solid background when expanded */
-.our-story-section.expanded-bg {
-  background: #19335d; /* stable dark blue, no gradient */
-  animation: none;
+
+
+.background-solid {
+  background-color: #19335d;
+  filter: brightness(1) saturate(1);
+  transition: opacity 3s ease;
+  opacity: 0; /* default */
+}
+.fade-in {
+  opacity: 1;
+  pointer-events: auto;
+}
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+.fade-in, .fade-out {
+  transition: opacity 1.5s ease;
+}
+.background-gradient.fade-out {
+  animation: gradientMove 1.2s ease-in-out 1;
 }
 
-/* Patched stepped animation */
-@keyframes patchedBackground {
+@keyframes gradientMove {
   0% {
-    background-position: 0% 0%;
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
   100% {
-    background-position: 100% 100%;
+    background-position: 0% 50%;
   }
 }
+
+
+
+
+
+
+.our-story-section {
+  position: relative;
+  z-index: 0;
+}
+
+.our-story-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* Underline and other styles */
+.story-underline {
+  height: 4px;
+  width: 80px;
+  margin: 0 auto 1rem auto;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #007bff 0%, rgba(0, 123, 255, 0.5) 50%, #007bff 100%);
+
+
+
+  animation: underlineSlide 4s ease-in-out infinite;
+}
+
+@keyframes smoothGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+
+
 .story-underline {
   height: 4px;
   width: 0; /* start closed */
@@ -292,4 +441,103 @@ body {
 .highlight-word:focus::after {
   background: rgba(255, 255, 255, 0.25);
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+}
+/* //////////Carousel section 3 our services */
+.card {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  font-size: 2rem;
+  color: #19335d;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease;
+}
+.carousel-arrow.left {
+  left: 10px;
+}
+.carousel-arrow.right {
+  right: 10px;
+}
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.25);
+  color: white;
+}
+.carousel-title-text {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #6c757d; /* soft gray like in Hero */
+  letter-spacing: 0.5px;
+  margin: 0;
+  padding: 0;
+  transition: all 0.4s ease-in-out;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Underline style for light/white backgrounds (blue gradient) */
+.story-underline.blue-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--navbar-bg) 0%,
+    rgba(25, 51, 93, 0.7) 50%,
+    var(--accent-blue) 100%
+  );
+
+}
+.title-blue {
+  color: var(--navbar-bg); 
+ 
+}
+/* ///////////////////Consult us form /////////// */
+.form-section {
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* example, use the same as your story section */
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+.form-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: white;
+  animation: underlineMove 2s infinite ease-in-out;
+}
+
+@keyframes underlineMove {
+  0% {
+    transform: scaleX(0.2);
+    transform-origin: left;
+    opacity: 0.7;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: center;
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0.2);
+    transform-origin: right;
+    opacity: 0.7;
+  }
 }

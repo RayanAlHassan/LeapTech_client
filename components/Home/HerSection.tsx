@@ -23,7 +23,7 @@ const HeroSection: React.FC = () => {
        {/* Left Side: Text + Button */}
           <div className="col-lg-6  d-flex flex-column align-items-start justify-content-center">
             <div className={`animated-text-box ${showText ? 'show-text' : ''}`}>
-              <h1 className="hero-title mb-3">
+              <h1 className="hero-title mb-5">
                 Empowering Your <span className="text-blue">Digital Leap</span>
               </h1>
               <small
@@ -37,10 +37,10 @@ const HeroSection: React.FC = () => {
               </p>
               <p className="mb-2">Learn more about our company and values.</p>
             </div>
-            <Link href="/services" legacyBehavior>
-              <a>
+            <Link href="/service"  >
+   
                 <PrimaryButton className="primary-button mt-4">LEARN MORE</PrimaryButton>
-              </a>
+            
             </Link>
           </div>
 

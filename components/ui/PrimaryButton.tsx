@@ -9,16 +9,21 @@ interface PrimaryButtonProps {
   type?: "button" | "submit" | "reset";
   className?: string;
 }
+interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  // other props if any
+}
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     children,
     onClick,
     type = "button",
     className = "",
+    disabled,
   }) => {
     return (
       <button
         type={type}
         onClick={onClick}
+        disabled={disabled}
         className={`primary-button ${className}`}
       >
         {children}
