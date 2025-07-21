@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import PrimaryButton from "../../ui/PrimaryButton";
 
 const ConsultUsForm: React.FC = () => {
   const [formData, setFormData] = useState({

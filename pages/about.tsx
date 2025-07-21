@@ -1,26 +1,222 @@
-import Navbar from "../components/Navbar";
+"use client";
 
-export default function Home() {
+import React from "react";
+import Image from "next/image";
+import mission from "@/public/images/mission.jpg";
+import Lottie from "lottie-react";
+import vision from "../public/animations/visionGoal.json";
+const AboutUs = () => {
   return (
-    <>
+    <div className="container-fluid p-0">
+      {/* Section 1 - Our Mission */}
+      <section className="py-5 bg-light">
+        <div className="container">
+          <div className="row align-items-center image-text-wrapper">
+            {/* Image */}
+            <div className="col-md-6 mb-4 mb-md-0 text-center image-animate">
+              <Image
+                src={mission}
+                alt="Our Mission"
+                className="img-fluid rounded shadow"
+                style={{ maxHeight: 400, width: "auto" }}
+              />
+            </div>
 
-      {/* Add padding top equal to navbar height (e.g., 80px) */}
-      <main className="container pt-5 " style={{  }}>
-        <section className="mb-5">
-          <h2 className="text-primary fw-bold mb-3">Section 1</h2>
-          <p>This is the first section content.</p>
-        </section>
+            {/* Text */}
+            <div className="col-md-6 text-center text-md-start text-animate">
+              <h2 className="fw-bold title-blue position-relative d-inline-block mb-3">
+                Our Mission
+                <div
+                  className="story-underline blue-gradient mt-2 mx-auto mx-md-0"
+                  style={{ height: 4, width: 120 }}
+                />
+              </h2>
+              <p className="lead" style={{textAlign:"left"}}>
+              <span className="highlight-gradient">Leap Tech</span>{` pushing the boundaries of technological innovation, transforming global
+ideas into tangible solutions that redefine industry standards. With a commitment to
+excellence, we develop cutting-edge software solutions designed to compete at the
+highest levels, ensuring businesses stay ahead in a rapidly evolving market`
+                  .split(" ")
+                  .map((word, i) => (
+                    <span key={i} className="hover-underline">
+                      {word}&nbsp;
+                    </span>
+                  ))}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <section className="mb-5">
-          <h2 className="text-primary fw-bold mb-3">Section 2</h2>
-          <p>This is the second section content.</p>
-        </section>
+      {/* Section 2 - Our Vision */}
+      <section className="py-5 bg-white shapedSection">
+        <div className="container">
+          <div className="row align-items-center flex-md-row-reverse image-text-wrapper">
+            {/* Image */}
+            <div className="col-md-6 mb-4 mb-md-0 text-center image-animate">
+              <Lottie animationData={vision} loop className="lottie-vision" />
+            </div>
 
-        <section className="mb-5">
-          <h2 className="text-primary fw-bold mb-3">Section 3</h2>
-          <p>This is the third section content.</p>
-        </section>
-      </main>
-    </>
+            {/* Text */}
+            <div className="col-md-6 text-center text-md-start text-animate">
+              <h2 className="fw-bold title-blue position-relative d-inline-block mb-3">
+                Our Vision
+                <div
+                  className="story-underline blue-gradient mt-2 mx-auto mx-md-0"
+                  style={{ height: 4, width: 120 }}
+                />
+              </h2>
+              <p className="lead" style={{textAlign:"left"}}>
+                {`At `}<span className="highlight-gradient">Leap Tech</span>{` International, we envision a future where innovation knows no
+boundaries. Our goal is to expand across the region, empowering businesses with
+cutting-edge SaaS, PaaS, and digital solutions that drive efficiency, growth, and
+superior customer experiences.`
+                  .split(" ")
+                  .map((word, i) => (
+                    <span key={i} className="hover-underline">
+                      {word}&nbsp;
+                    </span>
+                  ))}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3 - Text Only */}
+      <section className="py-5 bg-light text-center">
+        <div className="container">
+          <h2 className="fw-bold title-blue position-relative d-inline-block mb-3">
+            Leap At A Glance
+            <div
+              className="story-underline blue-gradient mt-2 mx-auto"
+              style={{ height: 4, width: 160 }}
+            />
+          </h2>
+          <p className="lead mx-auto" style={{ maxWidth: "800px", textAlign:"left"}}>
+            {`Pioneering Innovation, Empowering Digital Transformation
+In a world where technology is the heartbeat of progress, `}<span className="highlight-gradient">Leap Tech</span>{` stand at the
+forefront— fueling businesses with cutting-edge Software-as-a-Service (SaaS) and
+Platform-as-a- Service (PaaS) solutions. But we do not stop there. From shaping your
+brand’s identity to managing your presence across social media landscapes, we craft
+digital journeys that redefine success.
+At our core, we are innovators, strategists, and visionaries, passionate about
+bridging businesses to the future. Whether it’s optimizing workflows, amplifying
+brand impact, or navigating the digital era with confidence, we equip enterprises
+with the tools to thrive.`
+              .split(" ")
+              .map((word, i) => (
+                <span key={i} className="hover-underline">
+                  {word}&nbsp;
+                </span>
+              ))}
+          </p>
+        </div>
+      </section>
+
+      <style jsx>{`
+        .title-blue {
+          color: var(--navbar-bg);
+        }
+
+        .story-underline.blue-gradient {
+          background: linear-gradient(
+            90deg,
+            var(--navbar-bg) 0%,
+            rgba(25, 51, 93, 0.7) 50%,
+            var(--accent-blue) 100%
+          );
+        }
+
+        .image-text-wrapper {
+          position: relative;
+        }
+
+        .image-animate {
+          animation: fadeScaleIn 0.8s ease-out forwards;
+        }
+
+        .text-animate {
+          opacity: 0;
+          animation: slideFromBehind 1s ease-out 0.9s forwards;
+        }
+
+        @keyframes fadeScaleIn {
+          0% {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes slideFromBehind {
+          0% {
+            transform: translateX(-60px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        .lottie-vision {
+          max-width: 100%;
+          height: 400px;
+          margin: 0 auto;
+        }
+
+        .hover-underline {
+          display: inline-block;
+          position: relative;
+          cursor: pointer;
+        }
+
+        .hover-underline::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 2px;
+          width: 0%;
+          background: linear-gradient(
+            90deg,
+            var(--navbar-bg) 0%,
+            rgba(25, 51, 93, 0.7) 50%,
+            var(--accent-blue) 100%
+          );
+          transition: width 0.4s ease-in-out;
+          border-radius: 10px;
+        }
+
+        .hover-underline:hover::after {
+          width: 100%;
+        }
+
+        @media (max-width: 768px) {
+          .hover-underline {
+            white-space: nowrap;
+          }
+        }
+        .highlight-gradient {
+          background: linear-gradient(
+            90deg,
+            var(--navbar-bg) 0%,
+            rgba(25, 51, 93, 0.7) 50%,
+            var(--accent-blue) 100%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-fill-color: transparent;
+          font-weight: 600;
+        }
+        
+      `}</style>
+    </div>
   );
-}
+};
+
+export default AboutUs;

@@ -65,7 +65,7 @@ const Custom3DCarousel: React.FC = () => {
   
 
   return (
-    <section className="container-fluid py-5" style={{ minHeight: '70vh', overflow: 'hidden' }}>
+    <section className="container-fluid py-5" style={{ minHeight: '60vh', overflow: 'hidden' , display:'flex', alignItems:'center'}}>
       <div className="container h-100">
         <div className="row align-items-center justify-content-center h-100 text-center">
           <h2 className="our-story-title mb-4 text-center title-blue">Our Service</h2>

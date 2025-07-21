@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
@@ -7,6 +6,7 @@ import React from "react";
 import Image from "next/image";
 import logo from "@/public/images/leapkwlogo.png";
 import PrimaryButton from "./ui/PrimaryButton";
+import Animatedburger from "./ui/AnimatedHamburger"; 
 
 interface NavbarProps {
   onHeightChange: (height: number) => void;
@@ -15,7 +15,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [language, setLanguage] = useState<"🇮🇹" | "🇰🇼">("🇮🇹");
+  const [language, setLanguage] = useState<"🇬🇧" | "🇰🇼">("🇬🇧");
   const pathname = usePathname();
 
   const lastScrollY = useRef(0);
@@ -24,9 +24,8 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-
   const toggleLanguage = () => {
-    const newLang = language === "🇰🇼" ? "🇮🇹" : "🇰🇼";
+    const newLang = language === "🇰🇼" ? "🇬🇧" : "🇰🇼";
     setLanguage(newLang);
   };
 
@@ -44,32 +43,31 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
 
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout | null = null;
-  
+
     const handleScroll = () => {
       // Hide navbar when scrolling down past 100px
       if (window.scrollY > lastScrollY.current && window.scrollY > 100) {
         setIsVisible(false);
-      } 
-  
+      }
+
       lastScrollY.current = window.scrollY;
-  
+
       // Clear previous timeout (if any)
       if (scrollTimeout) clearTimeout(scrollTimeout);
-  
+
       // Set timeout to show navbar after 150ms of no scroll events (scroll stop)
       scrollTimeout = setTimeout(() => {
         setIsVisible(true);
       }, 150);
     };
-  
+
     window.addEventListener("scroll", handleScroll);
-  
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       if (scrollTimeout) clearTimeout(scrollTimeout);
     };
   }, []);
-  
 
   return (
     <nav
@@ -84,17 +82,13 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
         zIndex: 1030,
       }}
     >
-<div className="container d-flex align-items-center justify-content-between w-100 h-100" >
-  {/* Left side: Small logo (responsive) */}
-  <div className="d-flex align-items-center h-100" >
-    <Link href="/" 
-    legacyBehavior
-    >
-   <a  className="navbar-brand d-flex align-items-center ">
-
-
-     {/* Small screen logo */}
-     {/* <Image
+      <div className="container d-flex align-items-center justify-content-between w-100 h-100">
+        {/* Left side: Small logo (responsive) */}
+        <div className="d-flex align-items-center h-100">
+          <Link href="/" legacyBehavior>
+            <a className="navbar-brand d-flex align-items-center ">
+              {/* Small screen logo */}
+              {/* <Image
           src={logo}
           alt="Logo Small"
           width={100}
@@ -103,96 +97,93 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
           priority
           className="d-lg-none" // Show only on small/medium screens
         /> */}
-      <Image
-          src={logo}
-          alt="Logo Large"
-          width={120} // Larger size
-          height={120}
-          quality={100}
-          priority
-          // className="d-none d-lg-inline" // Show only on large screens and up
-        />
- 
- </a>
-    </Link>
-  </div>
+              <Image
+                src={logo}
+                alt="Logo Large"
+                width={120} // Larger size
+                height={120}
+                quality={100}
+                priority
+                // className="d-none d-lg-inline" // Show only on large screens and up
+              />
+            </a>
+          </Link>
+        </div>
 
-  {/* Desktop nav center (already in your code) */}
-  <div
-    className="d-none d-lg-flex gap-5 fw-medium"
-    style={{ flex: 1, justifyContent: "center" }}
-  >
-   <Link href="/" legacyBehavior>
-  <a className={`nav-link underline-anim ${pathname === "/" ? "active" : ""}`}>HOME</a>
-</Link>
+        {/* Desktop nav center (already in your code) */}
+        <div
+          className="d-none d-lg-flex gap-5 fw-medium"
+          style={{ flex: 1, justifyContent: "center" }}
+        >
+          <Link href="/" legacyBehavior>
+            <a
+              className={`nav-link underline-anim ${
+                pathname === "/" ? "active" : ""
+              }`}
+            >
+              HOME
+            </a>
+          </Link>
 
-<Link href="/about" legacyBehavior>
-  <a className={`nav-link underline-anim ${pathname === "/about" ? "active" : ""}`}>ABOUT US</a>
-</Link>
+          <Link href="/about" legacyBehavior>
+            <a
+              className={`nav-link underline-anim ${
+                pathname === "/about" ? "active" : ""
+              }`}
+            >
+              ABOUT US
+            </a>
+          </Link>
 
-<Link href="/service" legacyBehavior>
-  <a className={`nav-link underline-anim ${pathname === "/service" ? "active" : ""}`}>SERVICE</a>
-</Link>
+          <Link href="/service" legacyBehavior>
+            <a
+              className={`nav-link underline-anim ${
+                pathname === "/service" ? "active" : ""
+              }`}
+            >
+              SERVICE
+            </a>
+          </Link>
 
-<Link href="/contact" legacyBehavior>
-  <a className={`nav-link underline-anim ${pathname === "/contact" ? "active" : ""}`}>CONTACT US</a>
-</Link>
+          <Link href="/contact" legacyBehavior>
+            <a
+              className={`nav-link underline-anim ${
+                pathname === "/contact" ? "active" : ""
+              }`}
+            >
+              CONTACT US
+            </a>
+          </Link>
+        </div>
 
-  </div>
+        {/* Desktop right buttons */}
+        <div className="d-none d-lg-flex align-items-center gap-3">
+          <Link href="/career">
+            <button
+              className={`btn lang-toggle-btn px-4 ${
+                pathname === "/career" ? "active-career" : ""
+              }`}
+            >
+              CAREER
+            </button>
+          </Link>
 
-  {/* Desktop right buttons */}
-  <div className="d-none d-lg-flex align-items-center gap-3">
-    <Link href="/career" >
-    
-    <button
-      className={`btn lang-toggle-btn px-4 ${
-        pathname === "/career" ? "active-career" : ""
-      }`}
-    >
-      CAREER
-    </button>
-     
-    </Link>
+          <button
+            onClick={toggleLanguage}
+            className="lang-toggle-btn fw-semibold"
+            aria-label="Toggle language"
+            // style={{backgroundColor:"white"}}
+          >
+            {language}
+          </button>
+        </div>
 
-    <button
-      onClick={toggleLanguage}
-      className="lang-toggle-btn fw-semibold"
-      aria-label="Toggle language"
-      // style={{backgroundColor:"white"}}
-    >
-      {language}
-    </button>
-  </div>
-
-  {/* Mobile: Language toggle + Hamburger */}
-  <div className="d-flex d-lg-none align-items-center gap-2 ms-auto">
-   
-
-    {/* Hamburger */}
-    <button
-      className="btn border-0"
-      onClick={toggleMenu}
-      aria-label="Toggle Menu"
-      style={{ color: "white" }}
-      type="button"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="28"
-        height="28"
-        fill="currentColor"
-        className="bi bi-list"
-        viewBox="0 0 16 16"
-      >
-        <path
-          fillRule="evenodd"
-          d="M2.5 12.5a.5.5 0 010-1h11a.5.5 0 010 1h-11zm0-4a.5.5 0 010-1h11a.5.5 0 010 1h-11zm0-4a.5.5 0 010-1h11a.5.5 0 010 1h-11z"
-        />
-      </svg>
-    </button>
-  </div>
-</div>
-
+        {/* Mobile: Language toggle + Hamburger */}
+        <div className="d-flex d-lg-none align-items-center gap-2 ms-auto">
+          {/* Hamburger */}
+          <Animatedburger isOpen={isMenuOpen} toggle={toggleMenu} />
+        </div>
+      </div>
 
       {/* Mobile menu */}
       {isMenuOpen && (
@@ -209,77 +200,65 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
           }}
         >
           <div className="d-flex flex-column align-items-center gap-4">
-            <Link href="/" legacyBehavior >
-             <a onClick={toggleMenu} className="text-primary fw-semibold fs-5" >
-             HOME
-             </a>
-         
-           
-            </Link>
-            <Link href="/about"legacyBehavior>
-              <a    onClick={toggleMenu} className="text-primary fw-semibold fs-5" >
-              ABOUT US
+            <Link href="/" legacyBehavior>
+              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
+                HOME
               </a>
-        
-             
             </Link>
-            <Link href="/service"   legacyBehavior  >
-             <a onClick={toggleMenu}
-                className="text-primary fw-semibold fs-5" >
-             SERVICE
-             </a>
-                
-         
+            <Link href="/about" legacyBehavior>
+              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
+                ABOUT US
+              </a>
             </Link>
-            <Link  href="/contact" legacyBehavior
-               >
-           <a onClick={toggleMenu} 
-                className="text-primary fw-semibold fs-5" >
-           CONTACT US
-           </a>
-   
-              
+            <Link href="/service" legacyBehavior>
+              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
+                SERVICE
+              </a>
+            </Link>
+            <Link href="/contact" legacyBehavior>
+              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
+                CONTACT US
+              </a>
             </Link>
             <button
-      onClick={toggleLanguage}
-      className=" primary-button "
-      aria-label="Toggle language"
-    >
-      {language}
-    </button>
-            <Link  href="/career" legacyBehavior >
-    <a>
-    <PrimaryButton         className={`primary-button ${pathname === "/career" ? "active-career" : ""}`}
->
+              onClick={toggleLanguage}
+              className=" primary-button "
+              aria-label="Toggle language"
+            >
+              {language}
+            </button>
+            <Link href="/career" legacyBehavior>
+              <a>
+                <PrimaryButton
+                  className={`primary-button ${
+                    pathname === "/career" ? "active-career" : ""
+                  }`}
+                >
                   CAREER
                 </PrimaryButton>
-    </a>
-      
-         
+              </a>
             </Link>
-
           </div>
         </div>
       )}
 
       {/* STYLES */}
       <style jsx>{`
-      .navbar {
-        height: 74px; /* match large logo height */
-        transition: transform 0.5s ease, opacity 0.5s ease !important;
+        .navbar {
+          height: 74px; /* match large logo height */
+          transition: transform 0.5s ease, opacity 0.5s ease !important;
+        }
+        box-shadow: 2px 1rem 1rem rgba(0, 0, 0, 0.15) !important;
+      }
+        .translate-up {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
 
-      }
-    
-      
-      .translate-up {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-      
-      .main-section {
-        padding-top: 80px; /* to avoid overlap */
-      }
-      
+        .main-section {
+          padding-top: 80px; /* to avoid overlap */
+        }
+
         .career-button {
           position: relative;
           background-color: white;
@@ -296,7 +275,12 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
           content: "";
           position: absolute;
           inset: 0;
-          background: linear-gradient(90deg, #003366 0%, white 50%, #003366 100%);
+          background: linear-gradient(
+            90deg,
+            #003366 0%,
+            white 50%,
+            #003366 100%
+          );
           background-size: 200% 100%;
           background-position: 100% 0;
           transition: background-position 0.6s ease;
@@ -323,12 +307,11 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
           transform: translateY(0);
           opacity: 1;
         }
-        
+
         .translate-up {
           transform: translateY(-100%);
           opacity: 0;
         }
-        
 
         .nav-link {
           font-weight: 800;
@@ -341,14 +324,13 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
           display: inline-flex;
           align-items: center;
           height: 40px;
-          
         }
         .underline-anim {
           position: relative;
           display: inline-block;
           color: white;
         }
-        
+
         .underline-anim::after {
           content: "";
           position: absolute;
@@ -367,13 +349,10 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
           transform-origin: center;
           transition: transform 0.4s ease;
         }
-        
+
         .underline-anim:hover::after {
           transform: translateX(-50%) scaleX(1);
         }
-        
-
-
 
         .language-switch {
           background: none;
@@ -410,48 +389,45 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
           padding: 6px 16px;
           transition: all 0.3s ease;
         }
-        
+
         .lang-toggle-btn:hover {
           background-color: white;
           color: #003366;
         }
         /* Button same size as hamburger */
-.lang-icon-btn {
-  width: 32px;
-  height: 32px;
-  background-color: transparent;
-  border: 1px solid white;
-  color: white;
-  font-weight: 600;
-  font-size: 12px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
+        .lang-icon-btn {
+          width: 32px;
+          height: 32px;
+          background-color: transparent;
+          border: 1px solid white;
+          color: white;
+          font-weight: 600;
+          font-size: 12px;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+        }
 
-.lang-icon-btn:hover {
-  background-color: white;
-  color: #003366;
-}
-/* Active state */
-.lang-toggle-btn.active-career {
-  background-color: white;
-  color: var(--navbar-bg);
-  border: 1px solid white;
-  pointer-events: none; /* Optional: disables click on already active */
-}
-/* Keep underline visible on active page link */
-.underline-anim.active::after {
-  transform: translateX(-50%) scaleX(1);
-}
-
-
+        .lang-icon-btn:hover {
+          background-color: white;
+          color: #003366;
+        }
+        /* Active state */
+        .lang-toggle-btn.active-career {
+          background-color: white;
+          color: var(--navbar-bg);
+          border: 1px solid white;
+          pointer-events: none; /* Optional: disables click on already active */
+        }
+        /* Keep underline visible on active page link */
+        .underline-anim.active::after {
+          transform: translateX(-50%) scaleX(1);
+        }
       `}</style>
     </nav>
   );
 };
 
 export default Navbar;
-

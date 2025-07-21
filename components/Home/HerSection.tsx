@@ -17,14 +17,14 @@ const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="container-fluid hero-section py-5">
+    <section className="container-fluid hero-section py-5" >
       <div className="container" style={{ height: "100%" }}>
       <div className="row align-items-center" style={{ minHeight: "70vh", height:"100%"}}>
        {/* Left Side: Text + Button */}
           <div className="col-lg-6  d-flex flex-column align-items-start justify-content-center">
             <div className={`animated-text-box ${showText ? 'show-text' : ''}`}>
               <h1 className="hero-title mb-5">
-                Empowering Your <span className="text-blue">Digital Leap</span>
+                Empowering Your <span className="text-blue">Digital Business</span>
               </h1>
               <small
                 className={`fst-italic mb-2 d-block ${showText ? 'show-text' : ''}`}

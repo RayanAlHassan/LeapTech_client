@@ -19,7 +19,7 @@ const ConsultUsSection: React.FC = () => {
   className="container-fluid consult-us-section py-5"
   style={{
           background: "linear-gradient(90deg, #f0f4f8 0%, #d9e2ec 100%)",
-          minHeight: "60vh",
+          minHeight: "60vh",display:'flex', alignItems:'center'
         }}
       >
         <div className="container">
@@ -32,10 +32,10 @@ const ConsultUsSection: React.FC = () => {
             {/* Text */}
             <div className="slangText col-lg-6 mb-4 mb-lg-0">
               <h2 className="header2" style={{ color: "#19335d", fontWeight: "700", fontSize: "2.5rem" }}>
-                Need Help? Let's Consult Together!
+                Need Help? Consult Us!
               </h2>
               <p style={{ fontSize: "1.2rem", color: "#4a4a4a", marginBottom: "1.5rem" }}>
-                Whether you're starting a new project or need expert advice, we're here to guide you every step of the way.
+                Whether you are starting a new project or need expert advice, we are here to guide you every step of the way.
               </p>
               <PrimaryButton onClick={openModal}>CONSULT US</PrimaryButton>
             </div>
