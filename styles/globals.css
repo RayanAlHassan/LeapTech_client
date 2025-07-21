@@ -1,6 +1,5 @@
 /* In global.css */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap");
 
 :root {
   --navbar-bg: #19335d;
@@ -8,8 +7,8 @@
   --accent-blue: #007bff;
   --gray-bg: #f1f3f5;
 
-  --font-title: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-title: "Outfit", sans-serif;
+  --font-body: "Inter", sans-serif;
 }
 
 body {
@@ -49,7 +48,11 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(2.25rem, 5vw, 4.5rem); /* Small on phones, large on wide screens */
+  font-size: clamp(
+    2.25rem,
+    5vw,
+    4.5rem
+  ); /* Small on phones, large on wide screens */
   font-weight: 700;
   font-family: var(--font-title);
   text-shadow: 1px 1px 3px rgba(25, 51, 93, 0.2);
@@ -61,7 +64,7 @@ body {
   height: 75vh;
   background: linear-gradient(to left, #ffffff, #f0f4f8);
 }
- 
+
 @media (max-width: 767px) {
   .hero-section {
     height: auto; /* allow content to define height */
@@ -74,12 +77,12 @@ body {
     max-width: 720px;
   }
 }
-@media (max-width:1124px) {
+@media (max-width: 1124px) {
   .hero-section .col-lg-6 {
     width: 100%;
     height: 50%;
     flex-wrap: wrap;
-    flex-direction:column ;
+    flex-direction: column;
     text-align: center; /* Center text horizontally on stacked */
     align-items: center !important; /* Center flex items vertically if flex */
   }
@@ -98,7 +101,7 @@ body {
 
   /* Target the right column (animation container) */
   .hero-section .col-lg-6:last-child {
-    max-height:200px;
+    max-height: 200px;
     overflow: hidden;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -112,7 +115,6 @@ body {
     transform: scale(0.65); /* Shrinks image more */
   }
 }
-
 
 /* ========== LOTTIE CONTAINER ========== */
 .animation-transform {
@@ -148,7 +150,6 @@ body {
   }
 }
 
-
 /* ========== Button ========== */
 .primary-button {
   display: inline-block;
@@ -170,7 +171,8 @@ body {
 }
 
 @keyframes verticalShakeHover {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   25% {
@@ -185,12 +187,16 @@ body {
 }
 /* ///////////////Our story section//////////// */
 .our-story-section {
-  background: linear-gradient(135deg, var(--navbar-bg) 30%, var(--accent-blue) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--navbar-bg) 30%,
+    var(--accent-blue) 100%
+  );
   width: 99vw;
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;
-overflow: hidden;
+  overflow: hidden;
 }
 
 .story-text {
@@ -209,6 +215,7 @@ overflow: hidden;
 .story-text.expanded {
   -webkit-line-clamp: unset;
   display: block;
+
 }
 .our-story-title {
   font-size: 2.5rem;
@@ -219,13 +226,17 @@ overflow: hidden;
 .story-underline {
   height: 4px;
   width: 0; /* start closed */
-  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.5) 50%, #ffffff 100%);
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    #ffffff 100%
+  );
   border-radius: 10px;
   margin: 0 auto 1rem auto;
   animation: underlineSlide 4s ease-in-out infinite;
 }
 
-  
 @keyframes underlineSlide {
   0% {
     width: 0;
@@ -291,7 +302,14 @@ overflow: hidden;
     #273a68,
     #19335d
   ); */
-  background: linear-gradient(-45deg, #19335d, #8895a64d, #1f365f, #273a68, #2655a1);
+  background: linear-gradient(
+    -45deg,
+    #19335d,
+    #8895a64d,
+    #1f365f,
+    #273a68,
+    #2655a1
+  );
 
   background-size: 400% 400%;
   animation: gradientMove 6s ease-in-out infinite;
@@ -300,8 +318,6 @@ overflow: hidden;
   opacity: 1;
   z-index: -2;
 }
-
-
 
 .background-solid {
   background-color: #19335d;
@@ -317,7 +333,8 @@ overflow: hidden;
   opacity: 0;
   pointer-events: none;
 }
-.fade-in, .fade-out {
+.fade-in,
+.fade-out {
   transition: opacity 1.5s ease;
 }
 .background-gradient.fade-out {
@@ -336,11 +353,6 @@ overflow: hidden;
   }
 }
 
-
-
-
-
-
 .our-story-section {
   position: relative;
   z-index: 0;
@@ -357,9 +369,12 @@ overflow: hidden;
   width: 80px;
   margin: 0 auto 1rem auto;
   border-radius: 10px;
-  background: linear-gradient(90deg, #007bff 0%, rgba(0, 123, 255, 0.5) 50%, #007bff 100%);
-
-
+  background: linear-gradient(
+    90deg,
+    #007bff 0%,
+    rgba(0, 123, 255, 0.5) 50%,
+    #007bff 100%
+  );
 
   animation: underlineSlide 4s ease-in-out infinite;
 }
@@ -376,14 +391,15 @@ overflow: hidden;
   }
 }
 
-
-
-
-
 .story-underline {
   height: 4px;
   width: 0; /* start closed */
-  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.5) 50%, #ffffff 100%);
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    #ffffff 100%
+  );
   border-radius: 10px;
   margin: 0 auto 1rem auto;
   animation: underlineSlide 4s ease-in-out infinite;
@@ -479,7 +495,7 @@ overflow: hidden;
   margin: 0;
   padding: 0;
   transition: all 0.4s ease-in-out;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 /* Underline style for light/white backgrounds (blue gradient) */
@@ -490,15 +506,18 @@ overflow: hidden;
     rgba(25, 51, 93, 0.7) 50%,
     var(--accent-blue) 100%
   );
-
 }
 .title-blue {
-  color: var(--navbar-bg); 
- 
+  color: var(--navbar-bg);
 }
 /* ///////////////////Consult us form /////////// */
 .form-section {
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* example, use the same as your story section */
+  background: linear-gradient(
+    135deg,
+    #0f0c29,
+    #302b63,
+    #24243e
+  ); /* example, use the same as your story section */
   color: white;
   padding: 3rem 2rem;
   border-radius: 1rem;

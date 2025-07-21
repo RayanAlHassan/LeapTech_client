@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import webImage from '@/public/images/web.jpg';
 import socialImage from '@/public/images/sm.jpg';
 import mobileImage from '@/public/images/mobileBlue.jpg';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const slides = [
   {
@@ -139,49 +140,22 @@ const Custom3DCarousel: React.FC = () => {
             })}
 
 <button
-  className="arrowss left rounded-circle p-2"
+  className="arrowss left"
   onClick={handlePrev}
-  style={{
-    position: 'absolute',
-    top: '50%',
-    left: '10px',
-    transform: 'translateY(-50%)',
-    border: 'none',
-    borderRadius: '50%',
-    width: '40px',
-    height: '40px',
-    fontSize: '30px',
-    cursor: 'pointer',
-    zIndex: 10,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }}
+
 >
-  ‹
+<ChevronLeft size={20} />
+
 </button>
 
 <button
-  className="arrowss right rounded-circle p-2"
+  className="arrowss right"
   onClick={handleNext}
-  style={{
-    position: 'absolute',
-    top: '50%',
-    right: '10px',
-    transform: 'translateY(-50%)',
-    border: 'none',
-    borderRadius: '50%',
-    width: '40px',
-    height: '40px',
-    fontSize: '30px',
-    cursor: 'pointer',
-    zIndex: 10,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }}
+ 
+
+ 
 >
-  ›
+<ChevronRight size={20} /> 
 </button>
 
 
@@ -222,7 +196,7 @@ const Custom3DCarousel: React.FC = () => {
         font-size: 30px;
         border-radius: 50%;
         position: absolute;
-        top: 50%;
+        top: 60%;
         transform: translateY(-50%);
         z-index: 10;
       }

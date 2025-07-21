@@ -1,7 +1,9 @@
 
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
+import React from "react";
 import Image from "next/image";
 import logo from "@/public/images/leapkwlogo.png";
 import PrimaryButton from "./ui/PrimaryButton";
@@ -14,6 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [language, setLanguage] = useState<"🇮🇹" | "🇰🇼">("🇮🇹");
+  const pathname = usePathname();
 
   const lastScrollY = useRef(0);
   const navRef = useRef<HTMLElement>(null);
@@ -40,17 +43,33 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
   }, [onHeightChange]);
 
   useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout | null = null;
+  
     const handleScroll = () => {
+      // Hide navbar when scrolling down past 100px
       if (window.scrollY > lastScrollY.current && window.scrollY > 100) {
         setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
+      } 
+  
       lastScrollY.current = window.scrollY;
+  
+      // Clear previous timeout (if any)
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+  
+      // Set timeout to show navbar after 150ms of no scroll events (scroll stop)
+      scrollTimeout = setTimeout(() => {
+        setIsVisible(true);
+      }, 150);
     };
+  
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+  
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+    };
   }, []);
+  
 
   return (
     <nav
@@ -103,38 +122,35 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
     className="d-none d-lg-flex gap-5 fw-medium"
     style={{ flex: 1, justifyContent: "center" }}
   >
-    <Link href="/" legacyBehavior  >
-      <a className="nav-link underline-anim" >
-      HOME
-      </a>
-      
-    </Link>
-    <Link href="/about" legacyBehavior>
-      <a   className="nav-link underline-anim" >     ABOUT US </a>
+   <Link href="/" legacyBehavior>
+  <a className={`nav-link underline-anim ${pathname === "/" ? "active" : ""}`}>HOME</a>
+</Link>
 
-    </Link>
-    <Link href="/service" legacyBehavior>
-      <a className="nav-link underline-anim">
-      SERVICE
-      </a>
-      
-    </Link>
-    <Link href="/contact"legacyBehavior >
+<Link href="/about" legacyBehavior>
+  <a className={`nav-link underline-anim ${pathname === "/about" ? "active" : ""}`}>ABOUT US</a>
+</Link>
 
-      <a  className="nav-link underline-anim" >
-      CONTACT US
-      </a>
+<Link href="/service" legacyBehavior>
+  <a className={`nav-link underline-anim ${pathname === "/service" ? "active" : ""}`}>SERVICE</a>
+</Link>
 
-    </Link>
+<Link href="/contact" legacyBehavior>
+  <a className={`nav-link underline-anim ${pathname === "/contact" ? "active" : ""}`}>CONTACT US</a>
+</Link>
+
   </div>
 
   {/* Desktop right buttons */}
   <div className="d-none d-lg-flex align-items-center gap-3">
     <Link href="/career" >
     
-        <button className="btn lang-toggle-btn  px-4 " >
-          CAREER
-        </button>
+    <button
+      className={`btn lang-toggle-btn px-4 ${
+        pathname === "/career" ? "active-career" : ""
+      }`}
+    >
+      CAREER
+    </button>
      
     </Link>
 
@@ -233,7 +249,8 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
     </button>
             <Link  href="/career" legacyBehavior >
     <a>
-    <PrimaryButton className="primary-button ">
+    <PrimaryButton         className={`primary-button ${pathname === "/career" ? "active-career" : ""}`}
+>
                   CAREER
                 </PrimaryButton>
     </a>
@@ -249,7 +266,16 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
       <style jsx>{`
       .navbar {
         height: 74px; /* match large logo height */
+        transition: transform 0.5s ease, opacity 0.5s ease !important;
+
       }
+    
+      
+      .translate-up {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      
       .main-section {
         padding-top: 80px; /* to avoid overlap */
       }
@@ -285,21 +311,24 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
         }
 
         .career-button:hover {
-          color: #003366;
+          color: var(--navbar-bg);
         }
 
         .d-lg-none a {
-          color: #003366 !important;
+          color: var(--navbar-bg) !important;
           text-decoration: none;
         }
 
         .translate-none {
           transform: translateY(0);
+          opacity: 1;
         }
-
+        
         .translate-up {
           transform: translateY(-100%);
+          opacity: 0;
         }
+        
 
         .nav-link {
           font-weight: 800;
@@ -406,6 +435,18 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
   background-color: white;
   color: #003366;
 }
+/* Active state */
+.lang-toggle-btn.active-career {
+  background-color: white;
+  color: var(--navbar-bg);
+  border: 1px solid white;
+  pointer-events: none; /* Optional: disables click on already active */
+}
+/* Keep underline visible on active page link */
+.underline-anim.active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
 
       `}</style>
     </nav>

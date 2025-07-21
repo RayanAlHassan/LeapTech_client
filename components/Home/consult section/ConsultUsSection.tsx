@@ -30,8 +30,8 @@ const ConsultUsSection: React.FC = () => {
           <div className="story-underline blue-gradient mx-auto mb-4 "></div>
 </div>
             {/* Text */}
-            <div className="col-lg-6 mb-4 mb-lg-0">
-              <h2 style={{ color: "#19335d", fontWeight: "700", fontSize: "2.5rem" }}>
+            <div className="slangText col-lg-6 mb-4 mb-lg-0">
+              <h2 className="header2" style={{ color: "#19335d", fontWeight: "700", fontSize: "2.5rem" }}>
                 Need Help? Let's Consult Together!
               </h2>
               <p style={{ fontSize: "1.2rem", color: "#4a4a4a", marginBottom: "1.5rem" }}>
@@ -73,6 +73,8 @@ const ConsultUsSection: React.FC = () => {
 
       {/* 🔥 Styled JSX for animated gradient border */}
       <style jsx>{`
+  
+      
   .animated-border-wrapper {
     position: relative;
     display: inline-block;
@@ -280,7 +282,22 @@ const ConsultUsSection: React.FC = () => {
     color: white;
   }
 
+  @media (max-width: 992px) {
+ 
+  :global(.slangText) {
+    text-align: center !important;
+  }
+  
+ .header2
+ {
+    font-size: 1.9rem !important;
+  }
+  p{
+    font-size: 1.1rem !important;
 
+  }
+  
+}
   
 `}</style>
 
