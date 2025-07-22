@@ -45,23 +45,24 @@ const Footer: React.FC = () => {
             <h6 className="fw-semibold mb-3">Site Links</h6>
             <ul className="list-unstyled">
               <li>
-              <Link href="/" className="footer-link">Home</Link>
-
+                <Link href="/" legacyBehavior>
+                  <a className="footer-link">Home</a>
+                </Link>
               </li>
               <li>
-               
-                <Link href="/about" className="footer-link">  About Us</Link>
-
+                <Link href="/about" legacyBehavior>
+                  <a className="footer-link"> About Us</a>
+                </Link>
               </li>
               <li>
-              
-                <Link href="/service" className="footer-link">Service</Link>
-
+                <Link href="/service" legacyBehavior>
+                  <a className="footer-link">Service</a>
+                </Link>
               </li>
               <li>
-               
-                <Link href="/contact" className="footer-link"> Contact Us</Link>
-
+                <Link href="/contact" legacyBehavior>
+                  <a className="footer-link"> Contact Us</a>
+                </Link>
               </li>
             </ul>
           </Col>
@@ -71,32 +72,32 @@ const Footer: React.FC = () => {
             <h6 className="fw-semibold mb-3">Inner Links</h6>
             <ul className="list-unstyled">
               <li>
+                <Link href="/web" legacyBehavior>
+                  <a className="footer-link">Web</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/mobileApp" legacyBehavior>
+                  <a className="footer-link"> Mobile Application</a>
+                </Link>
+              </li>
+              <li>
                
-                <Link href="/web" className="footer-link">Web</Link>
-
-              </li>
-              <li>
-             
-                <Link href="/mobileApp" className="footer-link">  Mobile Application</Link>
-
+                <Link href="/socialMedia" legacyBehavior>
+                  <a className="footer-link"> Social Media</a>
+                </Link>
               </li>
               <li>
                
-                        <Link href="/socialMedia" className="footer-link">    Social Media</Link>
-
-              </li>
-              <li>
-           
-                <Link href="/career" className="footer-link">Career</Link>
-
+                <Link href="/career" legacyBehavior>
+                  <a className="footer-link">career</a>
+                </Link>
               </li>
             </ul>
           </Col>
 
           {/* Newsletter + Socials */}
           <Col md={4}>
-       
-
             {/* Socials */}
             <div className="mt-4 d-flex gap-3">
               <a
