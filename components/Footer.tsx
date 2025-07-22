@@ -9,11 +9,11 @@ const Footer: React.FC = () => {
   return (
     <footer className="footer mt-auto py-4 shadow text-white">
       {/* Use fixed width container to align with navbar */}
-      <Container className="px-5">
+      <Container className="">
         <Row className="justify-content-between align-items-start g-4">
           {/* Company Info */}
           <Col md={4}>
-            <h5 className="fw-bold mb-3">Leap Tech KW</h5>
+            <h5 className="fw-bold mb-3">Keep in touch</h5>
             <p className="mb-2">
               📍{" "}
               <a
@@ -69,20 +69,20 @@ const Footer: React.FC = () => {
 
           {/* Inner Links (Web App, Marketing, Career) */}
           <Col md={2}>
-            <h6 className="fw-semibold mb-3">Services</h6>
+            <h6 className="fw-semibold mb-3">Inner Links</h6>
             <ul className="list-unstyled">
               <li>
-                <a href="/web-app" className="footer-link">
+                <a href="/web" className="footer-link">
                   Web
                 </a>
               </li>
               <li>
-                <a href="/marketing" className="footer-link">
+                <a href="/mobileApp" className="footer-link">
                   Mobile Application
                 </a>
               </li>
               <li>
-                <a href="/career" className="footer-link">
+                <a href="/socialMedia" className="footer-link">
                   Social Media
                 </a>
               </li>
@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
 
           {/* Newsletter + Socials */}
           <Col md={4}>
-            <h6 className="fw-semibold mb-3">Subscribe to our Newsletter</h6>
+            {/* <h6 className="fw-semibold mb-3">Subscribe to our Newsletter</h6>
             <Form className="d-flex flex-column flex-sm-row gap-2">
               <Form.Control
                 type="email"
@@ -106,7 +106,7 @@ const Footer: React.FC = () => {
               <PrimaryButton className="btn btn-outline-light">
                 Subscribe
               </PrimaryButton>
-            </Form>
+            </Form> */}
 
             {/* Socials */}
             <div className="mt-4 d-flex gap-3">

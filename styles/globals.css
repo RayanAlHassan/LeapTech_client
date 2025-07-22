@@ -70,7 +70,7 @@ body {
 }
 
 .hero-section {
-  height: 75vh;
+  height: 75vh !important;
   background: linear-gradient(to left, #ffffff, #f0f4f8);
 }
 
@@ -89,7 +89,7 @@ body {
 @media (max-width: 1124px) {
   .hero-section .col-lg-6 {
     width: 100%;
-    height: 50%;
+    height: 51%;
     flex-wrap: wrap;
     flex-direction: column;
     text-align: center; /* Center text horizontally on stacked */
@@ -103,7 +103,7 @@ body {
 
 @media (min-width: 345px) and (max-width: 540px) {
   .hero-section {
-    height: auto;
+    height: 53%;
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
@@ -201,7 +201,7 @@ body {
     var(--navbar-bg) 30%,
     var(--accent-blue) 100%
   );
-  width: 99vw;
+  width: 100vw;
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;

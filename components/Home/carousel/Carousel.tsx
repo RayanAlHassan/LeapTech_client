@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
-import webImage from '@/public/images/web.jpg';
+import webImage from '@/public/images/pcModif.png';
 import socialImage from '@/public/images/sm.jpg';
 import mobileImage from '@/public/images/mobileBlue.jpg';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -18,7 +18,7 @@ const slides = [
     route: '/services/web',
   },
   {
-    title: 'Social Media Marketing',
+    title: 'Business & Digital Marketing',
     description: 'Boost brand visibility and engagement through digital strategies.',
     image: socialImage,
     route: '/services/social-media',
@@ -68,7 +68,7 @@ const Custom3DCarousel: React.FC = () => {
     <section className="container-fluid py-5" style={{ minHeight: '60vh', overflow: 'hidden' , display:'flex', alignItems:'center'}}>
       <div className="container h-100">
         <div className="row align-items-center justify-content-center h-100 text-center">
-          <h2 className="our-story-title mb-4 text-center title-blue">Our Service</h2>
+          <h2 className="our-story-title mb-4 text-center title-blue">Our Services</h2>
           <div className="story-underline blue-gradient mx-auto mb-4"></div>
 
           <div
@@ -205,7 +205,7 @@ const Custom3DCarousel: React.FC = () => {
       .arrowss.left {
         background-color: var(--navbar-bg) ;
         color: var(--gray-bg);
-        left: 10px;
+        left: -10px;
       }
       .arrowss.left:hover {
         background-color: var(--gray-bg);
@@ -216,7 +216,7 @@ const Custom3DCarousel: React.FC = () => {
       .arrowss.right {
         background-color:var(--navbar-bg) ;
         color: var(--gray-bg);
-        right: 10px;
+        right: -9px;
       }
       .arrowss.right:hover {
         background-color:var(--gray-bg) ;

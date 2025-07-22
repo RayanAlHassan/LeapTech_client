@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import StoryAnimation from "../Animation/StoryAnimation";
 import PrimaryButton from "../ui/PrimaryButton";
 import Link from "next/link";
@@ -17,30 +17,34 @@ const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="container-fluid hero-section py-5" >
+    <section className="container-fluid hero-section py-5">
       <div className="container" style={{ height: "100%" }}>
-      <div className="row align-items-center" style={{ minHeight: "70vh", height:"100%"}}>
-       {/* Left Side: Text + Button */}
+        <div
+          className="row align-items-center"
+          style={{ minHeight: "70vh", height: "100%" }}
+        >
+          {/* Left Side: Text + Button */}
           <div className="col-lg-6  d-flex flex-column align-items-start justify-content-center">
-            <div className={`animated-text-box ${showText ? 'show-text' : ''}`}>
+            <div className={`animated-text-box ${showText ? "show-text" : ""}`}>
               <h1 className="hero-title mb-5">
-                Empowering Your <span className="text-blue">Digital Business</span>
+                Empowering Your{" "}
+                <span className="text-blue">Digital Business</span>
               </h1>
               <small
-                className={`fst-italic mb-2 d-block ${showText ? 'show-text' : ''}`}
-                style={{ color: "#6c757d" }}
+                className={`fst-italic mb-2 d-block ${
+                  showText ? "show-text" : ""
+                }`}
+                style={{ color: "#6c757d" , fontSize:"2rem" }}
               >
-                Driven by Innovation. Built for Impact.
+                INNOVATE. INTEGRATE. ELEVATE.{" "}
               </small>
-              <p className="lead text-muted mb-3">
-                Custom Software Solutions for a Smarter Tomorrow
-              </p>
-              <p className="mb-2">Learn more about our company and values.</p>
+              <p className="lead text-muted mb-3 slogan2"    style={{ color: "black" }}>We Build It. You Own It.</p>
+              <p className="mb-2 fst-italic"    style={{ color: "#6c757d" }}>Web, Mobile, and Digital Marketing.</p>
             </div>
-            <Link href="/service"  >
-   
-                <PrimaryButton className="primary-button mt-4">LEARN MORE</PrimaryButton>
-            
+            <Link href="/service">
+              <PrimaryButton className="primary-button mt-4">
+                LEARN MORE
+              </PrimaryButton>
             </Link>
           </div>
 
@@ -50,6 +54,13 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
       </div>
+      <style jsx>
+{`
+.slogan2.jsx-3b504fd96e5fd9c6 {
+  font-family: sans-serif;
+  font-weight: 700 !important;}
+`}
+      </style>
     </section>
   );
 };
