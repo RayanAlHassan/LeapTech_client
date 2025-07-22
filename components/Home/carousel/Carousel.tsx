@@ -15,19 +15,19 @@ const slides = [
     title: 'Web Development',
     description: 'Professional websites and e-commerce platforms tailored to your brand.',
     image: webImage,
-    route: '/services/web',
+    route: '/web',
   },
   {
     title: 'Business & Digital Marketing',
     description: 'Boost brand visibility and engagement through digital strategies.',
     image: socialImage,
-    route: '/services/social-media',
+    route: '/socialMedia',
   },
   {
     title: 'Mobile Application',
     description: 'Robust, user-friendly apps for iOS and Android platforms.',
     image: mobileImage,
-    route: '/services/mobile',
+    route: '/mobileApp',
   },
 ];
 
