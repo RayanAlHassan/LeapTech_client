@@ -1,34 +1,31 @@
-// components/ui/PrimaryButton.tsx
 "use client";
 
 import React from "react";
 
-interface PrimaryButtonProps {
+interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  onClick?: () => void;
-  type?: "button" | "submit" | "reset";
   className?: string;
 }
-interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  // other props if any
-}
+
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
-    children,
-    onClick,
-    type = "button",
-    className = "",
-    disabled,
-  }) => {
-    return (
-      <button
-        type={type}
-        onClick={onClick}
-        disabled={disabled}
-        className={`primary-button ${className}`}
-      >
-        {children}
-      </button>
-    );
-  };
-  
+  children,
+  onClick,
+  type = "button",
+  className = "",
+  disabled,
+  ...rest // allow other button props like aria-label, etc.
+}) => {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={`primary-button ${className}`}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+};
+
 export default PrimaryButton;

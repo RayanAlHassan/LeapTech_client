@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import PrimaryButton from "../../ui/PrimaryButton";
-import Image from "next/image";
 import { Modal } from "react-bootstrap";
 import ConsultUsForm from "./ConsultUsForm";
 const ConsultUsSection: React.FC = () => {

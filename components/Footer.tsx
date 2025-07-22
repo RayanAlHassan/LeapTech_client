@@ -1,9 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { FaInstagram, FaLinkedin, FaFacebook, FaTiktok } from "react-icons/fa6";
-import PrimaryButton from "./ui/PrimaryButton";
 
 const Footer: React.FC = () => {
   return (
@@ -45,24 +45,23 @@ const Footer: React.FC = () => {
             <h6 className="fw-semibold mb-3">Site Links</h6>
             <ul className="list-unstyled">
               <li>
-                <a href="/" className="footer-link">
-                  Home
-                </a>
+              <Link href="/" className="footer-link">Home</Link>
+
               </li>
               <li>
-                <a href="/about" className="footer-link">
-                  About Us
-                </a>
+               
+                <Link href="/about" className="footer-link">  About Us</Link>
+
               </li>
               <li>
-                <a href="/service" className="footer-link">
-                  Service
-                </a>
+              
+                <Link href="/service" className="footer-link">Service</Link>
+
               </li>
               <li>
-                <a href="/contact" className="footer-link">
-                  Contact Us
-                </a>
+               
+                <Link href="/contact" className="footer-link"> Contact Us</Link>
+
               </li>
             </ul>
           </Col>
@@ -72,41 +71,31 @@ const Footer: React.FC = () => {
             <h6 className="fw-semibold mb-3">Inner Links</h6>
             <ul className="list-unstyled">
               <li>
-                <a href="/web" className="footer-link">
-                  Web
-                </a>
+               
+                <Link href="/web" className="footer-link">Web</Link>
+
               </li>
               <li>
-                <a href="/mobileApp" className="footer-link">
-                  Mobile Application
-                </a>
+             
+                <Link href="/mobileApp" className="footer-link">  Mobile Application</Link>
+
               </li>
               <li>
-                <a href="/socialMedia" className="footer-link">
-                  Social Media
-                </a>
+               
+                        <Link href="/socialMedia" className="footer-link">    Social Media</Link>
+
               </li>
               <li>
-                <a href="/career" className="footer-link">
-                  Career
-                </a>
+           
+                <Link href="/career" className="footer-link">Career</Link>
+
               </li>
             </ul>
           </Col>
 
           {/* Newsletter + Socials */}
           <Col md={4}>
-            {/* <h6 className="fw-semibold mb-3">Subscribe to our Newsletter</h6>
-            <Form className="d-flex flex-column flex-sm-row gap-2">
-              <Form.Control
-                type="email"
-                placeholder="Enter your email"
-                className="footer-email-input"
-              />
-              <PrimaryButton className="btn btn-outline-light">
-                Subscribe
-              </PrimaryButton>
-            </Form> */}
+       
 
             {/* Socials */}
             <div className="mt-4 d-flex gap-3">

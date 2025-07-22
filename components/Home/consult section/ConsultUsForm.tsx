@@ -44,7 +44,6 @@ const ConsultUsForm: React.FC = () => {
   // Extract unique categories
   const categories = Array.from(new Set(services.map((s) => s.category)));
 
- 
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -110,8 +109,12 @@ const ConsultUsForm: React.FC = () => {
         bestTimeToContact: "",
       });
       setEntityType("");
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Submission failed.");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.message || "Submission failed.");
+      } else {
+        setError("An unknown error occurred.");
+      }
     } finally {
       setLoading(false);
     }
