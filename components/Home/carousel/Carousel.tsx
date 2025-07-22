@@ -5,9 +5,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
-import webImage from '@/public/images/pcModif.png';
-import socialImage from '@/public/images/sm.jpg';
-import mobileImage from '@/public/images/mobileBlue.jpg';
+import webImage from '@/public/images/website.jpeg';
+import socialImage from '@/public/images/digital.jpeg';
+import mobileImage from '@/public/images/mobileApps.jpeg';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const slides = [

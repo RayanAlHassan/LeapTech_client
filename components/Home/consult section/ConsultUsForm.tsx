@@ -17,7 +17,7 @@ const ConsultUsForm: React.FC = () => {
     company: "",
     organization: "",
     category: "",
-    serviceTitle: "",
+    serviceId: "", // <-- changed from title to serviceId
     projectDescription: "",
     estimatedBudget: "",
     projectTimeline: "",
@@ -44,11 +44,7 @@ const ConsultUsForm: React.FC = () => {
   // Extract unique categories
   const categories = Array.from(new Set(services.map((s) => s.category)));
 
-  // Filter service titles by selected category
-  const titlesForSelectedCategory = services
-    .filter((s) => s.category === formData.category)
-    .map((s) => s.title);
-
+ 
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -89,7 +85,7 @@ const ConsultUsForm: React.FC = () => {
       ...formData,
       company: entityType === "company" ? formData.company : "",
       organization: entityType === "organization" ? formData.organization : "",
-      service: formData.serviceTitle, // used as single field in DB
+      service: formData.serviceId, // used as single field in DB
     };
 
     try {
@@ -106,7 +102,7 @@ const ConsultUsForm: React.FC = () => {
         company: "",
         organization: "",
         category: "",
-        serviceTitle: "",
+        serviceId: "", // reset
         projectDescription: "",
         estimatedBudget: "",
         projectTimeline: "",
@@ -276,28 +272,33 @@ const ConsultUsForm: React.FC = () => {
         </div>
 
         {/* Title Dropdown (after category selection) */}
-        {formData.category && (
-          <div className="col-12 mt-3">
-            <label htmlFor="serviceTitle" className="form-label">
-              Select type of a service *
-            </label>
-            <select
-              className="form-select"
-              id="serviceTitle"
-              name="serviceTitle"
-              value={formData.serviceTitle}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Choose a service</option>
-              {titlesForSelectedCategory.map((title, i) => (
-                <option key={i} value={title}>
-                  {title}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
+{/* Title Dropdown (after category selection) */}
+{formData.category && (
+  <div className="col-12 mt-3">
+    <label htmlFor="title" className="form-label">
+      Select type of a service *
+    </label>
+    <select
+      className="form-select"
+      id="title"
+      name="serviceId"
+      value={formData.serviceId}
+      onChange={handleChange}
+      required
+    >
+      <option value="">Choose a service</option>
+      {services
+        .filter((s) => s.category === formData.category)
+        .map((service) => (
+          <option key={service._id} value={service._id}>
+            {service.title}
+          </option>
+        ))}
+    </select>
+  </div>
+)}
+
+
 
         <div className="col-12">
           <label htmlFor="projectDescription" className="form-label">
