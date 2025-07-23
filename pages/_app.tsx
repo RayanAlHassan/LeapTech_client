@@ -1,12 +1,12 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Navbar from '../components/Navbar';
-import Footer from '@/components/Footer';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Navbar from "../components/Navbar";
+import Footer from "@/components/Footer";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import Loader from '@/components/ui/Loader';
+import Loader from "@/components/ui/Loader";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [navHeight, setNavHeight] = useState(0);
@@ -18,13 +18,13 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const handleLoad = () => setIsLoading(false);
 
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       setIsLoading(false);
     } else {
-      window.addEventListener('load', handleLoad);
+      window.addEventListener("load", handleLoad);
     }
 
-    return () => window.removeEventListener('load', handleLoad);
+    return () => window.removeEventListener("load", handleLoad);
   }, []);
 
   // Loader for page transitions
@@ -32,14 +32,14 @@ export default function App({ Component, pageProps }: AppProps) {
     const handleStart = () => setIsLoading(true);
     const handleComplete = () => setIsLoading(false);
 
-    router.events.on('routeChangeStart', handleStart);
-    router.events.on('routeChangeComplete', handleComplete);
-    router.events.on('routeChangeError', handleComplete);
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleComplete);
+    router.events.on("routeChangeError", handleComplete);
 
     return () => {
-      router.events.off('routeChangeStart', handleStart);
-      router.events.off('routeChangeComplete', handleComplete);
-      router.events.off('routeChangeError', handleComplete);
+      router.events.off("routeChangeStart", handleStart);
+      router.events.off("routeChangeComplete", handleComplete);
+      router.events.off("routeChangeError", handleComplete);
     };
   }, [router]);
 
@@ -47,7 +47,14 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       {isLoading && <Loader />}
       <Navbar onHeightChange={setNavHeight} />
-      <main style={{ paddingTop: navHeight, flex: 1, opacity: isLoading ? 0.4 : 1, transition: 'opacity 0.3s ease-in-out' }}>
+      <main
+        style={{
+          paddingTop: navHeight,
+          flex: 1,
+          opacity: isLoading ? 0.4 : 1,
+          transition: "opacity 0.3s ease-in-out",
+        }}
+      >
         <Component {...pageProps} />
       </main>
       <Footer />
