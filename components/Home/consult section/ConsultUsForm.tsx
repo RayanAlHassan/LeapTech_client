@@ -35,11 +35,24 @@ const ConsultUsForm: React.FC = () => {
 
   // Fetch services
   useEffect(() => {
+    setLoading(true); // <-- start loading
+  
     axios
-      .get("http://localhost:5001/services")
-      .then((res) => setServices(res.data))
-      .catch((err) => console.error("Error fetching services", err));
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/services`)
+      .then((res) => {
+        setServices(res.data);
+        setError(null);         // <-- clear error if success
+      })
+      .catch((err) => {
+        console.error("Error fetching services", err);
+        setError("Failed to load services. Please try again later."); // <-- custom error
+      })
+      .finally(() => {
+        setLoading(false); // <-- stop loading after both success/fail
+      });
   }, []);
+  
+  
 
   // Extract unique categories
   const categories = Array.from(new Set(services.map((s) => s.category)));
@@ -88,11 +101,18 @@ const ConsultUsForm: React.FC = () => {
     };
 
     try {
+      console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+
       setLoading(true);
-      const res = await axios.post("http://localhost:5001/consult", payload, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
+
+      const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/consult`,
+        payload,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
       setSuccess(res.data.message || "Consultation submitted.");
       setFormData({
         name: "",
@@ -131,6 +151,27 @@ const ConsultUsForm: React.FC = () => {
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
+  if (loading && services.length === 0) {
+    return (
+      <div className="text-center my-5">
+        <div
+          className="spinner-border text-primary"
+          style={{ width: "3rem", height: "3rem" }}
+          role="status"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error && services.length === 0) {
+    return (
+      <div className="alert alert-danger my-4 text-center">
+        {error}
+      </div>
+    );
+  }
   return (
     <form onSubmit={handleSubmit}>
       {error && <div className="alert alert-danger">{error}</div>}
@@ -275,33 +316,31 @@ const ConsultUsForm: React.FC = () => {
         </div>
 
         {/* Title Dropdown (after category selection) */}
-{/* Title Dropdown (after category selection) */}
-{formData.category && (
-  <div className="col-12 mt-3">
-    <label htmlFor="title" className="form-label">
-      Select type of a service *
-    </label>
-    <select
-      className="form-select"
-      id="title"
-      name="serviceId"
-      value={formData.serviceId}
-      onChange={handleChange}
-      required
-    >
-      <option value="">Choose a service</option>
-      {services
-        .filter((s) => s.category === formData.category)
-        .map((service) => (
-          <option key={service._id} value={service._id}>
-            {service.title}
-          </option>
-        ))}
-    </select>
-  </div>
-)}
-
-
+        {/* Title Dropdown (after category selection) */}
+        {formData.category && (
+          <div className="col-12 mt-3">
+            <label htmlFor="title" className="form-label">
+              Select type of a service *
+            </label>
+            <select
+              className="form-select"
+              id="title"
+              name="serviceId"
+              value={formData.serviceId}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Choose a service</option>
+              {services
+                .filter((s) => s.category === formData.category)
+                .map((service) => (
+                  <option key={service._id} value={service._id}>
+                    {service.title}
+                  </option>
+                ))}
+            </select>
+          </div>
+        )}
 
         <div className="col-12">
           <label htmlFor="projectDescription" className="form-label">
