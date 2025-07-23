@@ -151,7 +151,7 @@ const ConsultUsForm: React.FC = () => {
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
-  if (loading && services.length === 0) {
+    if (loading && services.length === 0) {
     return (
       <div className="text-center my-5">
         <div
