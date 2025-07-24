@@ -41,6 +41,12 @@ const ContactUs = () => {
           position: "bottom-center",
           theme: "colored",
         });
+        if (res.status === 201) {
+          setStatus("Your message has been sent!");
+          // ...
+        } else {
+          setStatus("Something went wrong. Please try again.");
+        }
         setFormData({
           name: "",
           email: "",
