@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import mission from "@/public/images/mission.jpg";
 import map from "@/public/animations/Goals Map.json"; // adjust path if needed
 
 import Lottie from "lottie-react";
