@@ -199,7 +199,7 @@ const ConsultUsForm: React.FC = () => {
             className="form-control"
             id="name"
             name="name"
-            placeholder="exp: Abdul rahman Al Azmi"
+            placeholder="exp: Abdullah Abdulrahman"
             value={formData.name}
             onChange={handleChange}
             required

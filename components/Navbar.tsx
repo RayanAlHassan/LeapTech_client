@@ -100,8 +100,8 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
               <Image
                 src={logo}
                 alt="Logo Large"
-                width={120} // Larger size
-                height={120}
+                width={150} // Larger size
+                height={150}
                 quality={100}
                 priority
                 // className="d-none d-lg-inline" // Show only on large screens and up

@@ -1,9 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { FaInstagram, FaLinkedin, FaFacebook, FaTiktok } from "react-icons/fa6";
+import arrow from "@/public/images/pin.png";
+import office from "@/public/images/location.png";
+import phone from "@/public/images/phone (1).png";
+import email from "@/public/images/email.png";
+import insta from "@/public/images/instagram.png";
+import linkedin from "@/public/images/linkedin.png";
+import fb from "@/public/images/facebook.png";
+import tiktok from "@/public/images/tiktok.png";
 
 const Footer: React.FC = () => {
   return (
@@ -15,7 +24,14 @@ const Footer: React.FC = () => {
           <Col md={4}>
             <h5 className="fw-bold mb-3">Keep in touch</h5>
             <p className="mb-2">
-              📍{" "}
+              {" "}
+              <Image
+                src={arrow}
+                alt="Logo Large"
+                width={23}
+                height={23}
+                priority
+              />{" "}
               <a
                 href="https://www.google.com/maps?q=Salmiya,+Salem+Al+Mubarak+St.+Block+4,+Omniya+Centre+-+G+Floor+-+Office+8"
                 target="_blank"
@@ -25,15 +41,41 @@ const Footer: React.FC = () => {
                 Salmiya, Salem Al Mubarak St.
               </a>
             </p>
-            <p className="mb-2">🏢 Omniya Centre - G Floor - Office 8</p>
             <p className="mb-2">
-              📞{" "}
+              {" "}
+              <Image
+                src={office}
+                alt="Logo Large"
+                width={23}
+                height={23}
+                priority
+                // className="d-none d-lg-inline" // Show only on large screens and up
+              />{" "}
+              Omniya Centre - G Floor - Office 8
+            </p>
+            <p className="mb-2">
+              {" "}
+              <Image
+                src={phone}
+                alt="Logo Large"
+                width={23}
+                height={23}
+                priority
+                // className="d-none d-lg-inline" // Show only on large screens and up
+              />{" "}
               <a href="tel:+96525713432" className="footer-link">
                 +965 2571 3432
               </a>
             </p>
             <p className="mb-0">
-              📧{" "}
+              {" "}
+              <Image
+                src={email}
+                alt="Logo Large"
+                width={23}
+                height={23}
+                priority
+              />{" "}
               <a href="mailto:info@leaptechkw.com" className="footer-link">
                 info@leaptechkw.com
               </a>
@@ -82,13 +124,11 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-               
                 <Link href="/socialMedia" legacyBehavior>
                   <a className="footer-link"> Social Media</a>
                 </Link>
               </li>
               <li>
-               
                 <Link href="/career" legacyBehavior>
                   <a className="footer-link">career</a>
                 </Link>
@@ -106,7 +146,14 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="footer-icon"
               >
-                <FaTiktok />
+                {" "}
+                <Image
+                  src={tiktok}
+                  alt="Logo Large"
+                  width={23}
+                  height={23}
+                  priority
+                />{" "}
               </a>
               <a
                 href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
@@ -114,7 +161,14 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="footer-icon"
               >
-                <FaInstagram />
+                {" "}
+                <Image
+                  src={insta}
+                  alt="Logo Large"
+                  width={23}
+                  height={23}
+                  priority
+                />{" "}
               </a>
               <a
                 href="https://www.linkedin.com/company/leap-tech-kw"
@@ -122,7 +176,14 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="footer-icon"
               >
-                <FaLinkedin />
+                {" "}
+                <Image
+                  src={linkedin}
+                  alt="Logo Large"
+                  width={23}
+                  height={23}
+                  priority
+                />{" "}
               </a>
               <a
                 href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
@@ -130,8 +191,14 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="footer-icon"
               >
-                <FaFacebook />
-              </a>
+     {" "}
+                <Image
+                  src={fb}
+                  alt="Logo Large"
+                  width={23}
+                  height={23}
+                  priority
+                />{" "}              </a>
             </div>
           </Col>
         </Row>
