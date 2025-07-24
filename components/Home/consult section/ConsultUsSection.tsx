@@ -76,7 +76,9 @@ const ConsultUsSection: React.FC = () => {
                 <video
                   src="/videos/vd.mp4"
                   autoPlay
+                  controls={false}
                   muted
+                  playsInline
                   loop
                   style={{
                     width: "100%",
