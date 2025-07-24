@@ -65,14 +65,7 @@ const ConsultUsSection: React.FC = () => {
             {/* Image + Border */}
             <div className="col-lg-6 d-flex justify-content-center">
               <div className="animated-border-wrapper" style={{height:"40% !important"}}>
-                {/* <Image
-                  src={consultImage}
-                  alt="Consult Us"
-                  width={200}
-                  height={280}
-                  className="img-fluid"
-                  style={{ borderRadius: "10px", objectFit: "cover", width: "100%", height: "auto" }}
-                /> */}
+             
                 <video
                   src="/videos/vd.mp4"
                   autoPlay

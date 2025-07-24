@@ -3,6 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import mission from "@/public/images/mission.jpg";
+import map from "@/public/animations/Goals Map.json"; // adjust path if needed
+
 import Lottie from "lottie-react";
 import vision from "../public/animations/visionGoal.json";
 const AboutUs = () => {
@@ -11,15 +13,20 @@ const AboutUs = () => {
       {/* Section 1 - Our Mission */}
       <section className="py-5 bg-light">
         <div className="container">
+          <h2 className="contact-title mb-4 text-center">
+            About Us
+            <div className={`underline-gradient mx-auto mt-1`}></div>
+          </h2>
           <div className="row align-items-center image-text-wrapper">
             {/* Image */}
             <div className="col-md-6 mb-4 mb-md-0 text-center image-animate">
-              <Image
+              {/* <Image
                 src={mission}
                 alt="Our Mission"
                 className="img-fluid rounded shadow"
                 style={{ maxHeight: 400, width: "auto" }}
-              />
+              /> */}
+              <Lottie animationData={map} loop className="lottie-vision" />
             </div>
 
             {/* Text */}
@@ -31,8 +38,9 @@ const AboutUs = () => {
                   style={{ height: 4, width: 120 }}
                 />
               </h2>
-              <p className="lead" style={{textAlign:"left"}}>
-              <span className="highlight-gradient">Leap Tech</span>{` pushing the boundaries of technological innovation, transforming global
+              <p className="lead" style={{ textAlign: "left" }}>
+                <span className="highlight-gradient">Leap Tech</span>
+                {` pushing the boundaries of technological innovation, transforming global
 ideas into tangible solutions that redefine industry standards. With a commitment to
 excellence, we develop cutting-edge software solutions designed to compete at the
 highest levels, ensuring businesses stay ahead in a rapidly evolving market`
@@ -66,8 +74,10 @@ highest levels, ensuring businesses stay ahead in a rapidly evolving market`
                   style={{ height: 4, width: 120 }}
                 />
               </h2>
-              <p className="lead" style={{textAlign:"left"}}>
-                {`At `}<span className="highlight-gradient">Leap Tech</span>{` International, we envision a future where innovation knows no
+              <p className="lead" style={{ textAlign: "left" }}>
+                {`At `}
+                <span className="highlight-gradient">Leap Tech</span>
+                {` International, we envision a future where innovation knows no
 boundaries. Our goal is to expand across the region, empowering businesses with
 cutting-edge SaaS, PaaS, and digital solutions that drive efficiency, growth, and
 superior customer experiences.`
@@ -93,9 +103,14 @@ superior customer experiences.`
               style={{ height: 4, width: 160 }}
             />
           </h2>
-          <p className="lead mx-auto" style={{ maxWidth: "800px", textAlign:"left"}}>
+          <p
+            className="lead mx-auto"
+            style={{ maxWidth: "800px", textAlign: "left" }}
+          >
             {`Pioneering Innovation, Empowering Digital Transformation
-In a world where technology is the heartbeat of progress, `}<span className="highlight-gradient">Leap Tech</span>{` stand at the
+In a world where technology is the heartbeat of progress, `}
+            <span className="highlight-gradient">Leap Tech</span>
+            {` stand at the
 forefront— fueling businesses with cutting-edge Software-as-a-Service (SaaS) and
 Platform-as-a- Service (PaaS) solutions. But we do not stop there. From shaping your
 brand’s identity to managing your presence across social media landscapes, we craft
@@ -115,6 +130,51 @@ with the tools to thrive.`
       </section>
 
       <style jsx>{`
+        .contact-title {
+          font-size: clamp(2.25rem, 5vw, 4.5rem);
+          font-weight: 700;
+          font-family: var(--font-title);
+          line-height: 1.3;
+          color: var(--navbar-bg);
+          position: relative;
+          display: inline-block;
+          margin-bottom: 2rem;
+        }
+        .underline-gradient {
+          width: 120px;
+          height: 4px;
+          border-radius: 5px;
+          background: linear-gradient(
+            90deg,
+            var(--navbar-bg) 0%,
+            rgba(25, 51, 93, 0.7) 50%,
+            var(--accent-blue) 100%
+          );
+          animation: underlinePulse 2s infinite ease-in-out;
+          margin-top: 0.5rem;
+          transform-origin: center;
+        }
+        .underline-gradient.paused {
+          animation-play-state: paused;
+        }
+
+        @keyframes underlinePulse {
+          0% {
+            transform: scaleX(0);
+            opacity: 0.6;
+            transform-origin: center;
+          }
+          50% {
+            transform: scaleX(1);
+            opacity: 1;
+            transform-origin: center;
+          }
+          100% {
+            transform: scaleX(0);
+            opacity: 0.6;
+            transform-origin: center;
+          }
+        }
         .title-blue {
           color: var(--navbar-bg);
         }
@@ -213,7 +273,6 @@ with the tools to thrive.`
           text-fill-color: transparent;
           font-weight: 600;
         }
-        
       `}</style>
     </div>
   );
