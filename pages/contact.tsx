@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -27,16 +29,18 @@ const ContactUs = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("Sending...");
-
+  
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/contact/`,
         formData
       );
-
+  
       if (res.status === 201) {
-        setStatus("Your message has been sent!");
+        toast.success("Your message has been sent!", {
+          position: "bottom-center",
+          theme: "colored",
+        });
         setFormData({
           name: "",
           email: "",
@@ -45,13 +49,20 @@ const ContactUs = () => {
           message: "",
         });
       } else {
-        setStatus("Something went wrong. Please try again.");
+        toast.error("Something went wrong. Please try again.", {
+          position: "bottom-center",
+          theme: "colored",
+        });
       }
     } catch (err) {
       console.error(err);
-      setStatus("Submission failed. Please try again.");
+      toast.error("Submission failed. Please try again.", {
+        position: "bottom-center",
+        theme: "colored",
+      });
     }
   };
+  
 
   return (
     <section
@@ -81,7 +92,9 @@ const ContactUs = () => {
               height="300"
               style={{ border: 0, borderRadius: "10px" }}
               allowFullScreen
-              loading="lazy"
+              loading="eager" // 👈 replaces "lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            
             ></iframe>
 
             <h5 style={{ color: "var(--navbar-bg)", marginTop: "1.5rem" }}>
@@ -253,6 +266,8 @@ const ContactUs = () => {
           background-color: var(--accent-blue);
         }
       `}</style>
+      <ToastContainer />
+
     </section>
   );
 };

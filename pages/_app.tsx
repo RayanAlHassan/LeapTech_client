@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Loader from "@/components/ui/Loader";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [navHeight, setNavHeight] = useState(0);
@@ -46,6 +47,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       {isLoading && <Loader />}
+      <Head>
+        <link rel="preconnect" href="https://www.google.com" />
+        <link rel="preconnect" href="https://maps.googleapis.com" />
+      </Head>
+
       <Navbar onHeightChange={setNavHeight} />
       <main
         style={{
