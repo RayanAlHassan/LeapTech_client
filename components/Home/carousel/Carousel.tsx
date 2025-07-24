@@ -138,124 +138,113 @@ const Custom3DCarousel: React.FC = () => {
 
               );
             })}
-
-<button
-  className="arrowss left"
-  onClick={handlePrev}
-
->
-<ChevronLeft size={20} />
-
-</button>
-
-<button
-  className="arrowss right"
-  onClick={handleNext}
- 
-
- 
->
-<ChevronRight size={20} /> 
-</button>
-
+<div className="arrows-wrapper">
+  <button className="arrowss left-arrow" onClick={handlePrev}>
+    <span><ChevronLeft/></span> {/* or use an <i className="fa fa-chevron-left" /> */}
+  </button>
+  <button className="arrowss right-arrow" onClick={handleNext}>
+    <span><ChevronRight/></span>
+  </button>
+</div>
 
           </div>
 
           <div className="d-flex justify-content-center gap-2 mt-4">
-          {slides.map((_, i) => (
-  <button
-    key={i}
-    onClick={() => setCenterIndex(i)}
-    aria-label={`Go to slide ${i + 1}`}
-    style={{
-      width: '12px',
-      height: '12px',
-      borderRadius: '50%',
-      backgroundColor: centerIndex === i ? 'var(--navbar-bg)' : '#dee2e6',
-      border: 'none',
-      margin: '0 4px',
-      cursor: 'pointer',
-    }}
-  />
-))}
+  {slides.map((_, i) => (
+    <button
+      key={i}
+      onClick={() => setCenterIndex(i)}
+      aria-label={`Go to slide ${i + 1}`}
+      className={centerIndex === i ? "dot active" : "dot"}
+    />
+  ))}
+</div>
 
-          </div>
         </div>
       </div>
 
-      <style jsx>{`
-      .arrowss {
-        border: none;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        font-size: 30px;
-        border-radius: 50%;
-        position: absolute;
-        top: 60%;
-        transform: translateY(-50%);
-        z-index: 10;
-      }
-      
-      /* Left arrow default & hover */
-      .arrowss.left {
-        background-color: var(--navbar-bg) ;
-        color: var(--gray-bg);
-        left: -10px;
-      }
-      .arrowss.left:hover {
-        background-color: var(--gray-bg);
-        color: var(--navbar-bg);
-      }
-      
-      /* Right arrow default & hover */
-      .arrowss.right {
-        background-color:var(--navbar-bg) ;
-        color: var(--gray-bg);
-        right: -9px;
-      }
-      .arrowss.right:hover {
-        background-color:var(--gray-bg) ;
-        color: var(--navbar-bg);
-      }
-      
-  .carousel-arrow {
-    position: absolute;
-    top: 6
-    0%; /* center vertically */
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.1);
-    border: none;
-    font-size: 2.5rem;
-    color: #19335d;
-    padding: 0.2rem 0.6rem;
-    cursor: pointer;
-    z-index: 10;
-    transition: background 0.3s ease;
-  }
+<style jsx>{`
 
-  .carousel-arrow.left {
-    left: 0;
-  }
+.arrows-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 1rem;
+  position: relative;
+}
+.arrowss {
+  width: 40px;
+  height: 40px;
+  background-color: var(--navbar-bg);
+  color: var(--gray-bg);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
 
-  .carousel-arrow.right {
-    right: 0;
-  }
+.arrowss svg,
+.arrowss span,
+.arrowss i {
+  font-size: 20px;
+  color: #f0f0f0;
+}
 
-  .carousel-arrow:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
 
-  .carousel-arrow:hover:not(:disabled) {
-    background: rgba(0, 0, 0, 0.25);
-    color: white;
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+.arrowss span,
+.arrowss svg,
+.arrowss i {
+  font-size: 20px;
+  color: var(--gray-bg); /* or gray */
+  line-height: 1;
+  display: inline-block;
+}
+
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #dee2e6;
+  border: none;
+  margin: 0 6px;
+  cursor: pointer;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 0;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: var(--navbar-bg);
+}
+
+
+@media (max-width: 768px) {
+  .dot {
+    width: 18px;
+    height: 18px;
+    margin: 0 8px;
   }
-`}</style>
+}
+
+
+`}
+</style>
 
 
 

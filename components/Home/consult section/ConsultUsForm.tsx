@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Service {
   _id: string;
@@ -32,7 +34,13 @@ const ConsultUsForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(null), 5000); // Hide after 5 sec
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
+  
   // Fetch services
   useEffect(() => {
     setLoading(true); // <-- start loading
@@ -113,8 +121,10 @@ const ConsultUsForm: React.FC = () => {
           withCredentials: true,
         }
       );
-      setSuccess(res.data.message || "Consultation submitted.");
-      setFormData({
+      toast.success("Submitted successfully!", {
+        position: "bottom-center",
+        theme: "colored",
+      });      setFormData({
         name: "",
         email: "",
         phone: "",
@@ -172,7 +182,9 @@ const ConsultUsForm: React.FC = () => {
       </div>
     );
   }
+ 
   return (
+    
     <form onSubmit={handleSubmit}>
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
@@ -187,7 +199,7 @@ const ConsultUsForm: React.FC = () => {
             className="form-control"
             id="name"
             name="name"
-            placeholder="Abdul rahman Al Azmi"
+            placeholder="exp: Abdul rahman Al Azmi"
             value={formData.name}
             onChange={handleChange}
             required
@@ -199,6 +211,7 @@ const ConsultUsForm: React.FC = () => {
             Email
           </label>
           <input
+          placeholder="exp@gmail.com"
             type="email"
             className="form-control"
             id="email"
@@ -214,6 +227,7 @@ const ConsultUsForm: React.FC = () => {
             Phone
           </label>
           <input
+          placeholder="exp: +965 xxxx xxxx"
             type="text"
             className="form-control"
             id="phone"
@@ -265,6 +279,7 @@ const ConsultUsForm: React.FC = () => {
               Company Name
             </label>
             <input
+            placeholder="exp: Red Cross"
               type="text"
               className="form-control"
               id="company"
@@ -282,6 +297,7 @@ const ConsultUsForm: React.FC = () => {
               Organization Name
             </label>
             <input
+            placeholder="exp:Red Cross"
               type="text"
               className="form-control"
               id="organization"
@@ -316,7 +332,6 @@ const ConsultUsForm: React.FC = () => {
         </div>
 
         {/* Title Dropdown (after category selection) */}
-        {/* Title Dropdown (after category selection) */}
         {formData.category && (
           <div className="col-12 mt-3">
             <label htmlFor="title" className="form-label">
@@ -347,6 +362,7 @@ const ConsultUsForm: React.FC = () => {
             Project Description
           </label>
           <textarea
+          placeholder="write your message"
             className="form-control"
             id="projectDescription"
             name="projectDescription"
@@ -362,6 +378,7 @@ const ConsultUsForm: React.FC = () => {
             Estimated Budget (Optional)
           </label>
           <input
+          placeholder="exp: 1000$"
             type="text"
             className="form-control"
             id="estimatedBudget"
@@ -373,9 +390,10 @@ const ConsultUsForm: React.FC = () => {
 
         <div className="col-md-6">
           <label htmlFor="projectTimeline" className="form-label">
-            Project Timeline
+            Project Timeline (Optional)
           </label>
           <input
+          placeholder="exp: 2 months"
             type="text"
             className="form-control"
             id="projectTimeline"
@@ -420,7 +438,7 @@ const ConsultUsForm: React.FC = () => {
             name="bestTimeToContact"
             value={formData.bestTimeToContact}
             onChange={handleChange}
-            min={getTodayDateTimeLocal()} // Add this line
+            min={getTodayDateTimeLocal()} 
           />
         </div>
 
@@ -435,6 +453,33 @@ const ConsultUsForm: React.FC = () => {
         </div>
       </div>
       <style jsx>{`
+      .success-toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1050;
+        max-width: 90%;
+        padding: 12px 20px;
+        border-radius: 6px;
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        animation: fadeInUp 0.3s ease;
+        font-weight: 500;
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translate(-50%, 20px);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+      
         .lang-toggle-btn {
           background: linear-gradient(135deg, #003366, #1e4976);
           color: white;
@@ -520,7 +565,10 @@ const ConsultUsForm: React.FC = () => {
           }
         }
       `}</style>
+         <ToastContainer />
+
     </form>
+
   );
 };
 
