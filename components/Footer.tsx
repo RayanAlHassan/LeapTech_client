@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { FaInstagram, FaLinkedin, FaFacebook, FaTiktok } from "react-icons/fa6";
 import arrow from "@/public/images/pin.png";
 import office from "@/public/images/location.png";
 import phone from "@/public/images/phone (1).png";
