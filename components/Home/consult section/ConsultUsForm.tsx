@@ -113,7 +113,7 @@ const ConsultUsForm: React.FC = () => {
 
       setLoading(true);
 
-      const res = await axios.post(
+      await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/consult`,
         payload,
         {
