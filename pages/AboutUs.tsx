@@ -4,7 +4,6 @@ import React from "react";
 import map from "@/public/animations/Goals Map.json"; // adjust path if needed
 
 import Lottie from "lottie-react";
-import vision from "../public/animations/visionGoal.json";
 import VisionSection from "@/components/VisionSection";
 const AboutUs = () => {
   return (

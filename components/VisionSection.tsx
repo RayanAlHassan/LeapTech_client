@@ -39,7 +39,7 @@ const LampSection = () => {
           className=" lamppp img-fluid"
           priority
           style={{
-            width: "100",
+            width: "65%",
             height: "393px",
             // maxWidth: "1200px", // Prevents it from getting too wide
           }}
