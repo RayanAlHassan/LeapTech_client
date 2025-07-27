@@ -43,7 +43,7 @@ const services: Service[] = [
   },
 ];
 
-const service = () => {
+function Service() {
   const router = useRouter();
 
   return (
@@ -242,4 +242,4 @@ const service = () => {
   );
 };
 
-export default service;
+export default Service;
