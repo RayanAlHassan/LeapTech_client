@@ -1,16 +1,14 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-
-import { useRouter } from "next/navigation";
+import Image, { StaticImageData } from "next/image";
+import { useRouter } from "next/router";
 import seo from '@/public/images/seo.png';
-
 import web from "@/public/images/website.png";
 import sm from "@/public/images/digital.png";
 import app from "@/public/images/mobileApps.png";
 interface Service {
-  image: any;
+  image: StaticImageData;
   title: string;
   description: string;
   route: string;
