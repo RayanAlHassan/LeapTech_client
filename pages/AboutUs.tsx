@@ -5,6 +5,7 @@ import map from "@/public/animations/Goals Map.json"; // adjust path if needed
 
 import Lottie from "lottie-react";
 import vision from "../public/animations/visionGoal.json";
+import VisionSection from "@/components/VisionSection";
 const AboutUs = () => {
   return (
     <div className="container-fluid p-0">
@@ -55,41 +56,39 @@ highest levels, ensuring businesses stay ahead in a rapidly evolving market`
       </section>
 
       {/* Section 2 - Our Vision */}
-      <section className="py-5 bg-white shapedSection">
-        <div className="container">
-          <div className="row align-items-center flex-md-row-reverse image-text-wrapper">
-            {/* Image */}
-            <div className="col-md-6 mb-4 mb-md-0 text-center image-animate">
-              <Lottie animationData={vision} loop className="lottie-vision" />
-            </div>
-
-            {/* Text */}
-            <div className="col-md-6 text-center text-md-start text-animate">
-              <h2 className="fw-bold title-blue position-relative d-inline-block mb-3">
-                Our Vision
-                <div
-                  className="story-underline blue-gradient mt-2 mx-auto mx-md-0"
-                  style={{ height: 4, width: 120 }}
-                />
-              </h2>
-              <p className="lead" style={{ textAlign: "left" }}>
-                {`At `}
-                <span className="highlight-gradient">Leap Tech</span>
-                {` International, we envision a future where innovation knows no
-boundaries. Our goal is to expand across the region, empowering businesses with
-cutting-edge SaaS, PaaS, and digital solutions that drive efficiency, growth, and
-superior customer experiences.`
-                  .split(" ")
-                  .map((word, i) => (
-                    <span key={i} className="hover-underline">
-                      {word}&nbsp;
-                    </span>
-                  ))}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+   {/* Section 2 - Our Vision */}
+{/* <section
+  id="our-vision"
+  className="py-5 bg-white shapedSection d-flex align-items-center"
+  style={{
+    backgroundImage: "url('/images/lamp.png')", // 👈 replace with your path
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    minHeight: "70vh", // or any height you prefer
+  }}
+>
+  <div className="container text-center">
+    <h2 className="fw-bold title-blue position-relative d-inline-block mb-3">
+      Our Vision
+      <div
+        className="story-underline blue-gradient mt-2 mx-auto"
+        style={{ height: 4, width: 120 }}
+      />
+    </h2>
+    <p className="lead mx-auto" style={{ maxWidth: "700px", color: "#333" }}>
+      {`At `}
+      <span className="highlight-gradient">Leap Tech</span>
+      {` International, we envision a future where innovation knows no boundaries. Our goal is to expand across the region, empowering businesses with cutting-edge SaaS, PaaS, and digital solutions that drive efficiency, growth, and superior customer experiences.`
+        .split(" ")
+        .map((word, i) => (
+          <span key={i} className="hover-underline">
+            {word}&nbsp;
+          </span>
+        ))}
+    </p>
+  </div>
+</section> */}
+<VisionSection/>
 
       {/* Section 3 - Text Only */}
       <section className="py-5 bg-light text-center">
@@ -258,19 +257,7 @@ with the tools to thrive.`
             white-space: nowrap;
           }
         }
-        .highlight-gradient {
-          background: linear-gradient(
-            90deg,
-            var(--navbar-bg) 0%,
-            rgba(25, 51, 93, 0.7) 50%,
-            var(--accent-blue) 100%
-          );
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          text-fill-color: transparent;
-          font-weight: 600;
-        }
+       
       `}</style>
     </div>
   );

@@ -4,9 +4,11 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import logo from "@/public/images/leapkwlogo.png";
+import logo from "@/public/images/leapkwlogo.png"
+// import logo from "@/public/images/WhatsApp Image 2025-07-27 at 11.09.13 AM (1).jpeg";
 import PrimaryButton from "./ui/PrimaryButton";
 import Animatedburger from "./ui/AnimatedHamburger"; 
+import { CgOverflow } from "react-icons/cg";
 
 interface NavbarProps {
   onHeightChange: (height: number) => void;
@@ -124,11 +126,11 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
               HOME
             </a>
           </Link>
-
-          <Link href="/about" legacyBehavior>
+          
+          <Link href="/AboutUs" legacyBehavior>
             <a
               className={`nav-link underline-anim ${
-                pathname === "/about" ? "active" : ""
+                pathname === "/AboutUs" ? "active" : ""
               }`}
             >
               ABOUT US

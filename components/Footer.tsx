@@ -91,7 +91,8 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/about" legacyBehavior>
+                <Link href="/AboutUs
+                " legacyBehavior>
                   <a className="footer-link"> About Us</a>
                 </Link>
               </li>

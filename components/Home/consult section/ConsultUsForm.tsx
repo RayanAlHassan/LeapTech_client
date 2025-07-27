@@ -373,7 +373,7 @@ const ConsultUsForm: React.FC = () => {
           />
         </div>
 
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <label htmlFor="estimatedBudget" className="form-label">
             Estimated Budget (Optional)
           </label>
@@ -401,7 +401,7 @@ const ConsultUsForm: React.FC = () => {
             value={formData.projectTimeline}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
 
         <div className="col-12">
           <label className="form-label d-block">Preferred Contact Method</label>

@@ -218,18 +218,18 @@ body {
   }
 }
 /* ///////////////Our story section//////////// */
-.our-story-section {
+ .our-story-section {
   background: linear-gradient(
     135deg,
     var(--navbar-bg) 30%,
     var(--accent-blue) 100%
   );
-  width: 100vw;
+  width: 99.5vw;
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;
   overflow: hidden;
-}
+} 
 
 .story-text {
   max-width: 800px;
@@ -285,22 +285,7 @@ body {
 }
 /* Base Our Story background — animated continuously */
 /* //////////////////Our Story base section///////////////// */
-.our-story-section {
-  position: relative;
-  overflow: hidden;
-  width: 99vw;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  color: white;
-  text-align: center;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  font-family: var(--font-body);
 
-  /* container for backgrounds */
-  --background-opacity: 1;
-  --solid-opacity: 0;
-}
 /* 
 .background-gradient,
 .background-solid {
@@ -608,4 +593,17 @@ body {
   height: 100vh;
   background: white;
   z-index: 9999;
+}
+.highlight-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--navbar-bg) 0%,
+    rgba(25, 51, 93, 0.7) 50%,
+    var(--accent-blue) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
 }
