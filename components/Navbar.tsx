@@ -206,7 +206,7 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
                 HOME
               </a>
             </Link>
-            <Link href="/about" legacyBehavior>
+            <Link href="/AboutUs" legacyBehavior>
               <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
                 ABOUT US
               </a>
