@@ -8,6 +8,8 @@ import { motion } from 'framer-motion';
 import webImage from '@/public/images/website.png';
 import socialImage from '@/public/images/digital.png';
 import mobileImage from '@/public/images/mobileApps.png';
+import seo from '@/public/images/seo.png';
+
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const slides = [
@@ -18,10 +20,16 @@ const slides = [
     route: '/web',
   },
   {
-    title: 'Business & Digital Marketing',
+    title: 'Business',
     description: 'Boost brand visibility and engagement through digital strategies.',
     image: socialImage,
     route: '/socialMedia',
+  },
+  {
+    title: 'Digital Marketing',
+    description: 'Drive growth and conversions through targeted campaigns, SEO, and data-driven digital strategies.',
+    image: seo,
+    route: '/digitalMarketing',
   },
   {
     title: 'Mobile Application',

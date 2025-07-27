@@ -36,10 +36,9 @@ const LampSection = () => {
         <Image
           src={lamp}
           alt="Lamp"
-          className=" lamppp img-fluid"
+          className=" imgg img-fluid"
           priority
           style={{
-            width: "65%",
             height: "393px",
             // maxWidth: "1200px", // Prevents it from getting too wide
           }}
@@ -130,6 +129,9 @@ const LampSection = () => {
 
           .lamp-paragraph {
             font-size: 0.9rem;
+          }
+          .imgg{
+            width:100%
           }
         }
 

@@ -2,10 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
-// import app from "@/public/images/mobile.jpg";
-// import sm from "@/public/images/sm.jpg";
-// import web from "@/public/images/codingBlue.jpg";
+
 import { useRouter } from "next/navigation";
+import seo from '@/public/images/seo.png';
 
 import web from "@/public/images/website.png";
 import sm from "@/public/images/digital.png";
@@ -37,6 +36,12 @@ const services: Service[] = [
     description: "Robust, user-friendly apps for iOS and Android platforms.",
     image: app,
     route: "/mobileApp",
+  },
+  {
+    title: 'Digital Marketing',
+    description: 'Drive growth and conversions through targeted campaigns, SEO, and data-driven digital strategies.',
+    image: seo,
+    route: '/digitalMarketing',
   },
 ];
 
