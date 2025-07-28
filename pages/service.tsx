@@ -23,7 +23,7 @@ const services: Service[] = [
     route: "/web",
   },
   {
-    title: "Business & Digital Marketing",
+    title: "E-Business",
     description:
       "Boost brand visibility and engagement through digital strategies.",
     image: sm,

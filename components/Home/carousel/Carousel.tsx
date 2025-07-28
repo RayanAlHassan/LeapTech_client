@@ -20,7 +20,7 @@ const slides = [
     route: '/web',
   },
   {
-    title: 'Business',
+    title: 'E-Business',
     description: 'Boost brand visibility and engagement through digital strategies.',
     image: socialImage,
     route: '/socialMedia',
