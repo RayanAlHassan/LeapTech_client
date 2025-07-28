@@ -4,7 +4,9 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import logo from "@/public/images/leapkwlogo.png"
+// import logo from "@/public/images/leapkwlogo.png"
+import logo from "@/public/images/logonew.png"
+
 // import logo from "@/public/images/WhatsApp Image 2025-07-27 at 11.09.13 AM (1).jpeg";
 import PrimaryButton from "./ui/PrimaryButton";
 import Animatedburger from "./ui/AnimatedHamburger"; 
@@ -101,8 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
               <Image
                 src={logo}
                 alt="Logo Large"
-                width={150} // Larger size
-                height={150}
+                width={100} // Larger size
                 quality={100}
                 priority
                 // className="d-none d-lg-inline" // Show only on large screens and up
@@ -146,10 +147,10 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
             </a>
           </Link>
 
-          <Link href="/contact" legacyBehavior>
+          <Link href="/ContactUs" legacyBehavior>
             <a
               className={`nav-link underline-anim ${
-                pathname === "/contact" ? "active" : ""
+                pathname === "/ContactUs" ? "active" : ""
               }`}
             >
               CONTACT US
@@ -216,7 +217,7 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
                 SERVICE
               </a>
             </Link>
-            <Link href="/contact" legacyBehavior>
+            <Link href="/ContactUs" legacyBehavior>
               <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
                 CONTACT US
               </a>

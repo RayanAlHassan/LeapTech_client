@@ -126,16 +126,7 @@ with the tools to thrive.`
       </section>
 
       <style jsx>{`
-        .contact-title {
-          font-size: clamp(2.25rem, 5vw, 4.5rem);
-          font-weight: 700;
-          font-family: var(--font-title);
-          line-height: 1.3;
-          color: var(--navbar-bg);
-          position: relative;
-          display: inline-block;
-          margin-bottom: 2rem;
-        }
+      
         .underline-gradient {
           width: 120px;
           height: 4px;

@@ -226,16 +226,7 @@ const Footer: React.FC = () => {
         .shadow {
           box-shadow: 5px -1rem 1rem rgba(0, 0, 0, 0.15) !important;
         }
-        .footer-link {
-          color: #ddd;
-          text-decoration: none;
-          transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-          color: #ffffff;
-          text-decoration: underline;
-        }
+       
 
         .footer-icon {
           font-size: 1.4rem;
