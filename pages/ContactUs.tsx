@@ -198,40 +198,38 @@ const ContactUs = () => {
 
                 {/* Icon-only clickable WhatsApp phone */}
                 <div className="info_single_icon d-flex align-items-center mb-3 justify-content-center">
-                  <a
+                <a
                     href="https://wa.me/96592220798"
                     className="footer-link"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="WhatsApp Phone"
                   >
                     <Image
                       src={wp}
-                      alt="WhatsApp"
-                      width={32}
-                      height={32}
+                      alt="Logo Large"
+                      width={23}
+                      height={23}
                       priority
-                    />
-                  </a>
+                      // className="d-none d-lg-inline" // Show only on large screens and up
+                    />{" "}
+                    +965 9222 0798
+                  </a>{" "}
+
                 </div>
 
                 {/* Icon-only clickable office location */}
-                <div className="info_single_icon d-flex align-items-center mb-3 justify-content-center">
-                  <a
-                    href="https://goo.gl/maps/OmniyaShoppingCenter"
-                    className="footer-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Office Location"
-                  >
+                <div className="info_single d-flex align-items-center mb-3">
+                  <p className="mb-2">
+                    {" "}
                     <Image
                       src={office}
-                      alt="Office Location"
-                      width={32}
-                      height={32}
+                      alt="Logo Large"
+                      width={23}
+                      height={23}
                       priority
-                    />
-                  </a>
+                      // className="d-none d-lg-inline" // Show only on large screens and up
+                    />{" "}
+                    Omniya Centre - G Floor - Office 8
+                  </p>
                 </div>
               </div>
 
