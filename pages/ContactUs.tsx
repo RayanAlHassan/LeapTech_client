@@ -16,7 +16,7 @@ const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    countryCode: "+965", 
+    countryCode: "+965",
 
     phone: "",
     subject: "",
@@ -27,12 +27,13 @@ const ContactUs = () => {
   const [, setIsTyping] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     setIsTyping(true);
   };
-  
 
   const handleBlur = () => setIsTyping(false);
   const handleFocus = () => setIsTyping(true);
@@ -55,7 +56,7 @@ const ContactUs = () => {
         setFormData({
           name: "",
           email: "",
-          countryCode: "+965",  // default GCC code
+          countryCode: "+965", // default GCC code
           phone: "",
           subject: "",
           message: "",
@@ -115,35 +116,34 @@ const ContactUs = () => {
                   required
                 />
 
-<div className="form-group d-flex gap-2 align-items-center">
-  <select
-    name="countryCode"
-    className="form-control country-code-select"
-    value={formData.countryCode}
-    onChange={handleChange}
-    required
-  >
-    <option value="+965">🇰🇼 +965</option>
-    <option value="+966">🇸🇦 +966</option>
-    <option value="+971">🇦🇪 +971</option>
-    <option value="+973">🇧🇭 +973</option>
-    <option value="+968">🇴🇲 +968</option>
-    <option value="+974">🇶🇦 +974</option>
-  </select>
+                <div className="form-group d-flex gap-2 align-items-center">
+                  <select
+                    name="countryCode"
+                    className="form-control country-code-select"
+                    value={formData.countryCode}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="+965">🇰🇼 +965</option>
+                    <option value="+966">🇸🇦 +966</option>
+                    <option value="+971">🇦🇪 +971</option>
+                    <option value="+973">🇧🇭 +973</option>
+                    <option value="+968">🇴🇲 +968</option>
+                    <option value="+974">🇶🇦 +974</option>
+                  </select>
 
-  <input
-    type="text"
-    name="phone"
-    className="form-control"
-    placeholder="Phone Number"
-    value={formData.phone}
-    onChange={handleChange}
-    onFocus={handleFocus}
-    onBlur={handleBlur}
-    required
-  />
-</div>
-
+                  <input
+                    type="text"
+                    name="phone"
+                    className="form-control"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    required
+                  />
+                </div>
 
                 <input
                   type="text"
@@ -203,7 +203,7 @@ const ContactUs = () => {
 
                 <div className="info_single d-flex align-items-center mb-3">
                   <a
-                    href="tel:+96592220798"
+                    href="https://wa.me/96592220798"
                     className="footer-link"
                     target="_blank"
                   >
@@ -214,10 +214,9 @@ const ContactUs = () => {
                       height={23}
                       priority
                       // className="d-none d-lg-inline" // Show only on large screens and up
-                    />
-                    {" "} +965 9222 0798
-                  </a>
-                  {" "}
+                    />{" "}
+                    +965 9222 0798
+                  </a>{" "}
                 </div>
 
                 <div className="info_single d-flex align-items-center mb-3">
@@ -230,8 +229,8 @@ const ContactUs = () => {
                       height={23}
                       priority
                       // className="d-none d-lg-inline" // Show only on large screens and up
-                    />
-                    {" "} Omniya Centre - G Floor - Office 8
+                    />{" "}
+                    Omniya Centre - G Floor - Office 8
                   </p>
                 </div>
               </div>
@@ -253,8 +252,7 @@ const ContactUs = () => {
                         width={23}
                         height={23}
                         priority
-                      />
-                      {" "}
+                      />{" "}
                     </a>
                     <a
                       href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
@@ -269,8 +267,7 @@ const ContactUs = () => {
                         width={23}
                         height={23}
                         priority
-                      />
-                      {" "}
+                      />{" "}
                     </a>
                     <a
                       href="https://www.linkedin.com/company/leap-tech-kw"
@@ -285,8 +282,7 @@ const ContactUs = () => {
                         width={23}
                         height={23}
                         priority
-                      />
-                      {" "}
+                      />{" "}
                     </a>
                     <a
                       href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
@@ -301,8 +297,7 @@ const ContactUs = () => {
                         width={23}
                         height={23}
                         priority
-                      />
-                      {" "}{" "}
+                      />{" "}
                     </a>
                   </div>
                 </div>
@@ -324,8 +319,7 @@ const ContactUs = () => {
                       width={23}
                       height={23}
                       priority
-                    />
-                    {" "}
+                    />{" "}
                   </a>
                   <a
                     href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
@@ -340,8 +334,7 @@ const ContactUs = () => {
                       width={23}
                       height={23}
                       priority
-                    />
-                    {" "}
+                    />{" "}
                   </a>
                   <a
                     href="https://www.linkedin.com/company/leap-tech-kw"
@@ -356,8 +349,7 @@ const ContactUs = () => {
                       width={23}
                       height={23}
                       priority
-                    />
-                    {" "}
+                    />{" "}
                   </a>
                   <a
                     href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
@@ -372,8 +364,7 @@ const ContactUs = () => {
                       width={23}
                       height={23}
                       priority
-                    />
-                    {" "}{" "}
+                    />{" "}
                   </a>
                 </div>
               </div>
@@ -460,15 +451,13 @@ const ContactUs = () => {
           background-color: var(--navbar-bg);
           color: var(--text-color);
           border: 1px solid var(--navbar-bg);
-
         }
         .contact_form_submit:hover {
-        
           background-color: var(--text-color);
           color: var(--navbar-bg);
           animation: verticalShakeHover 0.5s ease-in-out;
         }
-        
+
         @keyframes verticalShakeHover {
           0%,
           100% {
@@ -658,4 +647,3 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
-
