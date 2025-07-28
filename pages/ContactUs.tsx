@@ -82,7 +82,7 @@ const ContactUs = () => {
         <div className="container">
           <div className="contact_inner row mx-auto">
             {/* Contact Form */}
-            <div className="col-lg-7 col-md-12 contact_form_inner px-4">
+            <div className="col-lg-7 col-md-12 contact_form_inner ">
               <h2 className="contact-title mb-4 text-center">
                 Contact Us
                 <div className={`underline-gradient mx-auto mt-1`}></div>
@@ -596,6 +596,9 @@ const ContactUs = () => {
           .social_icons_container {
             display: none !important;
           }
+          .form-control{
+            margin-bottom:0
+          }
         }
 
         @media (max-width: 575px) {
@@ -639,6 +642,19 @@ const ContactUs = () => {
           margin-top: 0.5rem;
           transform-origin: center;
         }
+        .form-group.d-flex {
+          gap: 10px;
+        }
+        
+        .country-code-select {
+          width: 20%;
+          min-width: 80px;
+        }
+        
+        .form-group.d-flex input[name="phone"] {
+          width: 80%;
+        }
+        
       `}</style>
 
       <ToastContainer />
