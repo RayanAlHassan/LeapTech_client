@@ -655,7 +655,6 @@ const ContactUs = () => {
           appearance: none;
         
           /* Add space for the arrow */
-          padding-right: 30px;
           background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='10' viewBox='0 0 24 24' width='10' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
           background-repeat: no-repeat;
           background-position: right 10px center;
