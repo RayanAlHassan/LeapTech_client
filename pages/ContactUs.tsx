@@ -22,7 +22,7 @@ const ContactUs = () => {
   });
 
   const [status, setStatus] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
+  const [, setIsTyping] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
