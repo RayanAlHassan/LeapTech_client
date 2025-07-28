@@ -11,7 +11,6 @@ import fb from "@/public/images/facebook.png";
 import tiktok from "@/public/images/tiktok.png";
 import wp from "@/public/images/whatsapp (1).png";
 import office from "@/public/images/location.png";
-import PrimaryButton from "@/components/ui/PrimaryButton";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
