@@ -215,14 +215,14 @@ const ContactUs = () => {
                       priority
                       // className="d-none d-lg-inline" // Show only on large screens and up
                     />
-                    &nbsp; +965 9222 0798
+                    {" "} +965 9222 0798
                   </a>
-                  &nbsp;
+                  {" "}
                 </div>
 
                 <div className="info_single d-flex align-items-center mb-3">
                   <p className="mb-2">
-                    &nbsp;
+                    {" "}
                     <Image
                       src={office}
                       alt="Logo Large"
@@ -231,7 +231,7 @@ const ContactUs = () => {
                       priority
                       // className="d-none d-lg-inline" // Show only on large screens and up
                     />
-                    &nbsp; Omniya Centre - G Floor - Office 8
+                    {" "} Omniya Centre - G Floor - Office 8
                   </p>
                 </div>
               </div>
@@ -246,7 +246,7 @@ const ContactUs = () => {
                       rel="noopener noreferrer"
                       className="footer-icon"
                     >
-                      &nbsp;
+                      {" "}
                       <Image
                         src={tiktok}
                         alt="Logo Large"
@@ -254,7 +254,7 @@ const ContactUs = () => {
                         height={23}
                         priority
                       />
-                      &nbsp;
+                      {" "}
                     </a>
                     <a
                       href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
@@ -262,7 +262,7 @@ const ContactUs = () => {
                       rel="noopener noreferrer"
                       className="footer-icon"
                     >
-                      &nbsp;
+                      {" "}
                       <Image
                         src={insta}
                         alt="Logo Large"
@@ -270,7 +270,7 @@ const ContactUs = () => {
                         height={23}
                         priority
                       />
-                      &nbsp;
+                      {" "}
                     </a>
                     <a
                       href="https://www.linkedin.com/company/leap-tech-kw"
@@ -278,7 +278,7 @@ const ContactUs = () => {
                       rel="noopener noreferrer"
                       className="footer-icon"
                     >
-                      &nbsp;
+                      {" "}
                       <Image
                         src={linkedin}
                         alt="Logo Large"
@@ -286,7 +286,7 @@ const ContactUs = () => {
                         height={23}
                         priority
                       />
-                      &nbsp;
+                      {" "}
                     </a>
                     <a
                       href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
@@ -294,7 +294,7 @@ const ContactUs = () => {
                       rel="noopener noreferrer"
                       className="footer-icon"
                     >
-                      &nbsp;
+                      {" "}
                       <Image
                         src={fb}
                         alt="Logo Large"
@@ -302,7 +302,7 @@ const ContactUs = () => {
                         height={23}
                         priority
                       />
-                      &nbsp;{" "}
+                      {" "}{" "}
                     </a>
                   </div>
                 </div>
@@ -317,7 +317,7 @@ const ContactUs = () => {
                     rel="noopener noreferrer"
                     className="footer-icon"
                   >
-                    &nbsp;
+                    {" "}
                     <Image
                       src={tiktok}
                       alt="Logo Large"
@@ -325,7 +325,7 @@ const ContactUs = () => {
                       height={23}
                       priority
                     />
-                    &nbsp;
+                    {" "}
                   </a>
                   <a
                     href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
@@ -333,7 +333,7 @@ const ContactUs = () => {
                     rel="noopener noreferrer"
                     className="footer-icon"
                   >
-                    &nbsp;
+                    {" "}
                     <Image
                       src={insta}
                       alt="Logo Large"
@@ -341,7 +341,7 @@ const ContactUs = () => {
                       height={23}
                       priority
                     />
-                    &nbsp;
+                    {" "}
                   </a>
                   <a
                     href="https://www.linkedin.com/company/leap-tech-kw"
@@ -349,7 +349,7 @@ const ContactUs = () => {
                     rel="noopener noreferrer"
                     className="footer-icon"
                   >
-                    &nbsp;
+                    {" "}
                     <Image
                       src={linkedin}
                       alt="Logo Large"
@@ -357,7 +357,7 @@ const ContactUs = () => {
                       height={23}
                       priority
                     />
-                    &nbsp;
+                    {" "}
                   </a>
                   <a
                     href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
@@ -365,7 +365,7 @@ const ContactUs = () => {
                     rel="noopener noreferrer"
                     className="footer-icon"
                   >
-                    &nbsp;
+                    {" "}
                     <Image
                       src={fb}
                       alt="Logo Large"
@@ -373,7 +373,7 @@ const ContactUs = () => {
                       height={23}
                       priority
                     />
-                    &nbsp;{" "}
+                    {" "}{" "}
                   </a>
                 </div>
               </div>
