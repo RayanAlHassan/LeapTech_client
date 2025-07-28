@@ -648,6 +648,9 @@ const ContactUs = () => {
         
         .country-code-select {
           width: 20%;
+          appearance: auto; /* for modern browsers */
+          -webkit-appearance: auto;
+          -moz-appearance: auto;
           min-width: 80px;
         }
         
