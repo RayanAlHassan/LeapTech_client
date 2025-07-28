@@ -116,9 +116,11 @@ const ContactUs = () => {
                 />
 
                 <div className="form-group d-flex gap-2 align-items-center">
+                  <div className="d-flex justify-content-center gap-0 align-items-center " style={{width:"fit-content"}}>
+
                   <select
                     name="countryCode"
-                    className="form-control country-code-select"
+                    className="form-control country-code-select "
                     value={formData.countryCode}
                     onChange={handleChange}
                     required
@@ -131,6 +133,16 @@ const ContactUs = () => {
                     <option value="+968">🇴🇲 +968</option>
                     <option value="+974">🇶🇦 +974</option>
                   </select>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="#1f1f1f"
+                  >
+                    <path d="M480-360 280-560h400L480-360Z" />
+                  </svg>
+                  </div>
 
                   <input
                     type="text"
@@ -198,7 +210,7 @@ const ContactUs = () => {
 
                 {/* Icon-only clickable WhatsApp phone */}
                 <div className="info_single_icon d-flex align-items-center mb-3 justify-content-center">
-                <a
+                  <a
                     href="https://wa.me/96592220798"
                     className="footer-link"
                     target="_blank"
@@ -213,7 +225,6 @@ const ContactUs = () => {
                     />{" "}
                     +965 9222 0798
                   </a>{" "}
-
                 </div>
 
                 {/* Icon-only clickable office location */}
@@ -652,14 +663,8 @@ const ContactUs = () => {
 
         .country-code-select {
           width: 20%;
-          min-width: 80px;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-          background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='10' viewBox='0 0 24 24' width='10' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-          background-repeat: no-repeat;
-          background-position: right 10px center;
-          background-size: 20px;
+          min-width:60px;
+         
           cursor: pointer;
         }
 
@@ -671,13 +676,12 @@ const ContactUs = () => {
             flex-direction: column !important;
             gap: 0.5rem !important;
           }
-        
+
           .country-code-select,
           input[name="phone"] {
             width: 100% !important;
           }
         }
-        
       `}</style>
 
       <ToastContainer />
