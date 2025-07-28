@@ -9,13 +9,16 @@ import insta from "@/public/images/instagram.png";
 import linkedin from "@/public/images/linkedin.png";
 import fb from "@/public/images/facebook.png";
 import tiktok from "@/public/images/tiktok.png";
-import wp from "@/public/images/whatsapp.png"
+import wp from "@/public/images/whatsapp (1).png";
 import office from "@/public/images/location.png";
+import PrimaryButton from "@/components/ui/PrimaryButton";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    countryCode: "+965", 
+
     phone: "",
     subject: "",
     message: "",
@@ -25,11 +28,12 @@ const ContactUs = () => {
   const [, setIsTyping] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     setIsTyping(true);
   };
+  
 
   const handleBlur = () => setIsTyping(false);
   const handleFocus = () => setIsTyping(true);
@@ -52,6 +56,7 @@ const ContactUs = () => {
         setFormData({
           name: "",
           email: "",
+          countryCode: "+965",  // default GCC code
           phone: "",
           subject: "",
           message: "",
@@ -78,10 +83,11 @@ const ContactUs = () => {
           <div className="contact_inner row mx-auto">
             {/* Contact Form */}
             <div className="col-lg-7 col-md-12 contact_form_inner px-4">
-            <h2 className="contact-title mb-4 text-center">
-            About Us
-            <div className={`underline-gradient mx-auto mt-1`}></div>
-          </h2>              <p>
+              <h2 className="contact-title mb-4 text-center">
+                Contact Us
+                <div className={`underline-gradient mx-auto mt-1`}></div>
+              </h2>{" "}
+              <p>
                 Feel Free to contact us any time. We will get back to you as
                 soon as we can!
               </p>
@@ -90,7 +96,7 @@ const ContactUs = () => {
                   type="text"
                   className="form-control form-group"
                   name="name"
-                  placeholder="Name"
+                  placeholder="Full Name"
                   value={formData.name}
                   onChange={handleChange}
                   onFocus={handleFocus}
@@ -110,14 +116,35 @@ const ContactUs = () => {
                   required
                 />
 
-                <input
-                  type="text"
-                  className="form-control form-group"
-                  name="phone"
-                  placeholder="Phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                />
+<div className="form-group d-flex gap-2 align-items-center">
+  <select
+    name="countryCode"
+    className="form-control country-code-select"
+    value={formData.countryCode}
+    onChange={handleChange}
+    required
+  >
+    <option value="+965">🇰🇼 +965</option>
+    <option value="+966">🇸🇦 +966</option>
+    <option value="+971">🇦🇪 +971</option>
+    <option value="+973">🇧🇭 +973</option>
+    <option value="+968">🇴🇲 +968</option>
+    <option value="+974">🇶🇦 +974</option>
+  </select>
+
+  <input
+    type="text"
+    name="phone"
+    className="form-control"
+    placeholder="Phone Number"
+    value={formData.phone}
+    onChange={handleChange}
+    onFocus={handleFocus}
+    onBlur={handleBlur}
+    required
+  />
+</div>
+
 
                 <input
                   type="text"
@@ -138,10 +165,15 @@ const ContactUs = () => {
                   required
                 ></textarea>
 
-                <button className="contact_form_submit" type="submit">
+                <button className="contact_form_submit " type="submit">
                   Send
                 </button>
-
+                {/* <PrimaryButton
+                  className="contact_form_submit mt-4"
+                  type="submit"
+                >
+                  Send
+                </PrimaryButton> */}
                 {status && (
                   <p className="mt-3 text-success fw-semibold">{status}</p>
                 )}
@@ -155,7 +187,7 @@ const ContactUs = () => {
 
               {/* Black contact info box */}
               <div className="contact_info_sec position-relative">
-              <h4 className="mb-4">Contact Info</h4>
+                <h4 className="mb-4">Contact Info</h4>
 
                 <div className="map_container mb-4">
                   <iframe
@@ -171,167 +203,180 @@ const ContactUs = () => {
                 </div>
 
                 <div className="info_single d-flex align-items-center mb-3">
-                {" "}
-              <Image
-                src={wp}
-                alt="Logo Large"
-                width={23}
-                height={23}
-                priority
-                // className="d-none d-lg-inline" // Show only on large screens and up
-              />{" "}
-              <a href="tel:+96592220798" className="footer-link">
-              +965 9222 0798
-              </a>
+                  <a
+                    href="tel:+96592220798"
+                    className="footer-link"
+                    target="_blank"
+                  >
+                    <Image
+                      src={wp}
+                      alt="Logo Large"
+                      width={23}
+                      height={23}
+                      priority
+                      // className="d-none d-lg-inline" // Show only on large screens and up
+                    />
+                    &nbsp; +965 9222 0798
+                  </a>
+                  &nbsp;
                 </div>
 
                 <div className="info_single d-flex align-items-center mb-3">
-                <p className="mb-2">
-              {" "}
-              <Image
-                src={office}
-                alt="Logo Large"
-                width={23}
-                height={23}
-                priority
-                // className="d-none d-lg-inline" // Show only on large screens and up
-              />{" "}
-              Omniya Centre - G Floor - Office 8
-            </p>
+                  <p className="mb-2">
+                    &nbsp;
+                    <Image
+                      src={office}
+                      alt="Logo Large"
+                      width={23}
+                      height={23}
+                      priority
+                      // className="d-none d-lg-inline" // Show only on large screens and up
+                    />
+                    &nbsp; Omniya Centre - G Floor - Office 8
+                  </p>
                 </div>
               </div>
 
               {/* Social icons inside the gradient column, pinned at bottom on desktop */}
               <div className="social_icons_container d-none d-lg-flex flex-column justify-content-end">
                 <div className="social_icons d-flex justify-content-center gap-3">
-                <div className="mt-4 d-flex gap-3">
-              <a
-                href="https://www.tiktok.com/@leaptechkw?_t=ZS-8yCvz1g4UIU&_r=1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
-                {" "}
-                <Image
-                  src={tiktok}
-                  alt="Logo Large"
-                  width={23}
-                  height={23}
-                  priority
-                />{" "}
-              </a>
-              <a
-                href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
-                {" "}
-                <Image
-                  src={insta}
-                  alt="Logo Large"
-                  width={23}
-                  height={23}
-                  priority
-                />{" "}
-              </a>
-              <a
-                href="https://www.linkedin.com/company/leap-tech-kw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
-                {" "}
-                <Image
-                  src={linkedin}
-                  alt="Logo Large"
-                  width={23}
-                  height={23}
-                  priority
-                />{" "}
-              </a>
-              <a
-                href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
-     {" "}
-                <Image
-                  src={fb}
-                  alt="Logo Large"
-                  width={23}
-                  height={23}
-                  priority
-                />{" "}              </a>
-            </div>
+                  <div className="mt-4 d-flex gap-3">
+                    <a
+                      href="https://www.tiktok.com/@leaptechkw?_t=ZS-8yCvz1g4UIU&_r=1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-icon"
+                    >
+                      &nbsp;
+                      <Image
+                        src={tiktok}
+                        alt="Logo Large"
+                        width={23}
+                        height={23}
+                        priority
+                      />
+                      &nbsp;
+                    </a>
+                    <a
+                      href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-icon"
+                    >
+                      &nbsp;
+                      <Image
+                        src={insta}
+                        alt="Logo Large"
+                        width={23}
+                        height={23}
+                        priority
+                      />
+                      &nbsp;
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/company/leap-tech-kw"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-icon"
+                    >
+                      &nbsp;
+                      <Image
+                        src={linkedin}
+                        alt="Logo Large"
+                        width={23}
+                        height={23}
+                        priority
+                      />
+                      &nbsp;
+                    </a>
+                    <a
+                      href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-icon"
+                    >
+                      &nbsp;
+                      <Image
+                        src={fb}
+                        alt="Logo Large"
+                        width={23}
+                        height={23}
+                        priority
+                      />
+                      &nbsp;{" "}
+                    </a>
+                  </div>
                 </div>
               </div>
 
               {/* On mobile, show social icons below contact info normally */}
               <div className="social_icons_mobile d-lg-none mt-4 d-flex justify-content-center gap-3">
-               
-                  <div className="mt-4 d-flex gap-3">
-              <a
-                href="https://www.tiktok.com/@leaptechkw?_t=ZS-8yCvz1g4UIU&_r=1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
-                {" "}
-                <Image
-                  src={tiktok}
-                  alt="Logo Large"
-                  width={23}
-                  height={23}
-                  priority
-                />{" "}
-              </a>
-              <a
-                href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
-                {" "}
-                <Image
-                  src={insta}
-                  alt="Logo Large"
-                  width={23}
-                  height={23}
-                  priority
-                />{" "}
-              </a>
-              <a
-                href="https://www.linkedin.com/company/leap-tech-kw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
-                {" "}
-                <Image
-                  src={linkedin}
-                  alt="Logo Large"
-                  width={23}
-                  height={23}
-                  priority
-                />{" "}
-              </a>
-              <a
-                href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
-     {" "}
-                <Image
-                  src={fb}
-                  alt="Logo Large"
-                  width={23}
-                  height={23}
-                  priority
-                />{" "}              </a>
-            </div>
+                <div className="mt-4 d-flex gap-3">
+                  <a
+                    href="https://www.tiktok.com/@leaptechkw?_t=ZS-8yCvz1g4UIU&_r=1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-icon"
+                  >
+                    &nbsp;
+                    <Image
+                      src={tiktok}
+                      alt="Logo Large"
+                      width={23}
+                      height={23}
+                      priority
+                    />
+                    &nbsp;
+                  </a>
+                  <a
+                    href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-icon"
+                  >
+                    &nbsp;
+                    <Image
+                      src={insta}
+                      alt="Logo Large"
+                      width={23}
+                      height={23}
+                      priority
+                    />
+                    &nbsp;
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/leap-tech-kw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-icon"
+                  >
+                    &nbsp;
+                    <Image
+                      src={linkedin}
+                      alt="Logo Large"
+                      width={23}
+                      height={23}
+                      priority
+                    />
+                    &nbsp;
+                  </a>
+                  <a
+                    href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-icon"
+                  >
+                    &nbsp;
+                    <Image
+                      src={fb}
+                      alt="Logo Large"
+                      width={23}
+                      height={23}
+                      priority
+                    />
+                    &nbsp;{" "}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -403,22 +448,43 @@ const ContactUs = () => {
         }
 
         .contact_form_submit {
-          background: linear-gradient(to top right, #1325e8 -5%, #00bcd480 100%);          border: none;
-          color: #fff;
           padding: 12px 0;
           width: 100%;
           margin-top: 20px;
-          border-radius: 35px;
           cursor: pointer;
           font-size: 14px;
           letter-spacing: 2px;
           font-weight: 600;
-          transition: background 0.3s ease;
+          font-weight: 500;
+          font-size: 1rem;
+          border-radius: 0.375rem;
+          background-color: var(--navbar-bg);
+          color: var(--text-color);
+          border: 1px solid var(--navbar-bg);
+
         }
-
         .contact_form_submit:hover {
-          background: linear-gradient(to top right, #1325e859 -5%, #3F51B5 100%);        }
-
+        
+          background-color: var(--text-color);
+          color: var(--navbar-bg);
+          animation: verticalShakeHover 0.5s ease-in-out;
+        }
+        
+        @keyframes verticalShakeHover {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          25% {
+            transform: translateY(-4px);
+          }
+          50% {
+            transform: translateY(4px);
+          }
+          75% {
+            transform: translateY(-2px);
+          }
+        }
         .contact_info_wrapper {
           position: relative;
           padding-left: 50%;
@@ -432,14 +498,15 @@ const ContactUs = () => {
           right: 0;
           width: 50%;
           height: 100%;
-          background: linear-gradient(to top right, #1325e8 -5%, #00bcd480 100%);
+          box-shadow: -1px 1rem 1rem rgba(0, 0, 0, 0.15) !important;
+
           border-radius: 25px 0 0 25px;
           z-index: 0;
         }
 
         .contact_info_sec {
           position: relative;
-          background-color: #2d2d2d;
+          background-color: var(--navbar-bg);
           border-radius: 25px 0 0 25px;
           padding: 30px 40px 30px 60px; /* add left padding to clear gradient */
           color: #fff;
@@ -569,7 +636,7 @@ const ContactUs = () => {
           display: inline-block;
           margin-bottom: 2rem;
         }
-     
+
         .underline-gradient {
           width: 120px;
           height: 4px;
@@ -592,3 +659,4 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+
