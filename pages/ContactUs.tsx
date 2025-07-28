@@ -17,7 +17,6 @@ const ContactUs = () => {
     name: "",
     email: "",
     countryCode: "+965",
-
     phone: "",
     subject: "",
     message: "",
@@ -56,7 +55,7 @@ const ContactUs = () => {
         setFormData({
           name: "",
           email: "",
-          countryCode: "+965", // default GCC code
+          countryCode: "+965",
           phone: "",
           subject: "",
           message: "",
@@ -123,6 +122,7 @@ const ContactUs = () => {
                     value={formData.countryCode}
                     onChange={handleChange}
                     required
+                    aria-label="Select country code"
                   >
                     <option value="+965">🇰🇼 +965</option>
                     <option value="+966">🇸🇦 +966</option>
@@ -142,6 +142,7 @@ const ContactUs = () => {
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                     required
+                    inputMode="tel"
                   />
                 </div>
 
@@ -167,12 +168,6 @@ const ContactUs = () => {
                 <button className="contact_form_submit " type="submit">
                   Send
                 </button>
-                {/* <PrimaryButton
-                  className="contact_form_submit mt-4"
-                  type="submit"
-                >
-                  Send
-                </PrimaryButton> */}
                 {status && (
                   <p className="mt-3 text-success fw-semibold">{status}</p>
                 )}
@@ -201,37 +196,42 @@ const ContactUs = () => {
                   ></iframe>
                 </div>
 
-                <div className="info_single d-flex align-items-center mb-3">
+                {/* Icon-only clickable WhatsApp phone */}
+                <div className="info_single_icon d-flex align-items-center mb-3 justify-content-center">
                   <a
                     href="https://wa.me/96592220798"
                     className="footer-link"
                     target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp Phone"
                   >
                     <Image
                       src={wp}
-                      alt="Logo Large"
-                      width={23}
-                      height={23}
+                      alt="WhatsApp"
+                      width={32}
+                      height={32}
                       priority
-                      // className="d-none d-lg-inline" // Show only on large screens and up
-                    />{" "}
-                    +965 9222 0798
-                  </a>{" "}
+                    />
+                  </a>
                 </div>
 
-                <div className="info_single d-flex align-items-center mb-3">
-                  <p className="mb-2">
-                    {" "}
+                {/* Icon-only clickable office location */}
+                <div className="info_single_icon d-flex align-items-center mb-3 justify-content-center">
+                  <a
+                    href="https://goo.gl/maps/OmniyaShoppingCenter"
+                    className="footer-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Office Location"
+                  >
                     <Image
                       src={office}
-                      alt="Logo Large"
-                      width={23}
-                      height={23}
+                      alt="Office Location"
+                      width={32}
+                      height={32}
                       priority
-                      // className="d-none d-lg-inline" // Show only on large screens and up
-                    />{" "}
-                    Omniya Centre - G Floor - Office 8
-                  </p>
+                    />
+                  </a>
                 </div>
               </div>
 
@@ -244,60 +244,60 @@ const ContactUs = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="footer-icon"
+                      aria-label="TikTok"
                     >
-                      {" "}
                       <Image
                         src={tiktok}
-                        alt="Logo Large"
+                        alt="TikTok"
                         width={23}
                         height={23}
                         priority
-                      />{" "}
+                      />
                     </a>
                     <a
                       href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="footer-icon"
+                      aria-label="Instagram"
                     >
-                      {" "}
                       <Image
                         src={insta}
-                        alt="Logo Large"
+                        alt="Instagram"
                         width={23}
                         height={23}
                         priority
-                      />{" "}
+                      />
                     </a>
                     <a
                       href="https://www.linkedin.com/company/leap-tech-kw"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="footer-icon"
+                      aria-label="LinkedIn"
                     >
-                      {" "}
                       <Image
                         src={linkedin}
-                        alt="Logo Large"
+                        alt="LinkedIn"
                         width={23}
                         height={23}
                         priority
-                      />{" "}
+                      />
                     </a>
                     <a
                       href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="footer-icon"
+                      aria-label="Facebook"
                     >
-                      {" "}
                       <Image
                         src={fb}
-                        alt="Logo Large"
+                        alt="Facebook"
                         width={23}
                         height={23}
                         priority
-                      />{" "}
+                      />
                     </a>
                   </div>
                 </div>
@@ -311,60 +311,60 @@ const ContactUs = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="footer-icon"
+                    aria-label="TikTok"
                   >
-                    {" "}
                     <Image
                       src={tiktok}
-                      alt="Logo Large"
+                      alt="TikTok"
                       width={23}
                       height={23}
                       priority
-                    />{" "}
+                    />
                   </a>
                   <a
                     href="https://www.instagram.com/leaptechkw?igsh=enp4anBubjJ4YWVv"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="footer-icon"
+                    aria-label="Instagram"
                   >
-                    {" "}
                     <Image
                       src={insta}
-                      alt="Logo Large"
+                      alt="Instagram"
                       width={23}
                       height={23}
                       priority
-                    />{" "}
+                    />
                   </a>
                   <a
                     href="https://www.linkedin.com/company/leap-tech-kw"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="footer-icon"
+                    aria-label="LinkedIn"
                   >
-                    {" "}
                     <Image
                       src={linkedin}
-                      alt="Logo Large"
+                      alt="LinkedIn"
                       width={23}
                       height={23}
                       priority
-                    />{" "}
+                    />
                   </a>
                   <a
                     href="https://www.facebook.com/share/1TbEaveqqE/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="footer-icon"
+                    aria-label="Facebook"
                   >
-                    {" "}
                     <Image
                       src={fb}
-                      alt="Logo Large"
+                      alt="Facebook"
                       width={23}
                       height={23}
                       priority
-                    />{" "}
+                    />
                   </a>
                 </div>
               </div>
@@ -381,7 +381,7 @@ const ContactUs = () => {
         }
 
         .container {
-          max-width: 1140px; /* enforce max width */
+          max-width: 1140px;
           margin-left: auto;
           margin-right: auto;
           padding-left: 15px;
@@ -442,15 +442,13 @@ const ContactUs = () => {
           width: 100%;
           margin-top: 20px;
           cursor: pointer;
-          font-size: 14px;
-          letter-spacing: 2px;
-          font-weight: 600;
           font-weight: 500;
           font-size: 1rem;
           border-radius: 0.375rem;
           background-color: var(--navbar-bg);
           color: var(--text-color);
           border: 1px solid var(--navbar-bg);
+          letter-spacing: 2px;
         }
         .contact_form_submit:hover {
           background-color: var(--text-color);
@@ -479,7 +477,6 @@ const ContactUs = () => {
           min-height: 420px;
         }
 
-        /* The gradient column behind contact info on desktop */
         .gradient_column {
           position: absolute;
           top: 0;
@@ -487,7 +484,6 @@ const ContactUs = () => {
           width: 50%;
           height: 100%;
           box-shadow: -1px 1rem 1rem rgba(0, 0, 0, 0.15) !important;
-
           border-radius: 25px 0 0 25px;
           z-index: 0;
         }
@@ -496,7 +492,7 @@ const ContactUs = () => {
           position: relative;
           background-color: var(--navbar-bg);
           border-radius: 25px 0 0 25px;
-          padding: 30px 40px 30px 60px; /* add left padding to clear gradient */
+          padding: 30px 40px 30px 60px;
           color: #fff;
           min-height: 420px;
           box-sizing: border-box;
@@ -504,6 +500,8 @@ const ContactUs = () => {
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
+          align-items: center;
+          text-align: center;
         }
 
         .contact_info_sec h4 {
@@ -511,6 +509,8 @@ const ContactUs = () => {
           padding-bottom: 20px;
           font-weight: 600;
           font-size: 1.8rem;
+          width: 100%;
+          text-align: left;
         }
 
         .map_container iframe {
@@ -520,22 +520,21 @@ const ContactUs = () => {
           height: 220px;
         }
 
-        .info_single {
+        .info_single_icon {
           font-size: 14px;
           letter-spacing: 1px;
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 15px;
           color: #ccc;
           margin-bottom: 20px;
+          cursor: pointer;
+          transition: color 0.3s ease;
         }
 
-        .info_single i {
-          font-size: 20px;
-          width: 25px;
-          color: #d4afff;
-          flex-shrink: 0;
-          text-align: center;
+        .info_single_icon:hover {
+          color: #d3b8ff;
         }
 
         /* Social icons inside gradient column pinned bottom on desktop */
@@ -591,13 +590,20 @@ const ContactUs = () => {
             min-height: auto;
             margin-top: 3rem;
             border-radius: 25px;
+            align-items: flex-start;
+            text-align: left;
           }
 
           .social_icons_container {
             display: none !important;
           }
-          .form-control{
-            margin-bottom:0
+
+          .form-control {
+            margin-bottom: 0;
+          }
+
+          .info_single_icon {
+            justify-content: flex-start;
           }
         }
 
@@ -645,26 +651,33 @@ const ContactUs = () => {
         .form-group.d-flex {
           gap: 10px;
         }
-        
+
         .country-code-select {
           width: 20%;
           min-width: 80px;
-          /* Reset default appearance for consistent arrow */
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
-        
-          /* Add space for the arrow */
           background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='10' viewBox='0 0 24 24' width='10' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
           background-repeat: no-repeat;
           background-position: right 10px center;
           background-size: 20px;
           cursor: pointer;
         }
-        
-        
+
         .form-group.d-flex input[name="phone"] {
           width: 80%;
+        }
+        @media (max-width: 300px) {
+          .form-group.d-flex {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+          }
+        
+          .country-code-select,
+          input[name="phone"] {
+            width: 100% !important;
+          }
         }
         
       `}</style>
