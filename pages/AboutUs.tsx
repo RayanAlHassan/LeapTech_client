@@ -5,7 +5,7 @@ import React from "react";
 import map from "@/public/animations/Goals Map.json"; // adjust path if needed
 
 import Lottie from "lottie-react";
-import vision from "../public/animations/Light Solutions - blue green teal.json";
+import vision from "../public/animations/blue circle.json";
 const AboutUs = () => {
   return (
     <div className="container-fluid p-0">
