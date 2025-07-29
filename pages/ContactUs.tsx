@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import axios from "axios";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
@@ -75,6 +75,18 @@ const ContactUs = () => {
     }
   };
 
+useEffect(() => {
+  // Find the select element by ID
+  const select = document.getElementById("countryCodeSelect") as HTMLSelectElement;
+  if (!select) return;
+
+  // Get selected option
+  const selectedOption = select.selectedOptions[0];
+  if (!selectedOption) return;
+
+}, [formData.countryCode]);
+
+
   return (
     <>
       <section className="contact_us py-5">
@@ -115,47 +127,53 @@ const ContactUs = () => {
                   required
                 />
 
-                <div className="form-group d-flex gap-2 align-items-center">
-                  <div className="d-flex justify-content-center gap-0 align-items-center " style={{width:"fit-content"}}>
+                <div className="mb-3 w-100">
+                  {/* <label htmlFor="phone" className="form-label fw-bold">
+                    Phone Number
+                  </label> */}
+                <br/>
 
-                  <select
-                    name="countryCode"
-                    className="form-control country-code-select "
-                    value={formData.countryCode}
-                    onChange={handleChange}
-                    required
-                    aria-label="Select country code"
+                  <div
+                    className="d-flex flex-wrap flex-md-nowrap  gap-2 phone-wrapper"
+                    style={{ alignItems: "flex-start" }}
                   >
-                    <option value="+965">🇰🇼 +965</option>
-                    <option value="+966">🇸🇦 +966</option>
-                    <option value="+971">🇦🇪 +971</option>
-                    <option value="+973">🇧🇭 +973</option>
-                    <option value="+968">🇴🇲 +968</option>
-                    <option value="+974">🇶🇦 +974</option>
-                  </select>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -960 960 960"
-                    width="24px"
-                    fill="#1f1f1f"
-                  >
-                    <path d="M480-360 280-560h400L480-360Z" />
-                  </svg>
+                    {/* Country Code Select */}
+                    <select
+                      className="form-select custom-select"
+                      value={formData.countryCode}
+                      onChange={handleChange}
+                      name="countryCode"
+                      id="countryCodeSelect"
+                    >
+                      <option data-flag="" value="+965">
+                      🇰🇼+965
+                      </option>
+                      <option data-flag="" value="+966">
+                      🇸🇦 +966
+                      </option>
+                      <option data-flag="" value="+971">
+                      🇦🇪+971
+                      </option>
+                      <option data-flag="" value="+974">
+                      🇶🇦+974
+                      </option>
+                      <option data-flag="" value="+968">
+                      🇴🇲+968
+                      </option>
+                    </select>
+
+                    {/* Phone Input */}
+                    <div className="phone-number flex-grow-1">
+                      <input
+                        type="tel"
+                        className="form-control"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Enter your number"
+                      />
+                    </div>
                   </div>
-
-                  <input
-                    type="text"
-                    name="phone"
-                    className="form-control"
-                    placeholder="Phone Number"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    required
-                    inputMode="tel"
-                  />
                 </div>
 
                 <input
@@ -657,29 +675,48 @@ const ContactUs = () => {
           margin-top: 0.5rem;
           transform-origin: center;
         }
-        .form-group.d-flex {
-          gap: 10px;
+        //////////country arrow
+        .country-code {
+          flex: 0 0 14%;
+          min-width: 75px;
+          position: relative;
         }
 
-        .country-code-select {
-          width: 20%;
-          min-width:60px;
-         
-          cursor: pointer;
+        .phone-number {
+          flex: 0 0 60%;
+          min-width: 200px;
         }
 
-        .form-group.d-flex input[name="phone"] {
-          width: 80%;
+        .custom-select {
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          padding-right: 0rem;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5.5l6 6 6-6' stroke='%23333' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 0.75rem center;
+          background-size: 9px 14px;
+          width:32%;
         }
-        @media (max-width: 300px) {
-          .form-group.d-flex {
+
+        /* Ensure the arrow remains clickable */
+        .custom-select:focus {
+          outline: none;
+          box-shadow: none;
+        }
+
+        @media (max-width: 380px) {
+          .phone-wrapper {
             flex-direction: column !important;
-            gap: 0.5rem !important;
           }
+          .custom-select {
+           
+            width:100% !important;}
 
-          .country-code-select,
-          input[name="phone"] {
-            width: 100% !important;
+          .country-code,
+          .phone-number {
+            flex: 0 0 100%;
+            width: 100%;
           }
         }
       `}</style>
