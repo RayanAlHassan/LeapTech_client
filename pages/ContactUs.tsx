@@ -632,9 +632,13 @@ useEffect(() => {
           .info_single_icon {
             justify-content: flex-start;
           }
+          .custom-select {
+          
+            width:20% !important;
+          }
         }
 
-        @media (max-width: 575px) {
+        @media (max-width: 582px) {
           h3 {
             font-size: 1.8rem;
           }
@@ -647,6 +651,10 @@ useEffect(() => {
           .contact_form_submit {
             font-size: 13px;
             padding: 10px 0;
+          }
+          .custom-select {
+          
+            width:32% !important;
           }
         }
 
@@ -696,7 +704,7 @@ useEffect(() => {
           background-repeat: no-repeat;
           background-position: right 0.75rem center;
           background-size: 9px 14px;
-          width:32%;
+          width:20%;
         }
 
         /* Ensure the arrow remains clickable */
@@ -705,7 +713,7 @@ useEffect(() => {
           box-shadow: none;
         }
 
-        @media (max-width: 380px) {
+        @media (max-width: 400px) {
           .phone-wrapper {
             flex-direction: column !important;
           }

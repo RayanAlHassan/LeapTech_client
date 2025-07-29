@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import map from "@/public/animations/Goals Map.json"; // adjust path if needed
+import map from "@/public/animations/Goals Map.json"; 
 
 import Lottie from "lottie-react";
 import vision from "../public/animations/blue circle.json";
@@ -19,12 +19,7 @@ const AboutUs = () => {
           <div className="row align-items-center image-text-wrapper">
             {/* Image */}
             <div className="col-md-6 mb-4 mb-md-0 text-center image-animate">
-              {/* <Image
-                src={mission}
-                alt="Our Mission"
-                className="img-fluid rounded shadow"
-                style={{ maxHeight: 400, width: "auto" }}
-              /> */}
+             
               <Lottie animationData={map} loop className="lottie-vision" />
             </div>
 
