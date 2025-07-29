@@ -73,6 +73,7 @@ const ConsultUsSection: React.FC = () => {
                   controls={false}
                   muted
                   playsInline
+                  preload="auto" 
                   loop
                   style={{
                     width: "100%",
