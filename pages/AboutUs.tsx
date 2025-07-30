@@ -12,7 +12,7 @@ const AboutUs = () => {
       {/* Section 1 - Our Mission */}
       <section className="py-5 bg-light">
         <div className="container">
-          <h2 className="contact-title mb-4 text-center">
+          <h2 className="contact-title mb-4 ">
             About Us
             <div className={`underline-gradient mx-auto mt-1`}></div>
           </h2>

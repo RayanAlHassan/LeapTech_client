@@ -464,40 +464,7 @@ useEffect(() => {
           border-bottom: 2px solid #1325e8;
         }
 
-        .contact_form_submit {
-          padding: 12px 0;
-          width: 100%;
-          margin-top: 20px;
-          cursor: pointer;
-          font-weight: 500;
-          font-size: 1rem;
-          border-radius: 0.375rem;
-          background-color: var(--navbar-bg);
-          color: var(--text-color);
-          border: 1px solid var(--navbar-bg);
-          letter-spacing: 2px;
-        }
-        .contact_form_submit:hover {
-          background-color: var(--text-color);
-          color: var(--navbar-bg);
-          animation: verticalShakeHover 0.5s ease-in-out;
-        }
-
-        @keyframes verticalShakeHover {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          25% {
-            transform: translateY(-4px);
-          }
-          50% {
-            transform: translateY(4px);
-          }
-          75% {
-            transform: translateY(-2px);
-          }
-        }
+   
         .contact_info_wrapper {
           position: relative;
           padding-left: 50%;

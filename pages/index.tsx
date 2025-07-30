@@ -1,3 +1,4 @@
+import BotUI from "@/components/BotUI";
 import HeroSection from "@/components/Home/HerSection";
 import OurStorySection from "@/components/Home/OurStorySection";
 import Custom3DCarousel from "@/components/Home/carousel/Carousel";
@@ -10,6 +11,8 @@ export default function Home() {
         <OurStorySection />
       <Custom3DCarousel />
      <ConsultUsSection/>
+     <BotUI/>
+     
     </>
   );
 }
