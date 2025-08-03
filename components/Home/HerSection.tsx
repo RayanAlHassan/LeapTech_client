@@ -43,7 +43,7 @@ const HeroSection: React.FC = () => {
       Web, Mobile, and Digital Marketing.
     </p>
   </div>
-  <Link href="/serviceCheck" style={{textDecoration:"none"}} className='itsA'>
+  <Link href="/service" style={{textDecoration:"none"}} className='itsA'>
     <PrimaryButton className="primary-button mt-4">
       LEARN MORE
     </PrimaryButton>

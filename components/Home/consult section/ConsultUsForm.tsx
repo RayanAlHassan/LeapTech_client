@@ -4,11 +4,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { title } from "process";
 
 interface Service {
   _id: string;
-  category: string;
   title: string;
+  category: {
+    _id: string;
+    title: string;
+  };
 }
 
 const ConsultUsForm: React.FC = () => {
@@ -63,7 +67,7 @@ const ConsultUsForm: React.FC = () => {
   
 
   // Extract unique categories
-  const categories = Array.from(new Set(services.map((s) => s.category)));
+  const categories = Array.from(new Set(services.map((s) => s.category?.title)));
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -347,7 +351,7 @@ const ConsultUsForm: React.FC = () => {
             >
               <option value="">Choose a service</option>
               {services
-                .filter((s) => s.category === formData.category)
+                .filter((s) => s.category?.title === formData.category)
                 .map((service) => (
                   <option key={service._id} value={service._id}>
                     {service.title}
