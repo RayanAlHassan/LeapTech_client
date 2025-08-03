@@ -27,11 +27,14 @@ const CheckService = () => {
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/category`);
         setCategories(res.data);
-      } catch (error) {
-        console.error("Error fetching categories", error);
-        setError("Failed to load categories");
-      } finally {
-        setLoading(false);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error("Error fetching categories:", err);
+          setError("Failed to load categories: " + err.message);
+        } else {
+          console.error("Unknown error", err);
+          setError("An unexpected error occurred.");
+        }
       }
     };
 
