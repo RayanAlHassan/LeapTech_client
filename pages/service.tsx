@@ -16,24 +16,52 @@ interface Category {
 
 const CheckService = () => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true); // Add loading state here
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const fetchCategories = async () => {
+      setLoading(true);
+      setError(null);
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/category`);
         setCategories(res.data);
       } catch (error) {
         console.error("Error fetching categories", error);
+        setError("Failed to load categories");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCategories();
   }, []);
+
   const sortedCategories = [...categories].sort((a, b) => {
     return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
   });
-  
+
+  if (loading) {
+    return (
+      <section className="py-5 our_service_section">
+        <div className="container text-center text-white">
+          <p>Loading services...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-5 our_service_section">
+        <div className="container text-center text-danger">
+          <p>{error}</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-5 our_service_section">
       <div className="container">
@@ -43,61 +71,51 @@ const CheckService = () => {
         </h2>
 
         <div className="row gy-4 justify-content-center single_service_container">
-          
-        {sortedCategories.map((category) => {
-  // Normalize title for lookup: lowercase & trimmed
-  const key = category.title.trim().toLowerCase();
+          {sortedCategories.map((category) => {
+            const key = category.title.trim().toLowerCase();
+            const image = categoryImages[key] || categoryImages["web development"];
+            const unclickableTitles = ["smart home", "cloud storage"];
+            const isClickable = !unclickableTitles.includes(key);
 
-  // Lookup image or fallback to "web development"
-  const image = categoryImages[key] || categoryImages["web development"];
-
-  // Titles of the new two services you want unclickable
-  const unclickableTitles = ["smart home", "cloud storage"];
-
-  const isClickable = !unclickableTitles.includes(key);
-
-  return (
-    <div key={category._id} className="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
-      <div
-        className="single_service"
-        onClick={() => {
-          if (isClickable) {
-            router.push(`/services/category/${encodeURIComponent(category.title)}`);
-          }
-        }}
-        style={{
-          cursor: isClickable ? "pointer" : "default",
-          pointerEvents: isClickable ? "auto" : "none", // disable click interactions on these
-          opacity: isClickable ? 1 : 0.6, // optionally dim unclickable services
-        }}
-      >
-        <div className="top">
-          <span className="icon">
-            <Image
-              src={image}
-              alt={category.title}
-              width={60}
-              height={60}
-              style={{
-                width: "60px",
-                height: "60px",
-                objectFit: "contain",
-              }}
-            />
-          </span>
-          <div className="text">
-            <h5 className="__one mb-2">{category.title}</h5>
-          </div>
-        </div>
-        <div className="bottom">{category.description}</div>
-      </div>
-    </div>
-  );
-})}
-
+            return (
+              <div
+                key={category._id}
+                className="col-12 col-md-6 col-lg-4 d-flex justify-content-center"
+              >
+                <div
+                  className="single_service"
+                  onClick={() => {
+                    if (isClickable) {
+                      router.push(`/services/category/${encodeURIComponent(category.title)}`);
+                    }
+                  }}
+                  style={{
+                    cursor: isClickable ? "pointer" : "default",
+                    pointerEvents: isClickable ? "auto" : "none",
+                    opacity: isClickable ? 1 : 0.6,
+                  }}
+                >
+                  <div className="top">
+                    <span className="icon">
+                      <Image
+                        src={image}
+                        alt={category.title}
+                        width={60}
+                        height={60}
+                        style={{ width: "60px", height: "60px", objectFit: "contain" }}
+                      />
+                    </span>
+                    <div className="text">
+                      <h5 className="__one mb-2">{category.title}</h5>
+                    </div>
+                  </div>
+                  <div className="bottom">{category.description}</div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-
       <style jsx>{`
         .our_service_section {
           background-color: var(--navbar-bg);
