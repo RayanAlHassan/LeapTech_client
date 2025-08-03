@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import QuotationForm from "@/components/QuotationForm";
+import Image from "next/image";
 
 interface Service {
   _id: string;
@@ -105,7 +106,7 @@ const CategoryDetailPage = () => {
 
               {/* Image Section */}
               <div className="col-12 col-md-6 text-center mb-4 mb-md-0">
-                <img
+                <Image
                   src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/images/${selectedService.image}`}
                   alt={selectedService.title}
                   className="img-fluid service-image"

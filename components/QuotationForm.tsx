@@ -8,6 +8,7 @@ interface QuotationFormProps {
   onSuccess?: () => void;
 }
 
+
 const QuotationForm: React.FC<QuotationFormProps> = ({
   serviceId,
   onSuccess,
@@ -72,11 +73,14 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         });
         onSuccess?.();
       }
-    } catch (err: any) {
-      setError(err.response?.data?.error || "Failed to submit quotation");
-    } finally {
-      setLoading(false);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.error || "Failed to submit quotation");
+      } else {
+        setError("Failed to submit quotation");
+      }
     }
+    
   };
 
   return (
