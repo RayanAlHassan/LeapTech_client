@@ -80,7 +80,8 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
   };
 
   return (
-    <>
+    <div className="form-wrapper">
+    
       <form className="form" onSubmit={handleSubmit} noValidate>
         <p className="title">Request a Quote</p>
         <p className="message">
@@ -200,42 +201,41 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           <span>Preferred Contact Method</span>
 
           <div className="mydict">
-  <div>
-    <label>
-      <input
-        type="radio"
-        name="contactMethod"
-        value="Email"
-        checked={formData.contactMethod === "Email"}
-        onChange={handleChange}
-      />
-      <span>Email</span>
-    </label>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="contactMethod"
+                  value="Email"
+                  checked={formData.contactMethod === "Email"}
+                  onChange={handleChange}
+                />
+                <span>Email</span>
+              </label>
 
-    <label>
-      <input
-        type="radio"
-        name="contactMethod"
-        value="Phone"
-        checked={formData.contactMethod === "Phone"}
-        onChange={handleChange}
-      />
-      <span>Phone</span>
-    </label>
+              <label>
+                <input
+                  type="radio"
+                  name="contactMethod"
+                  value="Phone"
+                  checked={formData.contactMethod === "Phone"}
+                  onChange={handleChange}
+                />
+                <span>Phone</span>
+              </label>
 
-    <label>
-      <input
-        type="radio"
-        name="contactMethod"
-        value="Visit company"
-        checked={formData.contactMethod === "Visit company"}
-        onChange={handleChange}
-      />
-      <span>Visit Company</span>
-    </label>
-  </div>
-</div>
-
+              <label>
+                <input
+                  type="radio"
+                  name="contactMethod"
+                  value="Visit company"
+                  checked={formData.contactMethod === "Visit company"}
+                  onChange={handleChange}
+                />
+                <span>Visit Company</span>
+              </label>
+            </div>
+          </div>
         </label>
 
         <button disabled={loading} className="submit" type="submit">
@@ -249,22 +249,22 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
       </form>
 
       <style jsx>{`
-     .form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-        max-width: 600px; 
-        padding: 20px;
-        border-radius: 20px;
-        background-color: #003366;
-        color: #fff;
-        border: 1px solid #333;
-        font-family: Arial, sans-serif;
-        box-sizing: border-box;
-        margin: 0 auto;
-      }
-      
+        .form {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 100%;
+          max-width: 600px;
+          padding: 20px;
+          border-radius: 20px;
+          background-color: #003366;
+          color: #fff;
+          border: 1px solid #333;
+          font-family: Arial, sans-serif;
+          box-sizing: border-box;
+          margin: 0 auto;
+        }
+
         .title {
           font-size: 28px;
           font-weight: 600;
@@ -311,42 +311,52 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         }
 
         .flex {
-            display: flex;
-            flex-direction: column; /* ✅ Stack by default */
-            width: 100%;
-            gap: 6px;
+          display: flex;
+          flex-direction: column; /* ✅ Stack by default */
+          width: 100%;
+          gap: 6px;
+        }
+
+        @media (min-width: 768px) {
+          .flex {
+            flex-direction: row; /* ✅ Side-by-side on tablets+ */
           }
-          
-          @media (min-width: 768px) {
-            .flex {
-              flex-direction: row; /* ✅ Side-by-side on tablets+ */
-            }
+         
+        }
+
+        @media (max-width: 768px) {
+          .form-wrapper {
+            overflow-y: auto;
+            padding: 10px;
+            max-height:75vh
           }
-          
-          @media (max-width: 5) {
-            .mydict div {
-              flex-wrap: wrap;
-              justify-content: center;
-            }
-          
-            .mydict label {
-              flex: 0 0 50%; /* Take 50% width each */
-              box-sizing: border-box;
-            }
-          
-            /* Make the last label full width and centered */
-            .mydict label:last-child {
-              flex: 0 0 100%;
-              text-align: center;
-              margin-top: 8px; /* add some spacing */
-            }
+         
+        }
+       
+        @media (max-width: 400px) {
+          .mydict div {
+            flex-wrap: wrap;
+            justify-content: center;
           }
-          
+
+          .mydict label {
+            flex: 0 0 50%; /* Take 50% width each */
+            box-sizing: border-box;
+          }
+
+          /* Make the last label full width and centered */
+          .mydict label:last-child {
+            flex: 0 0 100%;
+            text-align: center;
+            margin-top: 8px; /* add some spacing */
+          }
+        }
+
         label {
           position: relative;
           flex: 1;
-          
-          z-index:1000
+
+          z-index: 1000;
         }
 
         .input {
@@ -440,98 +450,121 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           }
         }
         :focus {
-            outline: 0;
-            border-color: #2260ff;
-            box-shadow: 0 0 0 4px #b5c9fc;
-          }
-          
+          outline: 0;
+          border-color: #2260ff;
+          box-shadow: 0 0 0 4px #b5c9fc;
+        }
+
+        .mydict div {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 6px;
+          align-items: stretch; /* make labels equal height */
+        }
+
+        /* Make labels flex containers too, so span fills height */
+        .mydict label {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex: 0 1 auto; /* ← this stops weird stretching */
+          min-width: 100px; /* or 120px if you prefer */
+        }
+
+        /* Make span fill label height for vertical alignment */
+        .mydict label span {
+          flex: 0 1 auto;
+          min-width: 100px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.375em 0.75em;
+          background-color: #fff;
+          box-shadow: 0 0 0 0.0625em #b5bfd9;
+          letter-spacing: 0.05em;
+          color: #3e4963;
+          text-align: center;
+          transition: background-color 0.5s ease;
+          border-radius: 0;
+          margin-left: 0.0625em;
+        }
+
+        /* Rounded corners for first and last */
+        .mydict label:first-child span {
+          border-radius: 0.375em 0 0 0.375em;
+        }
+
+        .mydict label:last-child span {
+          border-radius: 0 0.375em 0.375em 0;
+        }
+
+        /* Hide native radio */
+        .mydict input[type="radio"] {
+          clip: rect(0 0 0 0);
+          clip-path: inset(100%);
+          height: 1px;
+          overflow: hidden;
+          position: absolute;
+          white-space: nowrap;
+          width: 1px;
+        }
+
+        /* Checked styling */
+        .mydict input[type="radio"]:checked + span {
+          box-shadow: 0 0 0 0.0625em #0043ed;
+          background-color: #dee7ff;
+          z-index: 1;
+          color: #0043ed;
+        }
+
+        /* Responsive for narrow phones (max 340px) */
+        @media (max-width: 340px) {
           .mydict div {
-            display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 6px;
-            align-items: stretch; /* make labels equal height */
+            align-items: stretch; /* keep equal height */
           }
-          
-          /* Make labels flex containers too, so span fills height */
-          .mydict label {
-            position: relative;
-            display: flex;
-            flex: 1;
-            align-items: center;
-            justify-content: center;
+
+          /* First two side-by-side */
+          .mydict label:nth-child(1),
+          .mydict label:nth-child(2) {
+            flex: 0 0 50%;
+            box-sizing: border-box;
           }
-          
-          /* Make span fill label height for vertical alignment */
-          .mydict label span {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.375em 0.75em;
-            background-color: #fff;
-            box-shadow: 0 0 0 0.0625em #b5bfd9;
-            letter-spacing: 0.05em;
-            color: #3e4963;
+
+          /* Third label full width below */
+          .mydict label:nth-child(3) {
+            flex: 0 0 100%;
             text-align: center;
-            transition: background-color 0.5s ease;
-            border-radius: 0;
-            margin-left: 0.0625em;
+            margin-top: 8px;
           }
-          
-          /* Rounded corners for first and last */
-          .mydict label:first-child span {
-            border-radius: 0.375em 0 0 0.375em;
+        }
+        @media (max-width: 440px) {
+          .mydict label {
+            flex: 0 0 100%;
           }
-          
-          .mydict label:last-child span {
-            border-radius: 0 0.375em 0.375em 0;
+        
+          .mydict label span {
+            border-radius: 0.375em !important;
           }
-          
-          /* Hide native radio */
-          .mydict input[type="radio"] {
-            clip: rect(0 0 0 0);
-            clip-path: inset(100%);
-            height: 1px;
-            overflow: hidden;
-            position: absolute;
-            white-space: nowrap;
-            width: 1px;
+          .form-wrapper {
+            overflow-y: auto;
+            padding: 10px;
+            max-height:75vh
           }
+      
           
-          /* Checked styling */
-          .mydict input[type="radio"]:checked + span {
-            box-shadow: 0 0 0 0.0625em #0043ed;
-            background-color: #dee7ff;
-            z-index: 1;
-            color: #0043ed;
-          }
-          
-          /* Responsive for narrow phones (max 340px) */
-          @media (max-width: 340px) {
-            .mydict div {
-              flex-wrap: wrap;
-              justify-content: center;
-              align-items: stretch; /* keep equal height */
-            }
-          
-            /* First two side-by-side */
-            .mydict label:nth-child(1),
-            .mydict label:nth-child(2) {
-              flex: 0 0 50%;
-              box-sizing: border-box;
-            }
-          
-            /* Third label full width below */
-            .mydict label:nth-child(3) {
-              flex: 0 0 100%;
-              text-align: center;
-              margin-top: 8px;
-            }
-          }
-          
+        }
+      
+      
+
+        
+        
       `}</style>
-    </>
+    </div>
   );
 };
 

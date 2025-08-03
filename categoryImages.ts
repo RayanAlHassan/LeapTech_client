@@ -3,6 +3,9 @@ import seo from "@/public/images/seo.png";
 import web from "@/public/images/website.png";
 import sm from "@/public/images/digital.png";
 import app from "@/public/images/mobileApps.png";
+import sh from "@/public/images/mobileApps.png";
+import cs from "@/public/images/mobileApps.png";
+
 import { StaticImageData } from "next/image";
 
 const categoryImages: Record<string, StaticImageData> = {
@@ -10,6 +13,8 @@ const categoryImages: Record<string, StaticImageData> = {
     "e-business": sm,
     "mobile application": app,
     "digital marketing": seo,
+    "smart home": sh,
+    "cloud storage": cs,
   };
   
   

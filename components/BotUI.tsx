@@ -10,8 +10,18 @@ interface ChatMessage {
 
 const BotUI: React.FC = () => {
   const [input, setInput] = useState("");
-  const [chat, setChat] = useState<ChatMessage[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [chat, setChat] = useState<ChatMessage[]>([
+    {
+      role: "bot",
+      content: "👋 Hello! How can I assist you today?",
+    },
+    {
+      role: "bot",
+      content:
+        "You can ask about our services, pricing, or how to get in touch.",
+    },
+  ]);
+    const [isOpen, setIsOpen] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const sendMessage = async () => {
@@ -118,23 +128,33 @@ const BotUI: React.FC = () => {
               className="card-body overflow-auto d-flex flex-column gap-2"
               style={{ height: "400px", backgroundColor: "#f8f9fa" }}
             >
-              {chat.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`d-inline-block px-3 py-2 rounded text-white text-sm ${
-                    msg.role === "user"
-                      ? "align-self-end"
-                      : "align-self-start bg-secondary"
-                  }`}
-                  style={{
-                    maxWidth: "75%",
-                    backgroundColor:
-                      msg.role === "user" ? "var(--navbar-bg)" : undefined,
-                  }}
-                >
-                  {msg.content}
-                </div>
-              ))}
+            {chat.map((msg, index) => (
+  <div
+    key={index}
+    className={`d-inline-block px-3 py-2 rounded text-white text-sm ${
+      msg.role === "user"
+        ? "align-self-end"
+        : "align-self-start bg-secondary"
+    }`}
+    style={{
+      maxWidth: "75%",
+      backgroundColor:
+        msg.role === "user" ? "var(--navbar-bg)" : undefined,
+    }}
+  >
+    {msg.role === "bot" ? (
+  <span
+  dangerouslySetInnerHTML={{
+    __html: msg.content,
+  }}
+/>
+
+    ) : (
+      msg.content
+    )}
+  </div>
+))}
+
               <div ref={bottomRef}></div>
             </div>
 

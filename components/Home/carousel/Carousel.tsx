@@ -17,26 +17,35 @@ const slides = [
     title: 'Web Development',
     description: 'Professional websites and e-commerce platforms tailored to your brand.',
     image: webImage,
-    route: '/web',
   },
   {
     title: 'E-Business',
     description: 'Boost brand visibility and engagement through digital strategies.',
     image: socialImage,
-    route: '/socialMedia',
   },
   {
     title: 'Digital Marketing',
     description: 'Drive growth and conversions through targeted campaigns, SEO, and data-driven digital strategies.',
     image: seo,
-    route: '/digitalMarketing',
   },
   {
     title: 'Mobile Application',
     description: 'Robust, user-friendly apps for iOS and Android platforms.',
     image: mobileImage,
-    route: '/mobileApp',
   },
+  {
+    title: 'Smart Home',
+    description: 'Enhance your living space with automated systems for security, lighting, and climate control.',
+    image: mobileImage,
+
+  },
+  {
+    title: 'Cloud Storage',
+    description: 'Securely store and access your data anytime, anywhere with scalable and reliable cloud solutions.',
+    image: mobileImage,
+
+  }
+  
 ];
 
 
@@ -107,8 +116,11 @@ const Custom3DCarousel: React.FC = () => {
   }}
   transition={{ duration: 1.5, ease: [0.25, 1, 0.5, 1] }}
   onClick={() =>
-    pos === 'center' ? router.push(slide.route) : null
+    pos === 'center'
+      ? router.push(`/services/category/${encodeURIComponent(slide.title)}`)
+      : null
   }
+  
 >
   <Image
     src={slide.image}

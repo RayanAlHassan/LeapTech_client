@@ -23,7 +23,6 @@ const CategoryDetailPage = () => {
   useEffect(() => {
     if (!categoryTitle) return;
 
-    // Fetch services by category title
     axios
       .get(
         `${
@@ -45,112 +44,107 @@ const CategoryDetailPage = () => {
   if (!categoryTitle) return <p>Loading category...</p>;
 
   return (
-    <div style={{ display: "flex", gap: "2rem", padding: "2rem" }}>
-      {/* Sidebar */}
-      <aside>
-        <div className="card">
-          <span>{categoryTitle} Services</span>
-          {services.length === 0 && (
-            <p style={{ color: "white" }}>No services found.</p>
-          )}
-
-          <div className="card__container">
-            {services.map((service) => (
-              <p
-                key={service._id}
-                className={`element ${
-                  selectedService?._id === service._id ? "active" : ""
-                }`}
-                onClick={() => handleSelectService(service)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    handleSelectService(service);
-                  }
-                }}
-              >
-                {service.title}
-              </p>
-            ))}
+    <div className="container-fluid py-4">
+<div className="row d-flex flex-column flex-md-row justify-content-center align-items-stretch">
+        {/* Sidebar */}
+        <aside className="col-12 col-md-3 mb-4 d-flex justify-content-center">
+          <div className="card text-center text-md-start">
+            <span>{categoryTitle} Services</span>
+            {services.length === 0 && (
+              <p style={{ color: "white" }}>No services found.</p>
+            )}
+            <div className="card__container">
+              {services.map((service) => (
+                <p
+                  key={service._id}
+                  className={`element ${
+                    selectedService?._id === service._id ? "active" : ""
+                  }`}
+                  onClick={() => handleSelectService(service)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      handleSelectService(service);
+                    }
+                  }}
+                >
+                  {service.title}
+                </p>
+              ))}
+            </div>
           </div>
-        </div>
-      </aside>
+        </aside>
 
-      {/* Main content: service details + quotation form */}
-      <main style={{ flex: 1 }}>
-        {selectedService ? (
-          <section className="py-5 bg-white shapedSection">
-            <div className="container">
-              <div className="row align-items-center flex-md-row-reverse image-text-wrapper">
-                {/* Image Placeholder or Animation */}
-                <div className="col-md-6 mb-4 mb-md-0 text-center image-animate">
-                  {/* You can later use a map of service images or Lottie animations */}
-                  <img
-                    src={` ${process.env.NEXT_PUBLIC_API_URL}/uploads/images/${selectedService.image}`}
-                    alt={selectedService.title}
-                    className="img-fluid"
-                    style={{ maxHeight: "300px", objectFit: "contain" }}
-                  />
-                </div>
+        {/* Main Content */}
+        <main className="col-12 col-md-9">
+          {selectedService ? (
+            <div className="d-flex flex-column-reverse flex-md-row align-items-center justify-content-between">
+              {/* Text Section */}
+              <div className="col-12 col-md-6 text-section text-center text-md-start mb-4 mb-md-0">
+                <h1 className="category-title">{categoryTitle}</h1>
+                <h2 className="service-title">
+                  {selectedService.title}
+                  <span className="underline-gradient" />
+                </h2>
+                <p className="lead description">
+                  {selectedService.description}
+                </p>
 
-                {/* Text Content */}
-                <div className="col-md-6 text-center text-md-start text-animate">
-                  <h2 className="fw-bold title-blue position-relative d-inline-block mb-3">
-                    {selectedService.title}
-                    <div
-                      className="story-underline blue-gradient mt-2 mx-auto mx-md-0"
-                      style={{ height: 4, width: 120 }}
-                    />
-                  </h2>
-                  <p className="lead" style={{ textAlign: "left" }}>
-                    {selectedService.description.split(" ").map((word, i) => (
-                      <span key={i} className="hover-underline">
-                        {word}&nbsp;
-                      </span>
-                    ))}
-                  </p>
-
-                  <div className="mt-4 text-center text-md-start">
-                    <button
-                      onClick={() => setShowQuotationForm((prev) => !prev)}
-                      className="btn btn-primary px-4 py-2"
-                    >
-                      {showQuotationForm
-                        ? "Close Quotation Form"
-                        : "Request a Quote"}
-                    </button>
-                  </div>
-
-                  {showQuotationForm && (
-                    <div className="mt-4">
-                      <QuotationForm serviceId={selectedService._id} />
-                    </div>
-                  )}
+                <div className="mt-3">
+                  <button
+                    onClick={() => setShowQuotationForm((prev) => !prev)}
+                    className="btn btn-primary px-4 py-2"
+                  >
+                    {showQuotationForm
+                      ? "Close Quotation Form"
+                      : "Request a Quote"}
+                  </button>
                 </div>
               </div>
-            </div>
-          </section>
-        ) : (
-          <p>Please select a service.</p>
-        )}
-      </main>
 
+              {/* Image Section */}
+              <div className="col-12 col-md-6 text-center mb-4 mb-md-0">
+                <img
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/images/${selectedService.image}`}
+                  alt={selectedService.title}
+                  className="img-fluid service-image"
+                />
+              </div>
+            </div>
+          ) : (
+            <p className="text-center">Please select a service.</p>
+          )}
+        </main>
+      </div>
+
+      {/* Modal */}
+      {showQuotationForm && (
+        <div className="quotation-modal">
+          <div className="modal-content">
+            <button
+              className="close-button"
+              onClick={() => setShowQuotationForm(false)}
+            >
+              &times;
+            </button>
+            <QuotationForm serviceId={selectedService!._id} />
+          </div>
+        </div>
+      )}
+
+      {/* Styles */}
       <style jsx>{`
         .card {
-          width: 100%; /* full width of sidebar */
-          max-width: 280px; /* max width as before */
+          width: 89%;
           border-radius: 15px;
           background: rgb(27, 26, 26);
           color: white;
           font-weight: 600;
           font-size: 1.2em;
           padding: 15px;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
           box-shadow: -5px 5px 1px 0px #004d92;
-          height: 80vh;
+          height: 100%;
           overflow-y: auto;
         }
 
@@ -171,7 +165,6 @@ const CategoryDetailPage = () => {
           border-left: 2px solid grey;
           cursor: pointer;
           border-radius: 5px 0 0 5px;
-          user-select: none;
           transition: all 0.3s ease;
         }
 
@@ -185,14 +178,96 @@ const CategoryDetailPage = () => {
           color: azure;
         }
 
-        /* Responsive adjustments */
+        .quotation-modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.6);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .modal-content {
+          background: white;
+          padding: 2rem;
+          border-radius: 12px;
+          max-width: 600px;
+          width: 90%;
+          position: relative;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          z-index: 10000;
+        }
+
+        .close-button {
+          position: absolute;
+          top: 0.5rem;
+          right: 1rem;
+          background: transparent;
+          border: none;
+          font-size: 1.8rem;
+          cursor: pointer;
+          color: #444;
+        }
+
+        .category-title {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #004d92;
+          margin-bottom: 0.5rem;
+        }
+
+        .service-title {
+          font-size: 1.6rem;
+          font-weight: 600;
+          color: #004d92;
+          position: relative;
+          padding-bottom: 6px;
+          display: inline-block;
+        }
+
+        .underline-gradient {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 4px;
+          width: 100%;
+          border-radius: 10px;
+          background: linear-gradient(to right, #004d92, #8cb4ff);
+        }
+
+        .description {
+          text-align: left;
+        }
+
+        .service-image {
+          max-height: 350px;
+          object-fit: contain;
+          width: 100%;
+          border-radius: 12px;
+        }
+
         @media (max-width: 768px) {
           .card {
             max-width: 100%;
             height: auto;
-            box-shadow: none;
-            border-radius: 10px;
             margin-bottom: 1rem;
+            text-align: center;
+            box-shadow: none;
+          }
+
+          .text-section,
+          .category-title,
+          .service-title,
+          .description {
+            text-align: center !important;
+          }
+
+          .service-image {
+            margin-top: 1rem;
           }
         }
       `}</style>

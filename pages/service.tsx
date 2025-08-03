@@ -30,7 +30,10 @@ const CheckService = () => {
 
     fetchCategories();
   }, []);
-
+  const sortedCategories = [...categories].sort((a, b) => {
+    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+  });
+  
   return (
     <section className="py-5 our_service_section">
       <div className="container">
@@ -40,43 +43,58 @@ const CheckService = () => {
         </h2>
 
         <div className="row gy-4 justify-content-center single_service_container">
-          {categories.map((category) => {
-            // Normalize title for lookup: lowercase & trimmed
-            const key = category.title.trim().toLowerCase();
+          
+        {sortedCategories.map((category) => {
+  // Normalize title for lookup: lowercase & trimmed
+  const key = category.title.trim().toLowerCase();
 
-            // Lookup image or fallback to "web development"
-            const image = categoryImages[key] || categoryImages["web development"];
+  // Lookup image or fallback to "web development"
+  const image = categoryImages[key] || categoryImages["web development"];
 
-            return (
-              <div key={category._id} className="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
-                <div
-                  className="single_service"
-                  onClick={() => router.push(`/services/category/${encodeURIComponent(category.title)}`)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <div className="top">
-                    <span className="icon">
-                      <Image
-                        src={image}
-                        alt={category.title}
-                        width={60}
-                        height={60}
-                        style={{
-                          width: "60px",
-                          height: "60px",
-                          objectFit: "contain",
-                        }}
-                      />
-                    </span>
-                    <div className="text">
-                      <h5 className="__one mb-2">{category.title}</h5>
-                    </div>
-                  </div>
-                  <div className="bottom">{category.description}</div>
-                </div>
-              </div>
-            );
-          })}
+  // Titles of the new two services you want unclickable
+  const unclickableTitles = ["smart home", "cloud storage"];
+
+  const isClickable = !unclickableTitles.includes(key);
+
+  return (
+    <div key={category._id} className="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
+      <div
+        className="single_service"
+        onClick={() => {
+          if (isClickable) {
+            router.push(`/services/category/${encodeURIComponent(category.title)}`);
+          }
+        }}
+        style={{
+          cursor: isClickable ? "pointer" : "default",
+          pointerEvents: isClickable ? "auto" : "none", // disable click interactions on these
+          opacity: isClickable ? 1 : 0.6, // optionally dim unclickable services
+        }}
+      >
+        <div className="top">
+          <span className="icon">
+            <Image
+              src={image}
+              alt={category.title}
+              width={60}
+              height={60}
+              style={{
+                width: "60px",
+                height: "60px",
+                objectFit: "contain",
+              }}
+            />
+          </span>
+          <div className="text">
+            <h5 className="__one mb-2">{category.title}</h5>
+          </div>
+        </div>
+        <div className="bottom">{category.description}</div>
+      </div>
+    </div>
+  );
+})}
+
         </div>
       </div>
 
