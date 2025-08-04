@@ -97,7 +97,7 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/service" legacyBehavior>
+                <Link href="/services" legacyBehavior>
                   <a className="footer-link">Service</a>
                 </Link>
               </li>

@@ -14,7 +14,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const slides = [
   {
-    title: 'Web Development',
+    title: 'Web Application',
     description: 'Professional websites and e-commerce platforms tailored to your brand.',
     image: webImage,
   },
@@ -23,6 +23,7 @@ const slides = [
     description: 'Boost brand visibility and engagement through digital strategies.',
     image: socialImage,
   },
+
   {
     title: 'Digital Marketing',
     description: 'Drive growth and conversions through targeted campaigns, SEO, and data-driven digital strategies.',
@@ -59,7 +60,7 @@ const positionStyles = {
 
 const Custom3DCarousel: React.FC = () => {
   const router = useRouter();
-  const [centerIndex, setCenterIndex] = useState(1);
+  const [centerIndex, setCenterIndex] = useState(0);
 
   const handleNext = () => {
     setCenterIndex((prev) => (prev + 1) % slides.length);
@@ -82,8 +83,8 @@ const Custom3DCarousel: React.FC = () => {
   
 
   return (
-    <section className="container-fluid py-5" style={{ minHeight: '60vh', overflow: 'hidden' , display:'flex', alignItems:'center'}}>
-      <div className="container h-100">
+    <section className="container-fluid py-5 carousel" style={{ minHeight: '60vh', overflow: 'hidden' , display:'flex', alignItems:'center'}}>
+      <div className="container h-100" >
         <div className="row align-items-center justify-content-center h-100 text-center">
           <h2 className="our-story-title mb-4 text-center title-blue">Our Services</h2>
           <div className="story-underline blue-gradient mx-auto mb-4"></div>
@@ -260,6 +261,9 @@ const Custom3DCarousel: React.FC = () => {
     height: 18px;
     margin: 0 8px;
   }
+}
+.carousel {
+  background: linear-gradient(90deg, #f0f4f8 0%, #d9e2ec 100%);
 }
 
 

@@ -89,7 +89,7 @@ useEffect(() => {
 
   return (
     <>
-      <section className="contact_us py-5">
+      <section className="contact_us py-5 ">
         <div className="container">
           <div className="contact_inner row mx-auto">
             {/* Contact Form */}

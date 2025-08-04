@@ -137,13 +137,13 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
             </a>
           </Link>
 
-          <Link href="/service" legacyBehavior>
+          <Link href="/services" legacyBehavior>
             <a
               className={`nav-link underline-anim ${
-                pathname === "/service" ? "active" : ""
+                pathname === "/services" ? "active" : ""
               }`}
             >
-              SERVICE
+              SERVICES
             </a>
           </Link>
 
@@ -212,9 +212,9 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
                 ABOUT US
               </a>
             </Link>
-            <Link href="/service" legacyBehavior>
+            <Link href="/services" legacyBehavior>
               <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
-                SERVICE
+                SERVICES
               </a>
             </Link>
             <Link href="/ContactUs" legacyBehavior>

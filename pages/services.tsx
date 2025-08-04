@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import categoryImages from "@/categoryImages";
-import axios from "axios";
 
 interface Category {
   _id: string;
@@ -20,25 +20,23 @@ const CheckService = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
+  // Fetch services
   useEffect(() => {
-    const fetchCategories = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/category`);
-        setCategories(res.data);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          console.error("Error fetching categories:", err);
-          setError("Failed to load categories: " + err.message);
-        } else {
-          console.error("Unknown error", err);
-          setError("An unexpected error occurred.");
-        }
-      }
-    };
+    setLoading(true); // <-- start loading
 
-    fetchCategories();
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/category`)
+      .then((res) => {
+        setCategories(res.data);
+        setError(null);         // <-- clear error if success
+      })
+      .catch((err) => {
+        console.error("Error fetching categoriess", err);
+        setError("Failed to load categ. Please try again later.",); // <-- custom error
+      })
+      .finally(() => {
+        setLoading(false); // <-- stop loading after both success/fail
+      });
   }, []);
 
   const sortedCategories = [...categories].sort((a, b) => {
