@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "leaptechkw.com",
-        pathname: "api/uploads/images/**",
+        pathname: "/api/uploads/images/**",
       },
     ],
   },
