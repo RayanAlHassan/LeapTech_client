@@ -9,6 +9,8 @@ import webImage from '@/public/images/website.png';
 import socialImage from '@/public/images/digital.png';
 import mobileImage from '@/public/images/mobileApps.png';
 import seo from '@/public/images/seo.png';
+import smartHome from "@/public/images/smartHomeBlue.png"
+import cloud from "@/public/images/cloud.png"
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -37,13 +39,13 @@ const slides = [
   {
     title: 'Smart Home',
     description: 'Enhance your living space with automated systems for security, lighting, and climate control.',
-    image: mobileImage,
+    image: smartHome,
 
   },
   {
     title: 'Cloud Storage',
     description: 'Securely store and access your data anytime, anywhere with scalable and reliable cloud solutions.',
-    image: mobileImage,
+    image: cloud,
 
   }
   
