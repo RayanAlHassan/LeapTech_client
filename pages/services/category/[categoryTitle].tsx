@@ -46,7 +46,7 @@ const CategoryDetailPage = () => {
 
   return (
     <div className="container-fluid py-4">
-<div className="row d-flex flex-column flex-md-row justify-content-center align-items-stretch">
+      <div className="row d-flex flex-column flex-md-row justify-content-center align-items-stretch">
         {/* Sidebar */}
         <aside className="col-12 col-md-3 mb-4 d-flex justify-content-center">
           <div className="card text-center text-md-start">
@@ -107,6 +107,10 @@ const CategoryDetailPage = () => {
               {/* Image Section */}
               <div className="col-12 col-md-6 text-center mb-4 mb-md-0">
                 <Image
+                    width={600}   // or any max width you want
+                    height={400}  // approximate height for aspect ratio
+                    style={{ maxWidth: "100%", height: "auto", borderRadius: "12px" }}
+                  
                   src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/images/${selectedService.image}`}
                   alt={selectedService.title}
                   className="img-fluid service-image"
