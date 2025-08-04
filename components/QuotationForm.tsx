@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 
 interface QuotationFormProps {
@@ -28,6 +28,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [serviceTitle, setServiceTitle] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -39,6 +40,26 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
       [e.target.name]: e.target.value,
     }));
   };
+
+
+  useEffect(() => {
+    const fetchServiceTitle = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/services/${serviceId}`
+        );
+        setServiceTitle(res.data?.title || "Selected Service");
+      } catch (err) {
+        setServiceTitle("Selected Service");
+        console.error("Failed to fetch service title", err);
+      }
+    };
+  
+    if (serviceId) {
+      fetchServiceTitle();
+    }
+  }, [serviceId]);
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -91,6 +112,12 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         <p className="message">
           Fill out the form and we’ll get back to you soon.
         </p>
+        <p>
+  This Quotation is requested for:{" "}
+  <span style={{ color: "#00BFFF", fontWeight: "bold" }}>
+    {serviceTitle || "Loading..."}
+  </span>
+</p>
 
         <div className="flex">
           <label>
