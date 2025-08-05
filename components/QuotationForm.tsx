@@ -44,7 +44,12 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
     const today = new Date();
     return today.toISOString().split("T")[0]; // Format: YYYY-MM-DD
   };
-
+  const contactOptions = [
+    { value: "Email", label: "Email", emoji: "📧" },
+    { value: "Phone", label: "Phone", emoji: "📞" },
+    { value: "Visit company", label: "Your Office", emoji: "🏢" },
+  ];
+  
   useEffect(() => {
     const fetchServiceTitle = async () => {
       try {
@@ -230,7 +235,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
 
 
         </div>
-
+{/* 
         <label>
           <span className="focusing">Preferred Contact Method</span>
 
@@ -270,7 +275,29 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
               </label>
             </div>
           </div>
-        </label>
+        </label> */}
+
+<label className="focusing"> * Preferred Contact Method</label>
+
+<div className="radio-inputs">
+  {contactOptions.map(({ value,label, emoji }) => (
+    <label key={value}>
+      <input
+        type="radio"
+        name="contactMethod"
+        value={value}
+        checked={formData.contactMethod === value}
+        onChange={handleChange}
+        className="radio-input"
+      />
+      <span className="radio-tile">
+        <span style={{ marginRight: "6px" }}>{emoji}</span>
+        <span className="radio-label">{label}</span>
+      </span>
+    </label>
+  ))}
+</div>
+
 
         <button disabled={loading} className="submit" type="submit">
           {loading ? "Submitting..." : "Submit"}
@@ -283,6 +310,124 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
       </form>
 
       <style jsx>{`
+      .radio-inputs {
+        display: flex;
+        justify-content: start; 
+        gap: 16px;
+        max-width: 400px;
+        user-select: none;
+        margin-top: 8px;
+      }
+      
+      .radio-input {
+        /* Hide native radio */
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      
+      .radio-tile {
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 18px;
+        border-radius: 12px;
+        border: 2px solid #b5bfd9;
+        background-color: #000;  /* or black like your inputs */
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+        user-select: none;
+        transition: all 0.25s ease;
+        min-width: 100px;
+        text-align: center;
+      }
+      
+      .radio-input:checked + .radio-tile {
+        border-color: #00bfff;
+        box-shadow: 0 0 6px #00bfff;
+        color: #00bfff;
+      
+      }
+      
+      .radio-label{
+        font-size:12px
+      }
+      .radio-input:focus + .radio-tile {
+        box-shadow: 0 0 8px #66c0ff;
+        outline: none;
+      }
+ 
+  .radio-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    max-width: 400px;
+    user-select: none;
+    margin-top: 8px;
+  }
+
+  .radio-inputs > label {
+    flex: 1 1 120px;
+    min-width: 100px;
+    max-width: 150px;
+  }
+
+  @media (max-width: 440px) {
+    .radio-inputs > label {
+      flex: 0 0 48%;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .radio-inputs > label {
+      flex: 0 0 100%;
+    }
+  }
+
+  /* keep your existing radio styling here */
+  .radio-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .radio-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: 2px solid #b5bfd9;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+    transition: all 0.25s ease;
+    min-width: 100px;
+    text-align: center;
+  }
+  .radio-input:checked + .radio-tile {
+    border-color: #00bfff;
+    box-shadow: 0 0 6px #00bfff;
+    color: #00bfff;
+  }
+  .radio-label {
+    font-size: 12px;
+  }
+  .radio-input:focus + .radio-tile {
+    box-shadow: 0 0 8px #66c0ff;
+    outline: none;
+  }
+
+
         .input[type="date"]::-webkit-calendar-picker-indicator {
           filter: invert(1);
           cursor: pointer;
@@ -290,7 +435,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         /* Make sure the date input matches height & padding */
         .input[type="date"] {
           padding: 20px 5px 5px 10px; /* same as text inputs */
-          height: 4rem; /* match other inputs */
+          height: 3.3rem; /* match other inputs */
           box-sizing: border-box;
           background-color: black;
           color: #fff;
@@ -417,24 +562,24 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           }
         }
 
-        @media (max-width: 400px) {
-          .mydict div {
-            flex-wrap: wrap;
-            justify-content: center;
-          }
+        // @media (max-width: 400px) {
+        //   .mydict div {
+        //     flex-wrap: wrap;
+        //     justify-content: center;
+        //   }
 
-          .mydict label {
-            flex: 0 0 50%; /* Take 50% width each */
-            box-sizing: border-box;
-          }
+        //   .mydict label {
+        //     flex: 0 0 50%; /* Take 50% width each */
+        //     box-sizing: border-box;
+        //   }
 
-          /* Make the last label full width and centered */
-          .mydict label:last-child {
-            flex: 0 0 100%;
-            text-align: center;
-            margin-top: 8px; /* add some spacing */
-          }
-        }
+        //   /* Make the last label full width and centered */
+        //   .mydict label:last-child {
+        //     flex: 0 0 100%;
+        //     text-align: center;
+        //     margin-top: 8px; /* add some spacing */
+        //   }
+        // }
 
         label {
           position: relative;
@@ -543,101 +688,101 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           box-shadow: 0 0 0 4px #b5c9fc;
         }
 
-        .mydict div {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 6px;
-          align-items: stretch; /* make labels equal height */
-        }
+        // .mydict div {
+        //   display: flex;
+        //   flex-wrap: wrap;
+        //   justify-content: center;
+        //   gap: 6px;
+        //   align-items: stretch; /* make labels equal height */
+        // }
 
         /* Make labels flex containers too, so span fills height */
-        .mydict label {
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex: 0 1 auto; /* ← this stops weird stretching */
-          min-width: 100px; /* or 120px if you prefer */
-        }
+        // .mydict label {
+        //   position: relative;
+        //   display: flex;
+        //   align-items: center;
+        //   justify-content: center;
+        //   flex: 0 1 auto; /* ← this stops weird stretching */
+        //   min-width: 100px; /* or 120px if you prefer */
+        // }
 
         /* Make span fill label height for vertical alignment */
-        .mydict label span {
-          flex: 0 1 auto;
-          min-width: 100px;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0.375em 0.75em;
-          background-color: #fff;
-          box-shadow: 0 0 0 0.0625em #b5bfd9;
-          letter-spacing: 0.05em;
-          color: #3e4963;
-          text-align: center;
-          transition: background-color 0.5s ease;
-          border-radius: 0;
-          margin-left: 0.0625em;
-        }
+        // .mydict label span {
+        //   flex: 0 1 auto;
+        //   min-width: 100px;
+        //   width: 100%;
+        //   display: flex;
+        //   align-items: center;
+        //   justify-content: center;
+        //   padding: 0.375em 0.75em;
+        //   background-color: #fff;
+        //   box-shadow: 0 0 0 0.0625em #b5bfd9;
+        //   letter-spacing: 0.05em;
+        //   color: #3e4963;
+        //   text-align: center;
+        //   transition: background-color 0.5s ease;
+        //   border-radius: 0;
+        //   margin-left: 0.0625em;
+        // }
 
         /* Rounded corners for first and last */
-        .mydict label:first-child span {
-          border-radius: 0.375em 0 0 0.375em;
-        }
+        // .mydict label:first-child span {
+        //   border-radius: 0.375em 0 0 0.375em;
+        // }
 
-        .mydict label:last-child span {
-          border-radius: 0 0.375em 0.375em 0;
-        }
+        // .mydict label:last-child span {
+        //   border-radius: 0 0.375em 0.375em 0;
+        // }
 
         /* Hide native radio */
-        .mydict input[type="radio"] {
-          clip: rect(0 0 0 0);
-          clip-path: inset(100%);
-          height: 1px;
-          overflow: hidden;
-          position: absolute;
-          white-space: nowrap;
-          width: 1px;
-        }
+        // .mydict input[type="radio"] {
+        //   clip: rect(0 0 0 0);
+        //   clip-path: inset(100%);
+        //   height: 1px;
+        //   overflow: hidden;
+        //   position: absolute;
+        //   white-space: nowrap;
+        //   width: 1px;
+        // }
 
         /* Checked styling */
-        .mydict input[type="radio"]:checked + span {
-          box-shadow: 0 0 0 0.0625em #0043ed;
-          background-color: #dee7ff;
-          z-index: 1;
-          color: #0043ed;
-        }
+        // .mydict input[type="radio"]:checked + span {
+        //   box-shadow: 0 0 0 0.0625em #0043ed;
+        //   background-color: #dee7ff;
+        //   z-index: 1;
+        //   color: #0043ed;
+        // }
 
         /* Responsive for narrow phones (max 340px) */
         @media (max-width: 340px) {
-          .mydict div {
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: stretch; /* keep equal height */
-          }
+          // .mydict div {
+          //   flex-wrap: wrap;
+          //   justify-content: center;
+          //   align-items: stretch; /* keep equal height */
+          // }
 
           /* First two side-by-side */
-          .mydict label:nth-child(1),
-          .mydict label:nth-child(2) {
-            flex: 0 0 50%;
-            box-sizing: border-box;
-          }
+          // .mydict label:nth-child(1),
+          // .mydict label:nth-child(2) {
+          //   flex: 0 0 50%;
+          //   box-sizing: border-box;
+          // }
 
           /* Third label full width below */
-          .mydict label:nth-child(3) {
-            flex: 0 0 100%;
-            text-align: center;
-            margin-top: 8px;
-          }
+          // .mydict label:nth-child(3) {
+          //   flex: 0 0 100%;
+          //   text-align: center;
+          //   margin-top: 8px;
+          // }
         }
         @media (max-width: 440px) {
-          .mydict label {
-            flex: 0 0 100%;
-          }
+          // .mydict label {
+          //   flex: 0 0 100%;
+          // }
 
-          .mydict label span {
-            border-radius: 0.375em !important;
-          }
+          // .mydict label span {
+          //   border-radius: 0.375em !important;
+          // }
           .form-wrapper {
             overflow-y: auto;
             padding: 10px;

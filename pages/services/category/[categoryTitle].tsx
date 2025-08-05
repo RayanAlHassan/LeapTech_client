@@ -199,7 +199,7 @@ const CategoryDetailPage = () => {
 
         .modal-content {
           background: #ffffff00;
-          padding: 2rem;
+          // padding: 2rem;
           border-radius: 12px;
           max-width: 600px;
           width: 90%;
@@ -210,8 +210,8 @@ const CategoryDetailPage = () => {
 
         .close-button {
           position: absolute;
-          top: 2.5rem;
-          right: 2.5rem;
+          top: 2rem;
+          right: 2rem;
           background: #00000000;
           border: none;
           font-size: 1.8rem;
