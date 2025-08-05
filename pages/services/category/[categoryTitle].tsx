@@ -211,7 +211,7 @@ const CategoryDetailPage = () => {
         .close-button {
           position: absolute;
           top: 2.5rem;
-          right: 3rem;
+          right: 2.5rem;
           background: #00000000;
           border: none;
           font-size: 1.8rem;
