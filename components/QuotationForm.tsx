@@ -219,9 +219,9 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
             <span className="focusing">Budget</span>
           </label>
 
-          <label>
+          <label className="expectedDate">
             <input
-              className="input expectedDate"
+              className="input "
               type="date"
               name="expectedDate"
               value={formData.expectedDate}
