@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import QuotationForm from "@/components/QuotationForm";
 import Image from "next/image";
-import ProjectServiceCarousel from "@/components/Home/carousel/ProjectServiceCarousel";
+// import ProjectServiceCarousel from "@/components/Home/carousel/ProjectServiceCarousel";
 interface Service {
   _id: string;
   title: string;
@@ -168,7 +168,7 @@ const CategoryDetailPage = () => {
           </div>
         </div>
       )}
-      <ProjectServiceCarousel/>
+      {/* <ProjectServiceCarousel/> */}
 
       {/* Styles */}
       <style jsx>{`
