@@ -82,7 +82,7 @@ import Head from "next/head";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-export default function App({ Component, pageProps, router }: AppProps & { router: any }) {
+export default function App({ Component, pageProps }: AppProps & { router: any }) {
   const [navHeight, setNavHeight] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
