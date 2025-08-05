@@ -71,7 +71,7 @@ const CheckService = () => {
           <div className="story-underline mx-auto mb-4"></div>
         </h2>
 
-        <div className="row gy-4 justify-content-center single_service_container">
+        <div className="row gy-4 justify-content-center single_service_container animated-container">
           {sortedCategories.map((category) => {
             const key = category.title.trim().toLowerCase();
             const image = categoryImages[key] || categoryImages["web development"];
@@ -118,6 +118,19 @@ const CheckService = () => {
         </div>
       </div>
       <style jsx>{`
+      .animated-container {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeSlideDown 0.8s ease-out forwards;
+      }
+      
+      @keyframes fadeSlideDown {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
         .our_service_section {
           background-color: var(--navbar-bg);
           background-size: cover;

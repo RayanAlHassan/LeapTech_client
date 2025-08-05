@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import QuotationForm from "@/components/QuotationForm";
 import Image from "next/image";
-
+// import ProjectServiceCarousel from "@/components/Home/carousel/ProjectServiceCarousel";
 interface Service {
   _id: string;
   title: string;
@@ -45,7 +45,7 @@ const CategoryDetailPage = () => {
   if (!categoryTitle) return <p>Loading category...</p>;
 
   return (
-    <div className="container-fluid py-4">
+    <div className="container-fluid py-4 " style={{minHeight:"55vh"}}>
       <div className="row d-flex flex-column flex-md-row justify-content-center align-items-stretch">
         {/* Sidebar */}
         <aside className="col-12 col-md-3 mb-4 d-flex justify-content-center">
@@ -137,6 +137,7 @@ const CategoryDetailPage = () => {
           </div>
         </div>
       )}
+      {/* <ProjectServiceCarousel/> */}
 
       {/* Styles */}
       <style jsx>{`
@@ -209,13 +210,15 @@ const CategoryDetailPage = () => {
 
         .close-button {
           position: absolute;
-          top: 0.5rem;
-          right: 1rem;
-          background: transparent;
+          top: 2.5rem;
+          right: 3rem;
+          background: #00000000;
           border: none;
           font-size: 1.8rem;
           cursor: pointer;
-          color: #444;
+          color: #ffffff;
+          z-index: 10001; /* Make sure it's above other elements */
+
         }
 
         .category-title {

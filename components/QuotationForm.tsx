@@ -41,7 +41,11 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
     }));
   };
 
-
+  const getTodayDate = (): string => {
+    const today = new Date();
+    return today.toISOString().split("T")[0]; // Format: YYYY-MM-DD
+  };
+  
   useEffect(() => {
     const fetchServiceTitle = async () => {
       try {
@@ -114,7 +118,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         </p>
         <p>
   This Quotation is requested for:{" "}
-  <span style={{ color: "#00BFFF", fontWeight: "bold" }}>
+  <span style={{ color: "#00bfff96", fontWeight: "bold" }}>
     {serviceTitle || "Loading..."}
   </span>
 </p>
@@ -131,7 +135,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
               placeholder=" "
               autoComplete="given-name"
             />
-            <span>First Name</span>
+            <span className="focusing">First Name</span>
           </label>
 
           <label>
@@ -145,7 +149,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
               placeholder=" "
               autoComplete="family-name"
             />
-            <span>Last Name</span>
+            <span className="focusing">Last Name</span>
           </label>
         </div>
 
@@ -159,7 +163,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
             required
             placeholder=" "
           />
-          <span>Civil ID</span>
+          <span className="focusing">Civil ID</span>
         </label>
 
         <label>
@@ -173,7 +177,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
             placeholder=" "
             autoComplete="tel"
           />
-          <span>Phone Number</span>
+          <span className="focusing">Phone Number</span>
         </label>
 
         <label>
@@ -187,7 +191,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
             placeholder=" "
             autoComplete="email"
           />
-          <span>Email</span>
+          <span className="focusing">Email</span>
         </label>
 
         <label>
@@ -199,7 +203,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
             placeholder=" "
             rows={4}
           />
-          <span>How Can We Help You?</span>
+          <span className="focusing">How Can We Help You?</span>
         </label>
 
         <div className="flex">
@@ -212,7 +216,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
               onChange={handleChange}
               placeholder=" "
             />
-            <span>Budget</span>
+            <span className="focusing">Budget</span>
           </label>
 
           <label>
@@ -223,13 +227,15 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
               value={formData.expectedDate}
               onChange={handleChange}
               placeholder=" "
+              min={getTodayDate()} // Prevents past dates
+
             />
-            <span>Expected Project Delivery</span>
+            <span className="focusing">Expected Project Delivery</span>
           </label>
         </div>
 
         <label>
-          <span>Preferred Contact Method</span>
+          <span className="focusing">Preferred Contact Method</span>
 
           <div className="mydict">
             <div>
@@ -241,7 +247,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
                   checked={formData.contactMethod === "Email"}
                   onChange={handleChange}
                 />
-                <span>Email</span>
+                <span >Email</span>
               </label>
 
               <label>
@@ -263,7 +269,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
                   checked={formData.contactMethod === "Visit company"}
                   onChange={handleChange}
                 />
-                <span>Visit Company</span>
+                <span >Visit Company</span>
               </label>
             </div>
           </div>
@@ -280,6 +286,12 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
       </form>
 
       <style jsx>{`
+     .input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      cursor: pointer;
+
+    }
+   
         .form {
           display: flex;
           flex-direction: column;
@@ -288,7 +300,9 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           max-width: 600px;
           padding: 20px;
           border-radius: 20px;
-          background-color: #003366;
+          // background-color: #003366;
+           background-color: black;
+
           color: #fff;
           border: 1px solid #333;
           font-family: Arial, sans-serif;
@@ -391,7 +405,9 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         }
 
         .input {
-          background-color: #003366;
+          // background-color: #003366;
+          background-color: black;
+
           color: #fff;
           width: 100%;
           padding: 20px 5px 5px 10px;
@@ -403,6 +419,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
 
         .input + span {
           color: rgba(255, 255, 255, 0.5);
+          
           position: absolute;
           left: 10px;
           top: 0px;
@@ -419,7 +436,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
 
         .input:focus + span,
         .input:not(:placeholder-shown) + span {
-          color: #00bfff;
+           color: #00bfff;
           top: 0px;
           font-size: 0.7em;
           font-weight: 600;
@@ -453,6 +470,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         }
         .submit:hover {
           background-color: #00bfff96;
+          color:white
         }
 
         .error-msg {
