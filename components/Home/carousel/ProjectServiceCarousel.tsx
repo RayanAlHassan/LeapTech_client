@@ -71,7 +71,9 @@ const ProjectsCarousel: React.FC = () => {
 
   return (
     <section
+    className='shadow'
       style={{
+
         minHeight: '60vh',
         backgroundColor: 'rgba(1, 1, 64, 0.05)',
         transform: 'skewY(3deg)',
@@ -229,6 +231,13 @@ const ProjectsCarousel: React.FC = () => {
           )}
         </AnimatePresence>
       </div>
+      <style jsx>
+        {`
+        .shadow{
+          box-shadow:-2px -1rem 1rem rgba(0, 0, 0, 0.15) !important
+        }
+        `}
+      </style>
     </section>
   );
 };

@@ -40,16 +40,16 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
     }));
   };
 
-  const getTodayDate = (): string => {
-    const today = new Date();
-  
-    const year = today.getFullYear();
-    const month = (today.getMonth() + 1).toString().padStart(2, "0"); // months are 0-based
-    const day = today.getDate().toString().padStart(2, "0");
-  
-    return `${year}-${month}-${day}`;
-  };
-  
+const getTodayDate = (): string => {
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, "0"); // months are 0-based
+  const day = today.getDate().toString().padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
+
   const contactOptions = [
     { value: "Email", label: "Email", emoji: "📧" },
     { value: "Phone", label: "Phone", emoji: "📞" },
@@ -125,7 +125,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         </p>
         <p>
           This Quotation is requested for:{" "}
-          <span style={{ color: "#00bfff96", fontWeight: "bold" }}>
+          <span style={{ color: "var(--navbar-bg)96", fontWeight: "bold" }}>
             {serviceTitle || "Loading..."}
           </span>
         </p>
@@ -342,8 +342,9 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         padding: 10px 18px;
         border-radius: 12px;
         border: 2px solid #b5bfd9;
-        background-color: #000;  /* or black like your inputs */
-        color: #fff;
+        background-color: white;  /* or white
+         like your inputs */
+        color: #rgba(105, 105, 105, .397);
         cursor: pointer;
         font-weight: 600;
         user-select: none;
@@ -353,9 +354,9 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
       }
       
       .radio-input:checked + .radio-tile {
-        border-color: #00bfff;
-        box-shadow: 0 0 6px #00bfff;
-        color: #00bfff;
+        border-color: var(--navbar-bg);
+        box-shadow: 0 0 6px var(--navbar-bg);
+        color: var(--navbar-bg);
       
       }
       
@@ -411,8 +412,8 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
     padding: 10px 18px;
     border-radius: 12px;
     border: 2px solid #b5bfd9;
-    background-color: #000;
-    color: #fff;
+    background-color: white;
+    color: #rgba(105, 105, 105, .397);
     cursor: pointer;
     font-weight: 600;
     user-select: none;
@@ -421,9 +422,9 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
     text-align: center;
   }
   .radio-input:checked + .radio-tile {
-    border-color: #00bfff;
-    box-shadow: 0 0 6px #00bfff;
-    color: #00bfff;
+    border-color: var(--navbar-bg);
+    box-shadow: 0 0 6px var(--navbar-bg);
+    color: var(--navbar-bg);
   }
   .radio-label {
     font-size: 12px;
@@ -443,8 +444,8 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           padding: 20px 5px 5px 10px; /* same as text inputs */
           height: 3.3rem; /* match other inputs */
           box-sizing: border-box;
-          background-color: black;
-          color: #fff;
+          background-color: white;
+          color: #rgba(105, 105, 105, .397);
           border: 1px solid rgba(105, 105, 105, 0.397);
           border-radius: 10px;
           font-size: 16px;
@@ -467,7 +468,8 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         .input[type="date"] + .focusing {
           top: 12.5px;
           font-size: 0.9em;
-          color: rgba(255, 255, 255, 0.5);
+          // color: rgb(0 51 112);
+          color:rgba(105, 105, 105, .397);
           left: 10px;
           pointer-events: none;
           position: absolute;
@@ -481,7 +483,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           top: 0;
           font-size: 0.7em;
           font-weight: 600;
-          color: #00bfff;
+          color: var(--navbar-bg);
         }
         
         .form {
@@ -493,9 +495,10 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           padding: 20px;
           border-radius: 20px;
           // background-color: #003366;
-          background-color: black;
+          background-color: white
+          ;
 
-          color: #fff;
+          color: #rgba(105, 105, 105, .397);
           border: 1px solid #333;
           font-family: Arial, sans-serif;
           box-sizing: border-box;
@@ -510,7 +513,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           display: flex;
           align-items: center;
           padding-left: 30px;
-          color: white;
+          color: var(--navbar-bg);
           margin-bottom: 0;
         }
         .title::before,
@@ -521,7 +524,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           width: 16px;
           border-radius: 50%;
           left: 0px;
-          background-color: white;
+          background-color: var(--navbar-bg);
         }
         .title::after {
           animation: pulse 1s linear infinite;
@@ -529,7 +532,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
 
         .message {
           font-size: 14.5px;
-          color: rgba(255, 255, 255, 0.7);
+          color: var(--navbar-bg);
           margin-top: 0;
           margin-bottom: 15px;
         }
@@ -540,7 +543,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           text-align: center;
         }
         .signin a {
-          color: #00bfff;
+          color: var(--navbar-bg);
           text-decoration: none;
         }
         .signin a:hover {
@@ -596,9 +599,10 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
 
         .input {
           // background-color: #003366;
-          background-color: black;
+          background-color: white
+          ;
 
-          color: #fff;
+          color: #rgba(105, 105, 105, .397);
           width: 100%;
           padding: 20px 5px 5px 10px;
           outline: 0;
@@ -608,7 +612,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         }
 
         .input + span {
-          color: rgba(255, 255, 255, 0.5);
+          color: rgb(105 105 105 / 40%);
 
           position: absolute;
           left: 10px;
@@ -626,7 +630,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
 
         .input:focus + span,
         .input:not(:placeholder-shown) + span {
-          color: #00bfff;
+          color: var(--navbar-bg);
           top: 0px;
           font-size: 0.7em;
           font-weight: 600;
@@ -646,21 +650,22 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         }
 
         .submit {
-          border: none;
+          border: 1px solid var(--navbar-bg);
           outline: none;
           padding: 10px;
           border-radius: 10px;
-          color: #003366;
+          color: white;
           font-size: 16px;
-          background-color: white;
+          background-color: var(--navbar-bg);
           cursor: pointer;
           transition: 0.3s ease;
           font-weight: 600;
           margin-top: 10px;
         }
         .submit:hover {
-          background-color: #00bfff96;
-          color: white;
+          color: var(--navbar-bg);
+          background-color: white;
+          border-color:1px solid var(--navbar-bg)
         }
 
         .error-msg {
@@ -721,7 +726,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         //   align-items: center;
         //   justify-content: center;
         //   padding: 0.375em 0.75em;
-        //   background-color: #fff;
+        //   background-color: #rgba(105, 105, 105, .397);
         //   box-shadow: 0 0 0 0.0625em #b5bfd9;
         //   letter-spacing: 0.05em;
         //   color: #3e4963;

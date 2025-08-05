@@ -247,7 +247,7 @@ const CategoryDetailPage = () => {
           border: none;
           font-size: 1.8rem;
           cursor: pointer;
-          color: #ffffff;
+          color: var(--navbar-bg);
           z-index: 10001; /* Make sure it's above other elements */
 
         }
