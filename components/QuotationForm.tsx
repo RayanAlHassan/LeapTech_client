@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 interface QuotationFormProps {
   serviceId: string;
   onSuccess?: () => void;
 }
-
 
 const QuotationForm: React.FC<QuotationFormProps> = ({
   serviceId,
@@ -45,7 +44,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
     const today = new Date();
     return today.toISOString().split("T")[0]; // Format: YYYY-MM-DD
   };
-  
+
   useEffect(() => {
     const fetchServiceTitle = async () => {
       try {
@@ -58,12 +57,11 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         console.error("Failed to fetch service title", err);
       }
     };
-  
+
     if (serviceId) {
       fetchServiceTitle();
     }
   }, [serviceId]);
-  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -105,23 +103,21 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         setError("Failed to submit quotation");
       }
     }
-    
   };
 
   return (
     <div className="form-wrapper">
-    
       <form className="form" onSubmit={handleSubmit} noValidate>
         <p className="title">Request a Quote</p>
         <p className="message">
           Fill out the form and we’ll get back to you soon.
         </p>
         <p>
-  This Quotation is requested for:{" "}
-  <span style={{ color: "#00bfff96", fontWeight: "bold" }}>
-    {serviceTitle || "Loading..."}
-  </span>
-</p>
+          This Quotation is requested for:{" "}
+          <span style={{ color: "#00bfff96", fontWeight: "bold" }}>
+            {serviceTitle || "Loading..."}
+          </span>
+        </p>
 
         <div className="flex">
           <label>
@@ -219,19 +215,20 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
             <span className="focusing">Budget</span>
           </label>
 
-          <label className="expectedDate">
-            <input
-              className="input "
-              type="date"
-              name="expectedDate"
-              value={formData.expectedDate}
-              onChange={handleChange}
-              placeholder=" "
-              min={getTodayDate()} // Prevents past dates
+          <label>
+  <input
+    className="input"
+    type="date"
+    name="expectedDate"
+    value={formData.expectedDate}
+    onChange={handleChange}
+    placeholder=" "
+    min={getTodayDate()}
+  />
+  <span className="focusing">Expected Project Delivery</span>
+</label>
 
-            />
-            <span className="focusing">Expected Project Delivery</span>
-          </label>
+
         </div>
 
         <label>
@@ -247,7 +244,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
                   checked={formData.contactMethod === "Email"}
                   onChange={handleChange}
                 />
-                <span >Email</span>
+                <span>Email</span>
               </label>
 
               <label>
@@ -269,7 +266,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
                   checked={formData.contactMethod === "Visit company"}
                   onChange={handleChange}
                 />
-                <span >Visit Company</span>
+                <span>Visit Company</span>
               </label>
             </div>
           </div>
@@ -286,12 +283,56 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
       </form>
 
       <style jsx>{`
-     .input[type="date"]::-webkit-calendar-picker-indicator {
-      filter: invert(1);
-      cursor: pointer;
-
-    }
-  
+        .input[type="date"]::-webkit-calendar-picker-indicator {
+          filter: invert(1);
+          cursor: pointer;
+        }
+        /* Make sure the date input matches height & padding */
+        .input[type="date"] {
+          padding: 20px 5px 5px 10px; /* same as text inputs */
+          height: 4rem; /* match other inputs */
+          box-sizing: border-box;
+          background-color: black;
+          color: #fff;
+          border: 1px solid rgba(105, 105, 105, 0.397);
+          border-radius: 10px;
+          font-size: 16px;
+          appearance: none; /* remove native date picker styling */
+          -webkit-appearance: none;
+          -moz-appearance: none;
+        }
+        
+        /* Fix the calendar picker icon to show properly */
+        .input[type="date"]::-webkit-calendar-picker-indicator {
+          filter: invert(1);
+          cursor: pointer;
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        
+        /* Floating label initial position */
+        .input[type="date"] + .focusing {
+          top: 12.5px;
+          font-size: 0.9em;
+          color: rgba(255, 255, 255, 0.5);
+          left: 10px;
+          pointer-events: none;
+          position: absolute;
+          transition: 0.3s ease;
+          user-select: none;
+        }
+        
+        /* When date input is focused or has value, move label up */
+        .input[type="date"]:focus + .focusing,
+        .input[type="date"]:not(:placeholder-shown) + .focusing {
+          top: 0;
+          font-size: 0.7em;
+          font-weight: 600;
+          color: #00bfff;
+        }
+        
         .form {
           display: flex;
           flex-direction: column;
@@ -301,7 +342,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           padding: 20px;
           border-radius: 20px;
           // background-color: #003366;
-           background-color: black;
+          background-color: black;
 
           color: #fff;
           border: 1px solid #333;
@@ -366,23 +407,16 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           .flex {
             flex-direction: row; /* ✅ Side-by-side on tablets+ */
           }
-          .expectedDate{
-            width:100%
-      
-          }
-         
-         
         }
-
+       
         @media (max-width: 768px) {
           .form-wrapper {
             overflow-y: auto;
             padding: 10px;
-            max-height:75vh
+            max-height: 75vh;
           }
-         
         }
-       
+
         @media (max-width: 400px) {
           .mydict div {
             flex-wrap: wrap;
@@ -424,7 +458,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
 
         .input + span {
           color: rgba(255, 255, 255, 0.5);
-          
+
           position: absolute;
           left: 10px;
           top: 0px;
@@ -441,7 +475,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
 
         .input:focus + span,
         .input:not(:placeholder-shown) + span {
-           color: #00bfff;
+          color: #00bfff;
           top: 0px;
           font-size: 0.7em;
           font-weight: 600;
@@ -475,7 +509,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
         }
         .submit:hover {
           background-color: #00bfff96;
-          color:white
+          color: white;
         }
 
         .error-msg {
@@ -600,23 +634,16 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           .mydict label {
             flex: 0 0 100%;
           }
-        
+
           .mydict label span {
             border-radius: 0.375em !important;
           }
           .form-wrapper {
             overflow-y: auto;
             padding: 10px;
-            max-height:75vh
+            max-height: 75vh;
           }
-      
-          
         }
-      
-      
-
-        
-        
       `}</style>
     </div>
   );
