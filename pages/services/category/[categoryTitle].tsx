@@ -198,7 +198,7 @@ const CategoryDetailPage = () => {
         }
 
         .modal-content {
-          background: white;
+          background: #ffffff00;
           padding: 2rem;
           border-radius: 12px;
           max-width: 600px;
