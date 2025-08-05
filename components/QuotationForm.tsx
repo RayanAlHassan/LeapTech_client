@@ -42,8 +42,14 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
 
   const getTodayDate = (): string => {
     const today = new Date();
-    return today.toISOString().split("T")[0]; // Format: YYYY-MM-DD
+  
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, "0"); // months are 0-based
+    const day = today.getDate().toString().padStart(2, "0");
+  
+    return `${year}-${month}-${day}`;
   };
+  
   const contactOptions = [
     { value: "Email", label: "Email", emoji: "📧" },
     { value: "Phone", label: "Phone", emoji: "📞" },
