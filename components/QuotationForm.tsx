@@ -221,7 +221,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
 
           <label>
             <input
-              className="input"
+              className="input expectedDate"
               type="date"
               name="expectedDate"
               value={formData.expectedDate}
@@ -291,7 +291,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
       cursor: pointer;
 
     }
-   
+  
         .form {
           display: flex;
           flex-direction: column;
@@ -366,6 +366,11 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
           .flex {
             flex-direction: row; /* ✅ Side-by-side on tablets+ */
           }
+          .expectedDate{
+            width:100%
+      
+          }
+         
          
         }
 
