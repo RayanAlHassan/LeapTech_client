@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import QuotationForm from "@/components/QuotationForm";
 import Image from "next/image";
-// import ProjectServiceCarousel from "@/components/Home/carousel/ProjectServiceCarousel";
+import ProjectServiceCarousel from "@/components/Home/carousel/ProjectServiceCarousel";
 interface Service {
   _id: string;
   title: string;
@@ -20,10 +20,12 @@ const CategoryDetailPage = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [showQuotationForm, setShowQuotationForm] = useState(false);
+  const [loadingServices, setLoadingServices] = useState(false); // <-- جديد
 
   useEffect(() => {
     if (!categoryTitle) return;
 
+    setLoadingServices(true);  // بداية تحميل
     axios
       .get(
         `${
@@ -34,9 +36,9 @@ const CategoryDetailPage = () => {
         setServices(res.data);
         if (res.data.length > 0) setSelectedService(res.data[0]);
       })
-      .catch((err) => console.error("Failed to fetch services:", err));
+      .catch((err) => console.error("Failed to fetch services:", err))
+      .finally(() => setLoadingServices(false)); // انتهاء تحميل
   }, [categoryTitle]);
-
   const handleSelectService = (service: Service) => {
     setSelectedService(service);
     setShowQuotationForm(false);
@@ -45,41 +47,71 @@ const CategoryDetailPage = () => {
   if (!categoryTitle) return <p>Loading category...</p>;
 
   return (
+<>
+
+
     <div className="container-fluid py-4 " style={{minHeight:"55vh"}}>
+    <button
+      onClick={() => router.back()}
+      className="btn btn-secondary mb-3"
+      style={{    marginLeft: "2rem",
+        padding: "-1rem",
+        backgroundColor: "transparent",
+        color: "black",
+        border: "none",}}
+    >
+      ← Back
+    </button>
       <div className="row d-flex flex-column flex-md-row justify-content-center align-items-stretch">
         {/* Sidebar */}
+        
         <aside className="col-12 col-md-3 mb-4 d-flex justify-content-center">
+          
           <div className="card text-center text-md-start">
             <span>{categoryTitle} Services</span>
-            {services.length === 0 && (
+            
+            {loadingServices && (
+              <p style={{ color: "white" }}>Loading services...</p>
+            )}
+
+            {!loadingServices && services.length === 0 && (
               <p style={{ color: "white" }}>No services found.</p>
             )}
-            <div className="card__container">
-              {services.map((service) => (
-                <p
-                  key={service._id}
-                  className={`element ${
-                    selectedService?._id === service._id ? "active" : ""
-                  }`}
-                  onClick={() => handleSelectService(service)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      handleSelectService(service);
-                    }
-                  }}
-                >
-                  {service.title}
-                </p>
-              ))}
-            </div>
+
+            {!loadingServices && (
+              <div className="card__container">
+                {services.map((service) => (
+                  <p
+                    key={service._id}
+                    className={`element ${
+                      selectedService?._id === service._id ? "active" : ""
+                    }`}
+                    onClick={() => handleSelectService(service)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        handleSelectService(service);
+                      }
+                    }}
+                  >
+                    {service.title}
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
         </aside>
 
         {/* Main Content */}
         <main className="col-12 col-md-9">
-          {selectedService ? (
+          {loadingServices && (
+            <p className="text-center" style={{ color: "white" }}>
+              Loading service details...
+            </p>
+          )}
+
+          {!loadingServices && selectedService ? (
             <div className="d-flex flex-column-reverse flex-md-row align-items-center justify-content-between">
               {/* Text Section */}
               <div className="col-12 col-md-6 text-section text-center text-md-start mb-4 mb-md-0">
@@ -107,10 +139,9 @@ const CategoryDetailPage = () => {
               {/* Image Section */}
               <div className="col-12 col-md-6 text-center mb-4 mb-md-0">
                 <Image
-                    width={600}   // or any max width you want
-                    height={400}  // approximate height for aspect ratio
-                    style={{ maxWidth: "100%", height: "auto", borderRadius: "12px" }}
-                  
+                  width={600}
+                  height={400}
+                  style={{ maxWidth: "100%", height: "auto", borderRadius: "12px" }}
                   src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/images/${selectedService.image}`}
                   alt={selectedService.title}
                   className="img-fluid service-image"
@@ -118,7 +149,7 @@ const CategoryDetailPage = () => {
               </div>
             </div>
           ) : (
-            <p className="text-center">Please select a service.</p>
+            !loadingServices && <p className="text-center">Please select a service.</p>
           )}
         </main>
       </div>
@@ -137,7 +168,7 @@ const CategoryDetailPage = () => {
           </div>
         </div>
       )}
-      {/* <ProjectServiceCarousel/> */}
+      <ProjectServiceCarousel/>
 
       {/* Styles */}
       <style jsx>{`
@@ -280,6 +311,7 @@ const CategoryDetailPage = () => {
         }
       `}</style>
     </div>
+    </>
   );
 };
 
