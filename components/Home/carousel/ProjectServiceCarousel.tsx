@@ -13,7 +13,6 @@ import SubahAlSalemCOApp from "@/public/images/subahSalamApp.png";
 import DeliverySystem from "@/public/images/deliverySystem.png";
 import MyHomeKW from "@/public/images/MyHome.png";
 import HRSystem from "@/public/images/zentra.png";
-import { useSwipeable } from "react-swipeable";
 
 interface Project {
   title: string;
@@ -85,6 +84,7 @@ const ProjectsCarousel: React.FC = () => {
   const isSmallScreen = windowWidth < 768;
   const isMediumScreen = windowWidth >= 768 && windowWidth < 1200;
   const isWideScreen = windowWidth >= 1200;
+  const isMediumOrWideScreen = windowWidth >= 768;
 
   const handleCardClick = (index: number) => {
     setActiveIndex(index);
@@ -98,25 +98,7 @@ const ProjectsCarousel: React.FC = () => {
     setProjects(updated);
     setActiveIndex(null);
   };
-  const handleSwipeLeft = () => {
-    if (activeIndex === null) return;
-    const nextIndex = (activeIndex + 1) % projects.length;
-    setActiveIndex(nextIndex);
-  };
-  
-  const handleSwipeRight = () => {
-    if (activeIndex === null) return;
-    const prevIndex = (activeIndex - 1 + projects.length) % projects.length;
-    setActiveIndex(prevIndex);
-  };
-  
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: handleSwipeLeft,
-    onSwipedRight: handleSwipeRight,
-    preventScrollOnSwipe: true,
-    trackMouse: true,
-  });
-  
+
   return (
     <section
       className="shadow"
@@ -152,10 +134,10 @@ const ProjectsCarousel: React.FC = () => {
 
         <div
           className="cards-wrapper"
-          {...swipeHandlers} 
           style={{
             position: "relative",
             display: isWideScreen ? "flex" : "flex",
+            
             flexWrap: isWideScreen ? "nowrap" : "wrap",
             justifyContent: "center",
             alignItems: "stretch",
@@ -167,7 +149,8 @@ const ProjectsCarousel: React.FC = () => {
         >
           {projects.map((project, index) => {
             const isActive = index === activeIndex;
-            if (isWideScreen && activeIndex !== null && !isActive) return null;
+            if (isMediumOrWideScreen && activeIndex !== null && !isActive)
+              return null;
 
             const offset =
               isWideScreen && activeIndex === null
@@ -175,68 +158,133 @@ const ProjectsCarousel: React.FC = () => {
                 : 0;
 
             return (
-              <motion.div
-                key={project.title + index}
-                onClick={() => handleCardClick(index)}
-                style={{
-                  width: isSmallScreen
-                    ? "100%"
-                    : isMediumScreen
-                    ? "45%"
-                    : isWideScreen
-                    ? 600
-                    : "100%",
-                  height:
-                    isWideScreen && activeIndex === null ? 400 : "auto",
-                  position:
-                    isWideScreen && activeIndex === null
-                      ? "absolute"
-                      : "relative",
-                  borderRadius: 15,
-                  backgroundColor: "#fff",
-                  border: "1px solid #ccc",
-                  overflow: "hidden",
-                  boxShadow: isActive
-                    ? "0 10px 40px rgba(0,0,0,0.4)"
-                    : "none",
-                  scale: isActive ? 1.05 : 0.96,
-                  translateX: offset,
-                  cursor: "pointer",
-                }}
-                animate={{
-                  scale: isActive ? 1.05 : 0.96,
-                  translateX: offset,
-                  boxShadow: isActive
-                    ? "0 10px 40px rgba(0,0,0,0.4)"
-                    : "none",
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              >
-                <div
+              <React.Fragment key={project.title + index}>
+                <motion.div
+                  onClick={() => handleCardClick(index)}
                   style={{
-                    position: "relative",
-                    width: "100%",
-                    height: isWideScreen ? "100%" : 200,
+                    width: isSmallScreen
+                      ? "100%"
+                      : isMediumScreen
+                      ? "45%"
+                      : isWideScreen
+                      ? 600
+                      : "100%",
+                    height: isWideScreen && activeIndex === null ? 400 : "auto",
+                    position:
+                      isWideScreen && activeIndex === null
+                        ? "absolute"
+                        : "relative",
+                    borderRadius: 15,
+                    backgroundColor: "#fff",
+                    border: "1px solid #ccc",
+                    overflow: "hidden",
+                    boxShadow: isActive
+                      ? "0 10px 40px rgba(0,0,0,0.4)"
+                      : "none",
+                    scale: isActive ? 1.05 : 0.96,
+                    translateX: offset,
+                    cursor: "pointer",
                   }}
+                  animate={{
+                    scale: isActive ? 1.05 : 0.96,
+                    translateX: offset,
+                    boxShadow: isActive
+                      ? "0 10px 40px rgba(0,0,0,0.4)"
+                      : "none",
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
                 >
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
+                  <div
                     style={{
-                      objectFit: "cover",
-                      pointerEvents: "none",
+                      position: "relative",
+                      width: "100%",
+                      height: isWideScreen ? "100%" : 200,
                     }}
-                    draggable={false}
-                  />
-                </div>
-              </motion.div>
+                  >
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      style={{
+                        objectFit: "cover",
+                        pointerEvents: "none",
+                      }}
+                      draggable={false}
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Show project detail right below the clicked image ONLY on small/medium screens */}
+                {(isSmallScreen || isMediumScreen) && isActive && (
+                  <motion.div
+                    key="project-details"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 30 }}
+                    transition={{ duration: 0.4 }}
+                    style={{
+                      marginTop: 20,
+                      textAlign: "left",
+                      width: isSmallScreen ? "90%" : 320,
+                      color: "#19335d",
+                      backgroundColor: "#fff",
+                      borderRadius: 12,
+                      boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
+                      padding: "20px 25px",
+                      border: "1px solid #ddd",
+                      position: "relative", // ✅ Make sure it's relative so the close button doesn't float over image
+                    }}
+                  >
+                    <div style={{ position: "relative" }}>
+                      <button
+                        onClick={handleClose}
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          right: 0,
+                          background: "none",
+                          border: "none",
+                          fontSize: "1.2rem",
+                          cursor: "pointer",
+                          color: "#aaa",
+                        }}
+                        aria-label="Close"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                    <h3 style={{ fontSize: "1.4rem", marginBottom: "0.5rem" }}>
+                      {project.title}
+                    </h3>
+                    <p style={{ fontSize: "0.95rem", color: "#555" }}>
+                      {project.description}
+                    </p>
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-block",
+                        marginTop: 10,
+                        padding: "8px 16px",
+                        backgroundColor: "#19335d",
+                        color: "white",
+                        borderRadius: 6,
+                        textDecoration: "none",
+                        fontSize: "0.9rem",
+                      }}
+                    >
+                      Visit Project
+                    </a>
+                  </motion.div>
+                )}
+              </React.Fragment>
             );
           })}
         </div>
 
         <AnimatePresence>
-          {activeIndex !== null && (
+          {activeIndex !== null && !isSmallScreen && !isMediumScreen && (
             <motion.div
               key="project-details"
               initial={{ opacity: 0, y: 30 }}
