@@ -97,7 +97,6 @@ const getTodayDate = (): string => {
         setFormData({
           firstName: "",
           lastName: "",
-          civilID: "",
           phoneNumber: "",
           email: "",
           message: "",
