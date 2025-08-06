@@ -882,3 +882,12 @@ body {
     transform: none !important;  /* Remove hover animation */
   }
 }
+
+.bg-secondary a {
+  color: #003366 !important;
+  text-decoration: underline;
+}
+.bg-secondary a:hover {
+  color: #001f4d;
+  text-decoration: none;
+}

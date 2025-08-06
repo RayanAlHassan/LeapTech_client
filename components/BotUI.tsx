@@ -10,6 +10,8 @@ interface ChatMessage {
 
 const BotUI: React.FC = () => {
   const [input, setInput] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
   const [chat, setChat] = useState<ChatMessage[]>([]);
 
   useEffect(() => {
@@ -25,7 +27,6 @@ const BotUI: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
   
-    const [isOpen, setIsOpen] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const sendMessage = async () => {
@@ -187,24 +188,10 @@ const BotUI: React.FC = () => {
               </div>
             </div>
           </div>
-          <style jsx>
-            {
-              `
-              .bg-secondary a {
-                color: #003366; /* your navy blue */
-                text-decoration: underline; /* optional */
-              }
-              
-              .bg-secondary a:hover {
-                color: #001f4d; /* darker navy on hover */
-                text-decoration: none;
-              }
-              
-              `
-            }
-          </style>
+   
         </div>
       )}
+
     </>
   );
 };
