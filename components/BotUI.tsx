@@ -105,7 +105,7 @@ const BotUI: React.FC = () => {
           className="container my-5 d-flex justify-content-center"
           style={{
             position: "fixed",
-            bottom: 140,
+            bottom:  70,
             right: 20,
             width: 500,
             maxWidth: "90%",
@@ -120,7 +120,7 @@ const BotUI: React.FC = () => {
                 style={{ cursor: "pointer" }}
                 onClick={() => setIsOpen(false)}
               >
-                Close
+                X
               </span>
             </div>
 
@@ -137,6 +137,7 @@ const BotUI: React.FC = () => {
         : "align-self-start bg-secondary"
     }`}
     style={{
+      
       maxWidth: "75%",
       backgroundColor:
         msg.role === "user" ? "var(--navbar-bg)" : undefined,
@@ -182,6 +183,22 @@ const BotUI: React.FC = () => {
               </div>
             </div>
           </div>
+          <style jsx>
+            {
+              `
+              .bg-secondary a {
+                color: #003366; /* your navy blue */
+                text-decoration: underline; /* optional */
+              }
+              
+              .bg-secondary a:hover {
+                color: #001f4d; /* darker navy on hover */
+                text-decoration: none;
+              }
+              
+              `
+            }
+          </style>
         </div>
       )}
     </>

@@ -89,59 +89,58 @@ const ConsultUsForm: React.FC = () => {
       organization: value === "organization" ? prev.organization : "",
     }));
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setSuccess(null);
-
+    setLoading(true);
+  
     if (
       !entityType ||
       (entityType === "company" && !formData.company.trim()) ||
       (entityType === "organization" && !formData.organization.trim())
     ) {
       setError("Please complete required fields.");
+      setLoading(false);
       return;
     }
-
+  
     const payload = {
       ...formData,
       company: entityType === "company" ? formData.company : "",
       organization: entityType === "organization" ? formData.organization : "",
-      service: formData.serviceId, // used as single field in DB
+      service: formData.serviceId,
     };
-
+  
     try {
-      console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
-
-      setLoading(true);
-
-      await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/consult`,
-        payload,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/consult`, payload, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+  
       toast.success("Submitted successfully!", {
         position: "bottom-center",
         theme: "colored",
-      });      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        organization: "",
-        category: "",
-        serviceId: "", // reset
-        projectDescription: "",
-        estimatedBudget: "",
-        projectTimeline: "",
-        preferredContactMethod: "",
-        bestTimeToContact: "",
+        onClose: () => {
+          // Reset form after toast closes (optional)
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            company: "",
+            organization: "",
+            category: "",
+            serviceId: "",
+            projectDescription: "",
+            estimatedBudget: "",
+            projectTimeline: "",
+            preferredContactMethod: "",
+            bestTimeToContact: "",
+          });
+          setEntityType("");
+          setSuccess(null);
+        },
       });
-      setEntityType("");
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         setError(err.response?.data?.message || "Submission failed.");
@@ -149,9 +148,72 @@ const ConsultUsForm: React.FC = () => {
         setError("An unknown error occurred.");
       }
     } finally {
-      setLoading(false);
+      setLoading(false); // Always turn off loading
     }
   };
+  
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setError(null);
+  //   setSuccess(null);
+
+  //   if (
+  //     !entityType ||
+  //     (entityType === "company" && !formData.company.trim()) ||
+  //     (entityType === "organization" && !formData.organization.trim())
+  //   ) {
+  //     setError("Please complete required fields.");
+  //     return;
+  //   }
+
+  //   const payload = {
+  //     ...formData,
+  //     company: entityType === "company" ? formData.company : "",
+  //     organization: entityType === "organization" ? formData.organization : "",
+  //     service: formData.serviceId, // used as single field in DB
+  //   };
+
+  //   try {
+  //     console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+
+  //     setLoading(true);
+
+  //     await axios.post(
+  //     `${process.env.NEXT_PUBLIC_API_URL}/consult`,
+  //       payload,
+  //       {
+  //         headers: { "Content-Type": "application/json" },
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     toast.success("Submitted successfully!", {
+  //       position: "bottom-center",
+  //       theme: "colored",
+  //     });      setFormData({
+  //       name: "",
+  //       email: "",
+  //       phone: "",
+  //       company: "",
+  //       organization: "",
+  //       category: "",
+  //       serviceId: "", // reset
+  //       projectDescription: "",
+  //       estimatedBudget: "",
+  //       projectTimeline: "",
+  //       preferredContactMethod: "",
+  //       bestTimeToContact: "",
+  //     });
+  //     setEntityType("");
+  //   } catch (err: unknown) {
+  //     if (axios.isAxiosError(err)) {
+  //       setError(err.response?.data?.message || "Submission failed.");
+  //     } else {
+  //       setError("An unknown error occurred.");
+  //     }
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const getTodayDateTimeLocal = (): string => {
     const now = new Date();
     now.setSeconds(0, 0); // Remove seconds and milliseconds for compatibility

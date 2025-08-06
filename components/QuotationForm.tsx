@@ -15,7 +15,7 @@ const QuotationForm: React.FC<QuotationFormProps> = ({
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    civilID: "",
+  
     phoneNumber: "",
     email: "",
     message: "",
@@ -79,7 +79,7 @@ const getTodayDate = (): string => {
     setLoading(true);
     setError(null);
     setSuccess(false);
-
+  
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/quotation`,
@@ -91,7 +91,7 @@ const getTodayDate = (): string => {
             : null,
         }
       );
-
+  
       if (response.status === 201) {
         setSuccess(true);
         setFormData({
@@ -113,8 +113,11 @@ const getTodayDate = (): string => {
       } else {
         setError("Failed to submit quotation");
       }
+    } finally {
+      setLoading(false); // ✅ Reset loading state after submission
     }
   };
+  
 
   return (
     <div className="form-wrapper">
@@ -160,18 +163,7 @@ const getTodayDate = (): string => {
           </label>
         </div>
 
-        <label>
-          <input
-            className="input"
-            type="text"
-            name="civilID"
-            value={formData.civilID}
-            onChange={handleChange}
-            required
-            placeholder=" "
-          />
-          <span className="focusing">Civil ID</span>
-        </label>
+        
 
         <label>
           <input
@@ -210,7 +202,7 @@ const getTodayDate = (): string => {
             placeholder=" "
             rows={4}
           />
-          <span className="focusing">How Can We Help You?</span>
+          <span className="focusing">Describe Your Project / Idea</span>
         </label>
 
         <div className="flex">
@@ -434,57 +426,29 @@ const getTodayDate = (): string => {
     outline: none;
   }
 
+  .input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
 
-        .input[type="date"]::-webkit-calendar-picker-indicator {
-          filter: invert(1);
-          cursor: pointer;
-        }
-        /* Make sure the date input matches height & padding */
-        .input[type="date"] {
-          padding: 20px 5px 5px 10px; /* same as text inputs */
-          height: 3.3rem; /* match other inputs */
-          box-sizing: border-box;
-          background-color: white;
-          color: #rgba(105, 105, 105, .397);
-          border: 1px solid rgba(105, 105, 105, 0.397);
-          border-radius: 10px;
-          font-size: 16px;
-          appearance: none; /* remove native date picker styling */
-          -webkit-appearance: none;
-          -moz-appearance: none;
-        }
-        
-        /* Fix the calendar picker icon to show properly */
-        .input[type="date"]::-webkit-calendar-picker-indicator {
-          filter: invert(1);
-          cursor: pointer;
-          position: absolute;
-          right: 10px;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-        
-        /* Floating label initial position */
-        .input[type="date"] + .focusing {
-          top: 12.5px;
-          font-size: 0.9em;
-          // color: rgb(0 51 112);
-          color:rgba(105, 105, 105, .397);
-          left: 10px;
-          pointer-events: none;
-          position: absolute;
-          transition: 0.3s ease;
-          user-select: none;
-        }
-        
-        /* When date input is focused or has value, move label up */
-        .input[type="date"]:focus + .focusing,
-        .input[type="date"]:not(:placeholder-shown) + .focusing {
-          top: 0;
-          font-size: 0.7em;
-          font-weight: 600;
-          color: var(--navbar-bg);
-        }
+  }
+  
+  .input[type="date"] {
+    padding: 20px 5px 5px 10px;
+    height: 3.3rem;
+    box-sizing: border-box;
+    background-color: white;
+    color: rgba(105, 105, 105, 0.397);
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    border-radius: 10px;
+    font-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('/icons/calendar-navy.svg'); /* 👈 Your custom navy icon path */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px 20px;
+    position: relative;
+  }
+  
         
         .form {
           display: flex;
