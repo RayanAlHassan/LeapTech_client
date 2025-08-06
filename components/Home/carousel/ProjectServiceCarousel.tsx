@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { StaticImageData } from 'next/image';
 
-import project1 from '@/public/images/homwPage1.jpg';
+import project1 from '@/public/images/xtreme.png';
 import project2 from '@/public/images/leap.png';
 import project3 from '@/public/images/services.png';
 import project4 from '@/public/images/about.png';
@@ -20,10 +20,10 @@ interface Project {
 
 const initialProjects: Project[] = [
   {
-    title: 'Company Website',
+    title: 'KWXtrem store ',
     description: 'A professional website for Company with custom CMS.',
     image: project1,
-    url: 'https://companywebsite.com',
+    url: 'https://kw.xtremestorekw.com',
   },
   {
     title: 'IT Solutions',
