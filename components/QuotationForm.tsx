@@ -127,7 +127,7 @@ const getTodayDate = (): string => {
         </p>
         <p>
           This Quotation is requested for:{" "}
-          <span style={{ color: "var(--navbar-bg)96", fontWeight: "bold" }}>
+          <span style={{ color: "var(--navbar-bg)", fontWeight: "bold" }}>
             {serviceTitle || "Loading..."}
           </span>
         </p>
