@@ -10,17 +10,21 @@ interface ChatMessage {
 
 const BotUI: React.FC = () => {
   const [input, setInput] = useState("");
-  const [chat, setChat] = useState<ChatMessage[]>([
-    {
-      role: "bot",
-      content: "👋 Hello! How can I assist you today?",
-    },
-    {
-      role: "bot",
-      content:
-        "You can ask about our services, pricing, or how to get in touch.",
-    },
-  ]);
+  const [chat, setChat] = useState<ChatMessage[]>([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setChat([
+        {
+          role: "bot",
+          content: "💭 I’m your Leap Assistant, feel free to chat with me",
+        },
+      ]);
+    }, 500); // half a second delay
+  
+    return () => clearTimeout(timer);
+  }, []);
+  
     const [isOpen, setIsOpen] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
