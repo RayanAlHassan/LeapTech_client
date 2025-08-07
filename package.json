@@ -12,7 +12,7 @@
     "@fortawesome/fontawesome-free": "^6.7.2",
     "axios": "^1.10.0",
     "bootstrap": "^5.3.7",
-    "dotenv": "^17.2.0",
+    "dotenv": "^17.2.1",
     "framer-motion": "^12.23.12",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.525.0",

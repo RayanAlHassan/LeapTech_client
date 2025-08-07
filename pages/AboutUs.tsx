@@ -37,7 +37,7 @@ const AboutUs = () => {
                 {` pushing the boundaries of technological innovation, transforming global
 ideas into tangible solutions that redefine industry standards. With a commitment to
 excellence, we develop cutting-edge software solutions designed to compete at the
-highest levels, ensuring businesses stay ahead in a rapidly evolving market`
+highest levels, ensuring businesses stay ahead in a rapidly evolving market .`
                   .split(" ")
                   .map((word, i) => (
                     <span key={i} className="hover-underline">
