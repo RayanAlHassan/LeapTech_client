@@ -11,6 +11,7 @@ import mobileImage from "@/public/images/mobileApps.png";
 import seo from "@/public/images/seo.png";
 import smartHome from "@/public/images/smartHomeBlue.png";
 import cloud from "@/public/images/cloud.png";
+import fintech from "@/public/images/fintech.png"
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSwipeable } from "react-swipeable";
@@ -52,6 +53,13 @@ const slides = [
       "Securely store and access your data anytime, anywhere with scalable and reliable cloud solutions.",
     image: cloud,
   },
+  {
+    title: "FinTech",
+    description:
+      "Empower your financial operations with innovative, secure, and scalable technology tailored for modern businesses.",
+    image: fintech,
+  }
+  
 ];
 
 const positionStyles = {
