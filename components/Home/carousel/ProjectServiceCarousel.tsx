@@ -48,7 +48,7 @@ const initialProjects: Project[] = [
   },
   {
     title: "Delivery System",
-    description: "A modern Android application.",
+    description: "A modern Web application.",
     image: DeliverySystem,
     url: "https://leaptogokw.com/login",
   },
