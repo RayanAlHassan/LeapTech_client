@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
@@ -70,9 +70,13 @@ const CareersPage: React.FC = () => {
 
       setCvMsg("✅ Thanks! Your CV has been received.");
       setCvForm({ name: "", email: "", phone: "", cv: null });
-    } catch (err: any) {
-      setCvMsg(err?.response?.data?.message || "❌ Could not submit your CV.");
-    }
+    } catch (err: unknown) {
+      let message = "❌ Could not submit your CV.";
+      if (axios.isAxiosError(err) && err.response?.data?.message) {
+        message = err.response.data.message;
+      }
+      setCvMsg(message);
+    }    
   };
 
   const renderCardContent = (career: Career) => (

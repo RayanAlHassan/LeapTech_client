@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 
 interface Career {
@@ -77,10 +77,13 @@ const CareerDetailPage: React.FC = () => {
 
       // Clear message after 5 seconds
       setTimeout(() => setApplyMsg(""), 5000);
-    } catch (err: any) {
-      setApplyMsg(
-        err?.response?.data?.message || "❌ Could not submit your application."
-      );
+    }catch (err: unknown) {
+      let message = "❌ Could not submit your application.";
+      if (axios.isAxiosError(err) && err.response?.data?.message) {
+        message = err.response.data.message;
+      }
+      setApplyMsg(message);
+    
     }
   };
 
