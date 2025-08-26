@@ -14,6 +14,7 @@ interface Career {
   description?: string;
   status: "Open" | "Closed";
   location?: string;
+  profession:string,
   employmentType?: string;
   experienceLevel?: string;
   createdAt: string;
@@ -30,6 +31,7 @@ const CareersPage: React.FC = () => {
     name: "",
     email: "",
     phone: "",
+    profession:"",
     cv: null as File | null,
   });
   const [cvMsg, setCvMsg] = useState<string>("");
@@ -62,6 +64,7 @@ const CareersPage: React.FC = () => {
       fd.append("name", cvForm.name);
       fd.append("email", cvForm.email);
       fd.append("phone", cvForm.phone);
+      fd.append("profession", cvForm.profession);
       fd.append("cvUrl", cvForm.cv);
 
       await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/career/apply`, fd, {
@@ -69,7 +72,7 @@ const CareersPage: React.FC = () => {
       });
 
       setCvMsg("✅ Thanks! Your CV has been received.");
-      setCvForm({ name: "", email: "", phone: "", cv: null });
+      setCvForm({ name: "", email: "", phone: "",profession:"", cv: null });
     } catch (err: unknown) {
       let message = "❌ Could not submit your CV.";
       if (axios.isAxiosError(err) && err.response?.data?.message) {
@@ -238,6 +241,17 @@ const CareersPage: React.FC = () => {
                     value={cvForm.phone}
                     onChange={(e) =>
                       setCvForm({ ...cvForm, phone: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <input
+                    className="form-control"
+                    placeholder="Your Profession"
+                    value={cvForm.profession}
+                    onChange={(e) =>
+                      setCvForm({ ...cvForm, profession: e.target.value })
                     }
                     required
                   />
