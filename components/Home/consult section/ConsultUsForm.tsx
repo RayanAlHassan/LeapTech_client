@@ -47,10 +47,14 @@ const ConsultUsForm: React.FC = () => {
   // Fetch services
   useEffect(() => {
     setLoading(true); // <-- start loading
+    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+
   
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/services`)
       .then((res) => {
+        console.log("Fetched services:", res.data); // <-- check structure
+
         setServices(res.data);
         setError(null);         // <-- clear error if success
       })

@@ -1,0 +1,21 @@
+{
+    "navbar": {
+      "home": "الرئيسية",
+      "aboutUs": "من نحن",
+      "services": "خدماتنا",
+      "contactUs": "اتصل بنا",
+      "career": "وظائف"
+    },
+    "footer": {
+      "company": "الشركة",
+      "about": "من نحن",
+      "services": "الخدمات",
+      "contact": "اتصل بنا",
+      "followUs": "تابعنا",
+      "address": "١٢٣ شارع، المدينة، الدولة",
+      "phone": "+٩٦٥ ١٢٣ ٤٥٦ ٧٨٩٠",
+      "email": "info@example.com",
+      "rights": "© 2025 شركتك. كل الحقوق محفوظة."
+    }
+  }
+  

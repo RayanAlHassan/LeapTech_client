@@ -4,12 +4,11 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-// import logo from "@/public/images/leapkwlogo.png"
-import logo from "@/public/images/logonew.png"
-
-// import logo from "@/public/images/WhatsApp Image 2025-07-27 at 11.09.13 AM (1).jpeg";
+import logo from "@/public/images/logonew.png";
 import PrimaryButton from "./ui/PrimaryButton";
-import Animatedburger from "./ui/AnimatedHamburger"; 
+import Animatedburger from "./ui/AnimatedHamburger";
+import en from "@/public/locales/en.json"; // English texts
+import ar from "@/public/locales/ar.json"; // Arabic texts
 
 interface NavbarProps {
   onHeightChange: (height: number) => void;
@@ -20,18 +19,22 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [language, setLanguage] = useState<"🇬🇧" | "🇰🇼">("🇬🇧");
   const pathname = usePathname();
-
   const lastScrollY = useRef(0);
   const navRef = useRef<HTMLElement>(null);
   const [navHeight, setNavHeight] = useState(0);
 
+  // Toggle menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  // Toggle language
   const toggleLanguage = () => {
-    const newLang = language === "🇰🇼" ? "🇬🇧" : "🇰🇼";
-    setLanguage(newLang);
+    setLanguage(prev => (prev === "🇬🇧" ? "🇰🇼" : "🇬🇧"));
   };
 
+  // Choose JSON based on language
+  const t = language === "🇬🇧" ? en : ar;
+
+  // Update nav height
   useEffect(() => {
     const updateHeight = () => {
       if (navRef.current) {
@@ -44,28 +47,18 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
     return () => window.removeEventListener("resize", updateHeight);
   }, [onHeightChange]);
 
+  // Show/hide navbar on scroll
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout | null = null;
-
     const handleScroll = () => {
-      // Hide navbar when scrolling down past 100px
       if (window.scrollY > lastScrollY.current && window.scrollY > 100) {
         setIsVisible(false);
       }
-
       lastScrollY.current = window.scrollY;
-
-      // Clear previous timeout (if any)
       if (scrollTimeout) clearTimeout(scrollTimeout);
-
-      // Set timeout to show navbar after 150ms of no scroll events (scroll stop)
-      scrollTimeout = setTimeout(() => {
-        setIsVisible(true);
-      }, 150);
+      scrollTimeout = setTimeout(() => setIsVisible(true), 150);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
       if (scrollTimeout) clearTimeout(scrollTimeout);
@@ -86,103 +79,53 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
       }}
     >
       <div className="container d-flex align-items-center justify-content-between w-100 h-100">
-        {/* Left side: Small logo (responsive) */}
+        {/* Logo */}
         <div className="d-flex align-items-center h-100">
           <Link href="/" legacyBehavior>
-            <a className="navbar-brand d-flex align-items-center ">
-              {/* Small screen logo */}
-              {/* <Image
-          src={logo}
-          alt="Logo Small"
-          width={100}
-          height={100}
-          quality={100}
-          priority
-          className="d-lg-none" // Show only on small/medium screens
-        /> */}
-              <Image
-                src={logo}
-                alt="Logo Large"
-                width={100} // Larger size
-                quality={100}
-                priority
-                // className="d-none d-lg-inline" // Show only on large screens and up
-              />
+            <a className="navbar-brand d-flex align-items-center">
+              <Image src={logo} alt="Logo" width={100} quality={100} priority />
             </a>
           </Link>
         </div>
 
-        {/* Desktop nav center (already in your code) */}
-        <div
-          className="d-none d-lg-flex gap-5 fw-medium"
-          style={{ flex: 1, justifyContent: "center" }}
-        >
+        {/* Desktop nav */}
+        <div className="d-none d-lg-flex gap-5 fw-medium" style={{ flex: 1, justifyContent: "center" }}>
           <Link href="/" legacyBehavior>
-            <a
-              className={`nav-link underline-anim ${
-                pathname === "/" ? "active" : ""
-              }`}
-            >
-              HOME
+            <a className={`nav-link underline-anim ${pathname === "/" ? "active" : ""}`}>
+              {t.navbar.home}
             </a>
           </Link>
-          
           <Link href="/AboutUs" legacyBehavior>
-            <a
-              className={`nav-link underline-anim ${
-                pathname === "/AboutUs" ? "active" : ""
-              }`}
-            >
-              ABOUT US
+            <a className={`nav-link underline-anim ${pathname === "/AboutUs" ? "active" : ""}`}>
+              {t.navbar.aboutUs}
             </a>
           </Link>
-
           <Link href="/services" legacyBehavior>
-            <a
-              className={`nav-link underline-anim ${
-                pathname === "/services" ? "active" : ""
-              }`}
-            >
-              SERVICES
+            <a className={`nav-link underline-anim ${pathname === "/services" ? "active" : ""}`}>
+              {t.navbar.services}
             </a>
           </Link>
-
           <Link href="/ContactUs" legacyBehavior>
-            <a
-              className={`nav-link underline-anim ${
-                pathname === "/ContactUs" ? "active" : ""
-              }`}
-            >
-              CONTACT US
+            <a className={`nav-link underline-anim ${pathname === "/ContactUs" ? "active" : ""}`}>
+              {t.navbar.contactUs}
             </a>
           </Link>
         </div>
 
-        {/* Desktop right buttons */}
+        {/* Desktop buttons */}
         <div className="d-none d-lg-flex align-items-center gap-3">
           <Link href="/career">
-            <button
-              className={`btn lang-toggle-btn px-4 ${
-                pathname === "/career" ? "active-career" : ""
-              }`}
-            >
-              CAREER
+            <button className={`btn lang-toggle-btn px-4 ${pathname === "/career" ? "active-career" : ""}`}>
+              {t.navbar.career}
             </button>
           </Link>
-
-          <button
-            onClick={toggleLanguage}
-            className="lang-toggle-btn fw-semibold"
-            aria-label="Toggle language"
-            // style={{backgroundColor:"white"}}
-          >
+          <button onClick={toggleLanguage} className="lang-toggle-btn fw-semibold" aria-label="Toggle language">
             {language}
           </button>
         </div>
 
-        {/* Mobile: Language toggle + Hamburger */}
+        {/* Mobile hamburger */}
         <div className="d-flex d-lg-none align-items-center gap-2 ms-auto">
-          {/* Hamburger */}
           <Animatedburger isOpen={isMenuOpen} toggle={toggleMenu} />
         </div>
       </div>
@@ -203,40 +146,22 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
         >
           <div className="d-flex flex-column align-items-center gap-4">
             <Link href="/" legacyBehavior>
-              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
-                HOME
-              </a>
+              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">{t.navbar.home}</a>
             </Link>
             <Link href="/AboutUs" legacyBehavior>
-              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
-                ABOUT US
-              </a>
+              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">{t.navbar.aboutUs}</a>
             </Link>
             <Link href="/services" legacyBehavior>
-              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
-                SERVICES
-              </a>
+              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">{t.navbar.services}</a>
             </Link>
             <Link href="/ContactUs" legacyBehavior>
-              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">
-                CONTACT US
-              </a>
+              <a onClick={toggleMenu} className="text-primary fw-semibold fs-5">{t.navbar.contactUs}</a>
             </Link>
-            <button
-              onClick={toggleLanguage}
-              className=" primary-button "
-              aria-label="Toggle language"
-            >
-              {language}
-            </button>
+            <button onClick={toggleLanguage} className="primary-button">{language}</button>
             <Link href="/career" legacyBehavior>
               <a>
-                <PrimaryButton
-                  className={`primary-button ${
-                    pathname === "/career" ? "active-career" : ""
-                  }`}
-                >
-                  CAREER
+                <PrimaryButton className={pathname === "/career" ? "active-career" : ""}>
+                  {t.navbar.career}
                 </PrimaryButton>
               </a>
             </Link>

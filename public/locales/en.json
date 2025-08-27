@@ -1,0 +1,24 @@
+{
+    "navbar": {
+      "home": "HOME",
+      "aboutUs": "ABOUT US",
+      "services": "SERVICES",
+      "contactUs": "CONTACT US",
+      "career": "CAREER",
+      "language": "Language"
+    },
+    "footer": {
+        "company": "Company",
+        "about": "About Us",
+        "services": "Services",
+        "contact": "Contact Us",
+        "followUs": "Follow Us",
+        "address": "123 Street Name, City, Country",
+        "phone": "+123 456 7890",
+        "email": "info@example.com",
+        "rights": "© 2025 Your Company. All Rights Reserved."
+      }
+    
+    
+  }
+  
