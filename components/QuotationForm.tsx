@@ -50,6 +50,17 @@ const getTodayDate = (): string => {
   return `${year}-${month}-${day}`;
 };
 
+const getNextYearDate = (): string => {
+  const today = new Date();
+  today.setFullYear(today.getFullYear() + 1);
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+
+
   const contactOptions = [
     { value: "Email", label: "Email", emoji: "📧" },
     { value: "Phone", label: "Phone", emoji: "📞" },
@@ -218,15 +229,16 @@ const getTodayDate = (): string => {
           </label>
 
           <label>
-  <input
-    className="input"
-    type="date"
-    name="expectedDate"
-    value={formData.expectedDate}
-    onChange={handleChange}
-    placeholder=" "
-    min={getTodayDate()}
-  />
+<input
+  className="input"
+  type="date"
+  name="expectedDate"
+  value={formData.expectedDate}
+  onChange={handleChange}
+  placeholder=" "
+  min={getTodayDate()}
+  max={getNextYearDate()}
+/>
   <span className="focusing">Expected Project Delivery</span>
 </label>
 

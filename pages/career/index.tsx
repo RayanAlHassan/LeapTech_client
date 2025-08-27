@@ -83,23 +83,17 @@ const CareersPage: React.FC = () => {
   };
 
   const renderCardContent = (career: Career) => (
-    
-    <>
-      <div className="d-flex justify-content-between align-items-start mb-1 " 
-         onClick={(e) => {
-          e.stopPropagation();
-          router.push(`/career/${career._id}`);
-        }}
-        style={{
-          flexDirection:"column"
-        }}>
+    <div style={{ position: "relative", height: "100%" }}>
+      {/* Title & Date */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
         <h5 className="career-title mb-0">{career.title}</h5>
-        <span className="posting-date">
+        <span className="posting-date" style={{ fontSize: "0.85rem", color: "#555" }}>
           {new Date(career.createdAt).toLocaleDateString()}
         </span>
       </div>
   
-      <div className="career-meta mb-2">
+      {/* Meta Info */}
+      <div className="career-meta" style={{ marginTop: "1rem", display: "flex", flexDirection: "column", gap: "4px",marginBottom:"1rem" }}>
         {career.location && (
           <div>
             <strong>Location:</strong> <span className="meta-text">{career.location}</span>
@@ -117,21 +111,50 @@ const CareersPage: React.FC = () => {
         )}
       </div>
   
-      <p className="career-desc">{truncateDescription(career.description)}</p>
+      {/* Description */}
+      <p className="career-desc" style={{  }}>
+        {truncateDescription(career.description)}
+      </p>
   
-      <div className="text-end mt-2">
-        {/* <button
-          className="btn btn-career"
-          onClick={(e) => {
-            e.stopPropagation();
-            router.push(`/career/${career._id}`);
-          }}
-        >
-          View
-        </button> */}
-      </div>
-    </>
+      {/* Fully independent View button at bottom-right */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          router.push(`/career/${career._id}`);
+        }}
+        style={{
+          all: "unset",
+          position: "absolute",
+          bottom: "15px",
+          right: "15px",
+          padding: "0.5rem 1.2rem",
+          border: "2px solid var(--navbar-bg)",
+          color: "var(--navbar-bg)",
+          backgroundColor: "transparent",
+          fontWeight: 600,
+          borderRadius: "8px",
+          textAlign: "center",
+          cursor: "pointer",
+          transition: "all 0.3s ease-in-out",
+          zIndex: 100,
+          display: "inline-block",
+        }}
+        onMouseEnter={(e) => {
+          const btn = e.currentTarget as HTMLButtonElement;
+          btn.style.backgroundColor = "var(--navbar-bg)";
+          btn.style.color = "var(--gray-bg)";
+        }}
+        onMouseLeave={(e) => {
+          const btn = e.currentTarget as HTMLButtonElement;
+          btn.style.backgroundColor = "transparent";
+          btn.style.color = "var(--navbar-bg)";
+        }}
+      >
+        View
+      </button>
+    </div>
   );
+  
   
 
   return (
