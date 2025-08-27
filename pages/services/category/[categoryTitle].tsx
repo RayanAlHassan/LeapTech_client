@@ -168,7 +168,7 @@ const CategoryDetailPage = () => {
           </div>
         </div>
       )}
-      <ProjectServiceCarousel/>
+<ProjectServiceCarousel categoryTitle={categoryTitle as string} />
 
       {/* Styles */}
       <style jsx>{`
