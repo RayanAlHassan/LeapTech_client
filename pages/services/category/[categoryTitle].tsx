@@ -65,7 +65,7 @@ const CategoryDetailPage = () => {
        {/* Back Button */}
        <div className="mb-4 text-left">
           <button className="career-btn"  onClick={() => router.back()}>
-            ← Back to Careers
+            ← Back to services
           </button>
         </div>
       <div className="row d-flex flex-column flex-md-row justify-content-center align-items-stretch">
