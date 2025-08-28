@@ -47,43 +47,43 @@ const CareerDetailPage: React.FC = () => {
 
   const [submitting, setSubmitting] = useState(false);
 
-const submitApplication = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setApplyMsg(""); // clear previous messages
+  const submitApplication = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setApplyMsg(""); // clear previous messages
 
-  if (!applyForm.cv) {
-    setApplyMsg("❌ Please attach your CV (PDF).");
-    return;
-  }
-
-  try {
-    setSubmitting(true); // start loading
-    const fd = new FormData();
-    fd.append("name", applyForm.name);
-    fd.append("email", applyForm.email);
-    fd.append("phone", applyForm.phone);
-    fd.append("cvUrl", applyForm.cv as File);
-    fd.append("careerId", String(id));
-
-    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/career/apply`, fd, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-
-    setApplyMsg("✅ Application submitted successfully!");
-    setApplyForm({ name: "", email: "", phone: "", cv: null });
-    setShowApply(false);
-
-    setTimeout(() => setApplyMsg(""), 5000);
-  } catch (err: unknown) {
-    let message = "❌ Could not submit your application.";
-    if (axios.isAxiosError(err) && err.response?.data?.message) {
-      message = err.response.data.message;
+    if (!applyForm.cv) {
+      setApplyMsg("❌ Please attach your CV (PDF).");
+      return;
     }
-    setApplyMsg(message);
-  } finally {
-    setSubmitting(false); // stop loading
-  }
-};
+
+    try {
+      setSubmitting(true); // start loading
+      const fd = new FormData();
+      fd.append("name", applyForm.name);
+      fd.append("email", applyForm.email);
+      fd.append("phone", applyForm.phone);
+      fd.append("cvUrl", applyForm.cv as File);
+      fd.append("careerId", String(id));
+
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/career/apply`, fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      setApplyMsg("✅ Application submitted successfully!");
+      setApplyForm({ name: "", email: "", phone: "", cv: null });
+      setShowApply(false);
+
+      setTimeout(() => setApplyMsg(""), 5000);
+    } catch (err: unknown) {
+      let message = "❌ Could not submit your application.";
+      if (axios.isAxiosError(err) && err.response?.data?.message) {
+        message = err.response.data.message;
+      }
+      setApplyMsg(message);
+    } finally {
+      setSubmitting(false); // stop loading
+    }
+  };
   if (loading) return <p className="text-center mt-5">Loading...</p>;
   if (error || !career)
     return <p className="text-center mt-5 text-danger">{error}</p>;
@@ -126,6 +126,18 @@ const submitApplication = async (e: React.FormEvent) => {
             <p style={{ whiteSpace: "pre-line" }}>{career.description}</p>
           </div>
 
+          {/* Key Responsibilities */}
+          {career.keyResponsibilities &&
+            career.keyResponsibilities.length > 0 && (
+              <div className="mb-4">
+                <h5>Key Responsibilities:</h5>
+                <ul className="ps-4">
+                  {career.keyResponsibilities.map((res, i) => (
+                    <li key={i}>{res}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           {/* Skills */}
           {career.skills && career.skills.length > 0 && (
             <div className="mb-4">
@@ -139,20 +151,6 @@ const submitApplication = async (e: React.FormEvent) => {
               </div>
             </div>
           )}
-
-          {/* Key Responsibilities */}
-          {career.keyResponsibilities &&
-            career.keyResponsibilities.length > 0 && (
-              <div className="mb-4">
-                <h5>Key Responsibilities:</h5>
-                <ul className="ps-4">
-                  {career.keyResponsibilities.map((res, i) => (
-                    <li key={i}>{res}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
           {/* Apply Button */}
           <div className="text-center mb-4">
             <button
@@ -216,13 +214,13 @@ const submitApplication = async (e: React.FormEvent) => {
                   />
                 </div>
                 <div className="col-12 text-center">
-                <button
-  type="submit"
-  className="career-btn w-50 btn-lg"
-  disabled={submitting}
->
-  {submitting ? "Submitting..." : "Submit Application"}
-</button>
+                  <button
+                    type="submit"
+                    className="career-btn w-50 btn-lg"
+                    disabled={submitting}
+                  >
+                    {submitting ? "Submitting..." : "Submit Application"}
+                  </button>
                 </div>
               </form>
             </div>
