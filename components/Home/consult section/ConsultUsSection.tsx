@@ -68,7 +68,7 @@ const ConsultUsSection: React.FC = () => {
               <div className="animated-border-wrapper" style={{height:"40% !important"}}>
              
                 <video
-                  src="/videos/Leap_Tech_Development.mp4"
+                  src="/videos/WhatsApp Video.mp4"
                   autoPlay
                   controls={false}
                   muted
