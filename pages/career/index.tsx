@@ -14,7 +14,7 @@ interface Career {
   description?: string;
   status: "Open" | "Closed";
   location?: string;
-  profession:string,
+  profession: string;
   employmentType?: string;
   experienceLevel?: string;
   createdAt: string;
@@ -31,7 +31,7 @@ const CareersPage: React.FC = () => {
     name: "",
     email: "",
     phone: "",
-    profession:"",
+    profession: "",
     cv: null as File | null,
   });
   const [cvMsg, setCvMsg] = useState<string>("");
@@ -52,14 +52,18 @@ const CareersPage: React.FC = () => {
       : desc;
   };
 
+  const [submittingCv, setSubmittingCv] = useState(false);
+
   const handleCvSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setCvMsg("");
     if (!cvForm.cv) {
-      setCvMsg("Please attach your CV (PDF).");
+      setCvMsg("❌ Please attach your CV (PDF).");
       return;
     }
+
     try {
+      setSubmittingCv(true); // start loading
       const fd = new FormData();
       fd.append("name", cvForm.name);
       fd.append("email", cvForm.email);
@@ -72,14 +76,16 @@ const CareersPage: React.FC = () => {
       });
 
       setCvMsg("✅ Thanks! Your CV has been received.");
-      setCvForm({ name: "", email: "", phone: "",profession:"", cv: null });
+      setCvForm({ name: "", email: "", phone: "", profession: "", cv: null });
     } catch (err: unknown) {
       let message = "❌ Could not submit your CV.";
       if (axios.isAxiosError(err) && err.response?.data?.message) {
         message = err.response.data.message;
       }
       setCvMsg(message);
-    }    
+    } finally {
+      setSubmittingCv(false); // stop loading
+    }
   };
 
   const renderCardContent = (career: Career) => (
@@ -87,35 +93,50 @@ const CareersPage: React.FC = () => {
       {/* Title & Date */}
       <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
         <h5 className="career-title mb-0">{career.title}</h5>
-        <span className="posting-date" style={{ fontSize: "0.85rem", color: "#555" }}>
+        <span
+          className="posting-date"
+          style={{ fontSize: "0.85rem", color: "#555" }}
+        >
           {new Date(career.createdAt).toLocaleDateString()}
         </span>
       </div>
-  
+
       {/* Meta Info */}
-      <div className="career-meta" style={{ marginTop: "1rem", display: "flex", flexDirection: "column", gap: "4px",marginBottom:"1rem" }}>
+      <div
+        className="career-meta"
+        style={{
+          marginTop: "1rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: "4px",
+          marginBottom: "1rem",
+        }}
+      >
         {career.location && (
           <div>
-            <strong>Location:</strong> <span className="meta-text">{career.location}</span>
+            <strong>Location:</strong>{" "}
+            <span className="meta-text">{career.location}</span>
           </div>
         )}
         {career.employmentType && (
           <div>
-            <strong>Type:</strong> <span className="meta-text">{career.employmentType}</span>
+            <strong>Type:</strong>{" "}
+            <span className="meta-text">{career.employmentType}</span>
           </div>
         )}
         {career.experienceLevel && (
           <div>
-            <strong>Level:</strong> <span className="meta-text">{career.experienceLevel}</span>
+            <strong>Level:</strong>{" "}
+            <span className="meta-text">{career.experienceLevel}</span>
           </div>
         )}
       </div>
-  
+
       {/* Description */}
-      <p className="career-desc" style={{  }}>
+      <p className="career-desc" style={{}}>
         {truncateDescription(career.description)}
       </p>
-  
+
       {/* Fully independent View button at bottom-right */}
       <button
         onClick={(e) => {
@@ -154,8 +175,6 @@ const CareersPage: React.FC = () => {
       </button>
     </div>
   );
-  
-  
 
   return (
     <section className="py-5 careers-section">
@@ -177,46 +196,46 @@ const CareersPage: React.FC = () => {
             </p>
           </div>
         )}
-{!loading && openJobs.length > 0 && (
-  <>
-    {/* Desktop Grid */}
-    <div className="d-none d-lg-flex flex-wrap gap-4 justify-content-start mb-4">
-      {openJobs.map((career) => (
-        <div
-          key={career._id}
-          className="career-card single_service p-3 rounded shadow flex-fill cursor-pointer"
-          style={{ minWidth: "30%", maxWidth: "32%", height: "380px" }}
-          onClick={() => router.push(`/career/${career._id}`)} // make entire card clickable
-        >
-          {renderCardContent(career)}
-        </div>
-      ))}
-    </div>
-
-    {/* Mobile / Tablet Swiper */}
-    <div className="d-lg-none mb-4">
-      <Swiper
-        modules={[Pagination]}
-        spaceBetween={20}
-        slidesPerView={1.2}
-        centeredSlides
-        pagination={{ clickable: true }}
-      >
-        {openJobs.map((career) => (
-          <SwiperSlide key={career._id}>
-            <div
-              className="career-card single_service p-3 rounded shadow cursor-pointer mx-auto"
-              style={{ maxWidth: "90%", height: "380px" }}
-              onClick={() => router.push(`/career/${career._id}`)}
-            >
-              {renderCardContent(career)}
+        {!loading && openJobs.length > 0 && (
+          <>
+            {/* Desktop Grid */}
+            <div className="d-none d-lg-flex flex-wrap gap-4 justify-content-start mb-4">
+              {openJobs.map((career) => (
+                <div
+                  key={career._id}
+                  className="career-card single_service p-3 rounded shadow flex-fill cursor-pointer"
+                  style={{ minWidth: "30%", maxWidth: "32%", height: "380px" }}
+                  onClick={() => router.push(`/career/${career._id}`)} // make entire card clickable
+                >
+                  {renderCardContent(career)}
+                </div>
+              ))}
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
-  </>
-)}
+
+            {/* Mobile / Tablet Swiper */}
+            <div className="d-lg-none mb-4">
+              <Swiper
+                modules={[Pagination]}
+                spaceBetween={20}
+                slidesPerView={1.2}
+                centeredSlides
+                pagination={{ clickable: true }}
+              >
+                {openJobs.map((career) => (
+                  <SwiperSlide key={career._id}>
+                    <div
+                      className="career-card single_service p-3 rounded shadow cursor-pointer mx-auto"
+                      style={{ maxWidth: "90%", height: "380px" }}
+                      onClick={() => router.push(`/career/${career._id}`)}
+                    >
+                      {renderCardContent(career)}
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </>
+        )}
 
         {/* CV Form */}
         <div className="row justify-content-center mt-5">
@@ -291,8 +310,12 @@ const CareersPage: React.FC = () => {
                   />
                 </div>
                 <div className="col-12">
-                  <button type="submit" className="btn btn-career w-100">
-                    Submit CV
+                  <button
+                    type="submit"
+                    className="btn btn-career w-100"
+                    disabled={submittingCv}
+                  >
+                    {submittingCv ? "Submitting..." : "Submit CV"}
                   </button>
                 </div>
               </form>
@@ -368,21 +391,21 @@ const CareersPage: React.FC = () => {
         .career-card.single_service:hover {
           box-shadow: 0 10px 24px rgba(25, 51, 93, 0.2);
           border: 1px solid var(--accent-blue);
-          cursor:pointer;
+          cursor: pointer;
         }
 
         /* Button view */
         /* your global CSS file */
         .btn-career {
           background-color: transparent !important; /* main color */
-          color: var(--navbar-bg) !important;    /* force white text */
+          color: var(--navbar-bg) !important; /* force white text */
           border: 1px solid var(--navbar-bg) !important;
           transition: all 0.3s ease !important;
         }
-        
+
         .btn-career:hover {
           background-color: var(--navbar-bg) !important; /* darker shade */
-          color: white  !important;
+          color: white !important;
         }
         .career-title {
           font-weight: 700;

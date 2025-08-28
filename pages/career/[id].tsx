@@ -45,47 +45,45 @@ const CareerDetailPage: React.FC = () => {
       .finally(() => setLoading(false));
   }, [id]);
 
-  const submitApplication = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setApplyMsg(""); // clear previous messages
+  const [submitting, setSubmitting] = useState(false);
 
-    if (!applyForm.cv) {
-      setApplyMsg("❌ Please attach your CV (PDF).");
-      return;
+const submitApplication = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setApplyMsg(""); // clear previous messages
+
+  if (!applyForm.cv) {
+    setApplyMsg("❌ Please attach your CV (PDF).");
+    return;
+  }
+
+  try {
+    setSubmitting(true); // start loading
+    const fd = new FormData();
+    fd.append("name", applyForm.name);
+    fd.append("email", applyForm.email);
+    fd.append("phone", applyForm.phone);
+    fd.append("cvUrl", applyForm.cv as File);
+    fd.append("careerId", String(id));
+
+    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/career/apply`, fd, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    setApplyMsg("✅ Application submitted successfully!");
+    setApplyForm({ name: "", email: "", phone: "", cv: null });
+    setShowApply(false);
+
+    setTimeout(() => setApplyMsg(""), 5000);
+  } catch (err: unknown) {
+    let message = "❌ Could not submit your application.";
+    if (axios.isAxiosError(err) && err.response?.data?.message) {
+      message = err.response.data.message;
     }
-
-    try {
-      const fd = new FormData();
-      fd.append("name", applyForm.name);
-      fd.append("email", applyForm.email);
-      fd.append("phone", applyForm.phone);
-      fd.append("cvUrl", applyForm.cv as File);
-      fd.append("careerId", String(id));
-
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/career/apply`, fd, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      // Success message
-      setApplyMsg("✅ Application submitted successfully!");
-
-      // Clear form
-      setApplyForm({ name: "", email: "", phone: "", cv: null });
-
-      // Optionally hide form
-      setShowApply(false);
-
-      // Clear message after 5 seconds
-      setTimeout(() => setApplyMsg(""), 5000);
-    } catch (err: unknown) {
-      let message = "❌ Could not submit your application.";
-      if (axios.isAxiosError(err) && err.response?.data?.message) {
-        message = err.response.data.message;
-      }
-      setApplyMsg(message);
-    }
-  };
-
+    setApplyMsg(message);
+  } finally {
+    setSubmitting(false); // stop loading
+  }
+};
   if (loading) return <p className="text-center mt-5">Loading...</p>;
   if (error || !career)
     return <p className="text-center mt-5 text-danger">{error}</p>;
@@ -218,9 +216,13 @@ const CareerDetailPage: React.FC = () => {
                   />
                 </div>
                 <div className="col-12 text-center">
-                  <button type="submit" className="career-btn w-50 btn-lg">
-                    Submit Application
-                  </button>
+                <button
+  type="submit"
+  className="career-btn w-50 btn-lg"
+  disabled={submitting}
+>
+  {submitting ? "Submitting..." : "Submit Application"}
+</button>
                 </div>
               </form>
             </div>
