@@ -7,6 +7,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Lottie from "lottie-react";
+import lootie from "@/public/animations/LoadingPaperplane.json";
 
 interface Career {
   _id: string;
@@ -319,6 +321,21 @@ const CareersPage: React.FC = () => {
                   </button>
                 </div>
               </form>
+              {submittingCv && (
+            <div
+              style={{
+                marginTop: "20px",
+                width: 100,
+                marginInline: "auto",
+              }}
+            >
+              <Lottie
+                animationData={lootie}
+                loop={true}
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
+          )}
               {cvMsg && <p className="mt-3 text-center">{cvMsg}</p>}
             </div>
           </div>

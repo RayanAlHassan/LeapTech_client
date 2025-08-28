@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
+import Lottie from "lottie-react";
+import lootie from "@/public/animations/LoadingPaperplane.json";
 
+import { useRouter } from "next/router";
 interface Career {
   _id: string;
   title: string;
@@ -223,6 +225,22 @@ const CareerDetailPage: React.FC = () => {
                   </button>
                 </div>
               </form>
+            </div>
+          )}
+
+          {submitting && (
+            <div
+              style={{
+                marginTop: "20px",
+                width: 100,
+                marginInline: "auto",
+              }}
+            >
+              <Lottie
+                animationData={lootie}
+                loop={true}
+                style={{ width: "100%", height: "100%" }}
+              />
             </div>
           )}
           {applyMsg && (
