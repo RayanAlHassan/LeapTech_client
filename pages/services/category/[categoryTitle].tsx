@@ -51,7 +51,7 @@ const CategoryDetailPage = () => {
 
 
     <div className="container-fluid py-4 " style={{minHeight:"55vh"}}>
-    <button
+    {/* <button
       onClick={() => router.back()}
       className="btn btn-secondary mb-3"
       style={{    marginLeft: "2rem",
@@ -61,7 +61,13 @@ const CategoryDetailPage = () => {
         border: "none",}}
     >
       ← Back
-    </button>
+    </button> */}
+       {/* Back Button */}
+       <div className="mb-4 text-left">
+          <button className="career-btn" onClick={() => router.push("/career")}>
+            ← Back to Careers
+          </button>
+        </div>
       <div className="row d-flex flex-column flex-md-row justify-content-center align-items-stretch">
         {/* Sidebar */}
         
@@ -172,6 +178,20 @@ const CategoryDetailPage = () => {
 
       {/* Styles */}
       <style jsx>{`
+       .career-btn {
+        background-color: transparent;
+        color: var(--navbar-bg);
+        border: 1px solid var(--navbar-bg);
+        transition: all 0.3s ease;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 8px 20px;
+        margin: 0 1.5rem;
+      }
+      .career-btn:hover {
+        background-color: var(--navbar-bg);
+        color: white;
+      }
         .card {
           width: 89%;
           border-radius: 15px;

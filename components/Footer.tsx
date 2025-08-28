@@ -14,10 +14,7 @@ import linkedin from "@/public/images/linkedin.png";
 import fb from "@/public/images/facebook.png";
 import tiktok from "@/public/images/tiktok.png";
 import axios from "axios";
-// استدعاء الكونتكس + الترجمات
-import { useLanguage } from "@/context/LanguageContext";
-import en from "@/public/locales/en.json";
-import ar from "@/public/locales/ar.json";
+
 interface Category {
   _id: string;
   title: string;
@@ -25,19 +22,13 @@ interface Category {
 
 const Footer: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const { language } = useLanguage();
-  const t = language === "en" ? en : ar; // الترجمة حسب اللغة الحالية
-  const [mounted, setMounted] = useState(false);
- 
-  useEffect(() => {
-    setMounted(true);
 
+  useEffect(() => {
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/category`) // your endpoint for fetching categories
       .then((res) => setCategories(res.data))
       .catch((err) => console.error("Failed to fetch categories", err));
   }, []);
-  if (!mounted) return null; // wait until client to render
 
   return (
     <footer className="footer mt-auto py-4 shadow text-white">
@@ -45,7 +36,7 @@ const Footer: React.FC = () => {
         <Row className="justify-content-between align-items-start g-4">
           {/* Company Info */}
           <Col md={4}>
-            <h5 className="fw-bold mb-3">{t.footer.company}</h5>
+            <h5 className="fw-bold mb-3">Keep in touch</h5>
             <p className="mb-2">
               <Image src={arrow} alt="Arrow" width={23} height={23} />{" "}
               <a
@@ -54,61 +45,61 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="footer-link"
               >
-                {t.footer.address}
+                Salmiya, Salem Al Mubarak St.
               </a>
             </p>
             <p className="mb-2">
-              <Image src={office} alt="Office" width={23} height={23} /> {t.footer.office}
+              <Image src={office} alt="Office" width={23} height={23} /> Omniya Centre - G Floor - Office 8
             </p>
             <p className="mb-2">
               <Image src={phone} alt="Phone" width={23} height={23} />{" "}
               <a href="tel:+96525713432" className="footer-link">
-                {t.footer.phone}
+                +965 2571 3432
               </a>
             </p>
             <p className="mb-0">
               <Image src={email} alt="Email" width={23} height={23} />{" "}
               <a href="mailto:info@leaptechkw.com" className="footer-link">
-                {t.footer.email}
+                info@leaptechkw.com
               </a>
             </p>
           </Col>
 
-          {/* Site Links */}
+          {/* Site Links (with Career included) */}
           <Col md={2}>
-            <h6 className="fw-semibold mb-3">{t.footer.services}</h6>
+            <h6 className="fw-semibold mb-3">Site Links</h6>
             <ul className="list-unstyled">
               <li>
                 <Link href="/" legacyBehavior>
-                  <a className="footer-link">{t.navbar.home}</a>
+                  <a className="footer-link">Home</a>
                 </Link>
               </li>
               <li>
                 <Link href="/AboutUs" legacyBehavior>
-                  <a className="footer-link">{t.navbar.aboutUs}</a>
+                  <a className="footer-link">About Us</a>
                 </Link>
               </li>
               <li>
                 <Link href="/services" legacyBehavior>
-                  <a className="footer-link">{t.navbar.services}</a>
+                  <a className="footer-link">Service</a>
                 </Link>
               </li>
               <li>
                 <Link href="/ContactUs" legacyBehavior>
-                  <a className="footer-link">{t.navbar.contactUs}</a>
+                  <a className="footer-link">Contact Us</a>
                 </Link>
               </li>
               <li>
                 <Link href="/career" legacyBehavior>
-                  <a className="footer-link">{t.navbar.career}</a>
+                  <a className="footer-link">Career</a>
                 </Link>
               </li>
             </ul>
           </Col>
 
-          {/* Inner Links (categories from API) */}
+          {/* Inner Links (dynamically fetched categories) */}
           <Col md={2}>
-            <h6 className="fw-semibold mb-3">{t.footer.about}</h6>
+            <h6 className="fw-semibold mb-3">Inner Links</h6>
             <ul className="list-unstyled">
               {categories.length > 0 ? (
                 categories.map((cat) => (
@@ -126,38 +117,17 @@ const Footer: React.FC = () => {
 
           {/* Socials */}
           <Col md={4}>
-            <h6 className="fw-semibold mb-3">{t.footer.followUs}</h6>
             <div className="mt-4 d-flex gap-3">
-              <a
-                href="https://www.tiktok.com/@leaptechkw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
+              <a href="https://www.tiktok.com/@leaptechkw" target="_blank" rel="noopener noreferrer" className="footer-icon">
                 <Image src={tiktok} alt="TikTok" width={23} height={23} />
               </a>
-              <a
-                href="https://www.instagram.com/leaptechkw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
+              <a href="https://www.instagram.com/leaptechkw" target="_blank" rel="noopener noreferrer" className="footer-icon">
                 <Image src={insta} alt="Instagram" width={23} height={23} />
               </a>
-              <a
-                href="https://www.linkedin.com/company/leap-tech-kw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
+              <a href="https://www.linkedin.com/company/leap-tech-kw" target="_blank" rel="noopener noreferrer" className="footer-icon">
                 <Image src={linkedin} alt="LinkedIn" width={23} height={23} />
               </a>
-              <a
-                href="https://www.facebook.com/share/1TbEaveqqE"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon"
-              >
+              <a href="https://www.facebook.com/share/1TbEaveqqE" target="_blank" rel="noopener noreferrer" className="footer-icon">
                 <Image src={fb} alt="Facebook" width={23} height={23} />
               </a>
             </div>
@@ -172,8 +142,10 @@ const Footer: React.FC = () => {
 
       {/* Copyright */}
       <div className="text-center mt-4 pt-3">
-        <small className="fw-medium">{t.footer.rights}</small>
-      </div>      <style jsx>{`
+        <small className="fw-medium">© {new Date().getFullYear()} Leap Tech KW. All Rights Reserved.</small>
+      </div>
+
+      <style jsx>{`
         .footer {
           background: linear-gradient(90deg, #0b1f3a, #1e3d6b);
           color: #fff;

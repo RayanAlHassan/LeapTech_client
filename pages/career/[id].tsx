@@ -77,13 +77,12 @@ const CareerDetailPage: React.FC = () => {
 
       // Clear message after 5 seconds
       setTimeout(() => setApplyMsg(""), 5000);
-    }catch (err: unknown) {
+    } catch (err: unknown) {
       let message = "❌ Could not submit your application.";
       if (axios.isAxiosError(err) && err.response?.data?.message) {
         message = err.response.data.message;
       }
       setApplyMsg(message);
-    
     }
   };
 
@@ -123,6 +122,11 @@ const CareerDetailPage: React.FC = () => {
               </span>
             )}
           </div>
+          {/* Job Description */}
+          <div className="mb-5">
+            <h5>Job Description:</h5>
+            <p style={{ whiteSpace: "pre-line" }}>{career.description}</p>
+          </div>
 
           {/* Skills */}
           {career.skills && career.skills.length > 0 && (
@@ -150,12 +154,6 @@ const CareerDetailPage: React.FC = () => {
                 </ul>
               </div>
             )}
-
-          {/* Job Description */}
-          <div className="mb-5">
-            <h5>Job Description:</h5>
-            <p style={{ whiteSpace: "pre-line" }}>{career.description}</p>
-          </div>
 
           {/* Apply Button */}
           <div className="text-center mb-4">
@@ -225,19 +223,17 @@ const CareerDetailPage: React.FC = () => {
                   </button>
                 </div>
               </form>
-           
             </div>
-          
           )}
-             {applyMsg && (
-                <p
-                  className={`mt-3 text-center ${
-                    applyMsg.startsWith("✅") ? "text-success" : "text-danger"
-                  }`}
-                >
-                  {applyMsg}
-                </p>
-              )}
+          {applyMsg && (
+            <p
+              className={`mt-3 text-center ${
+                applyMsg.startsWith("✅") ? "text-success" : "text-danger"
+              }`}
+            >
+              {applyMsg}
+            </p>
+          )}
         </div>
       </div>
 

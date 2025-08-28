@@ -1,22 +1,14 @@
 "use client";
 
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import PrimaryButton from "../../ui/PrimaryButton";
 import { Modal } from "react-bootstrap";
 import ConsultUsForm from "./ConsultUsForm";
-import { useLanguage } from "@/context/LanguageContext";
-
 const ConsultUsSection: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
-  const { t, dir } = useLanguage(); // use dir from context
   const [show, setShow] = useState(false);
 
   const openModal = () => setShow(true);
   const closeModal = () => setShow(false);
-
-  const isRTL = dir === "rtl";
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null; // prevent SSR mismatch
 
   return (
     <>
@@ -31,35 +23,30 @@ const ConsultUsSection: React.FC = () => {
         }}
       >
         <div className="container">
-          <div
-            className={`row align-items-center h-100 ${isRTL ? "flex-row-reverse" : ""}`}
-          >
+          <div className="row align-items-center h-100">
+            <div className="row align-items-center justify-content-center h-100 text-center">
+              <h2 className="our-story-title mb-4 text-center title-blue">
+                Consult Us
+              </h2>
+              <div className="story-underline blue-gradient mx-auto mb-4 "></div>
+            </div>
             {/* Text */}
-            <div
-              className={`col-lg-6 mb-4 mb-lg-0 ${
-                isRTL ? "text-lg-end align-items-lg-end" : "text-center text-lg-start"
-              }`}
-              style={{ textAlign: isRTL ? "right" : "left" }}
-            >
+            <div className="slangText col-lg-6 mb-4 mb-lg-0">
               <h2
+                className="header2"
                 style={{
-                  fontSize: "clamp(2.25rem, 5vw, 4.5rem)",
+                  fontSize: "clamp(2.25rem, 5vw, 4.5rem)", // Responsive font size
                   fontWeight: 700,
                   fontFamily: "var(--font-title)",
                   lineHeight: 1.3,
                   color: "var(--navbar-bg)",
                 }}
               >
-                {t.consultUs.header1}
-                <span
-                  style={{
-                    fontSize: "2.8rem",
-                    marginTop: "-1rem",
-                    display: "block",
-                  }}
-                >
-                  {t.consultUs.header2}
+                Need Assistance?
+                <span style={{ fontSize: "2.8rem", marginTop: "-1rem" }}>
+                  Schedule a Consultation.
                 </span>
+                {/* <div className="story-underline blue-gradient"></div> */}
               </h2>
               <p
                 style={{
@@ -68,25 +55,25 @@ const ConsultUsSection: React.FC = () => {
                   marginBottom: "1.5rem",
                   lineHeight: "1.6",
                   maxWidth: "95%",
-                  textAlign: isRTL ? "right" : "left",
                 }}
               >
-                {t.consultUs.description}
+                Our team is always ready to support you.
+                <br /> Get Your Free Consultation Today!
               </p>
-              <PrimaryButton onClick={openModal}>
-                {t.consultUs.buttonText}
-              </PrimaryButton>
+              <PrimaryButton onClick={openModal}>CONSULT US</PrimaryButton>
             </div>
 
-            {/* Video */}
+            {/* Image + Border */}
             <div className="col-lg-6 d-flex justify-content-center">
-              <div className="animated-border-wrapper">
+              <div className="animated-border-wrapper" style={{height:"40% !important"}}>
+             
                 <video
-                  src="/videos/WhatsApp Video.mp4"
+                  src="/videos/Leap_Tech_Development.mp4"
                   autoPlay
+                  controls={false}
                   muted
                   playsInline
-                  preload="auto"
+                  preload="auto" 
                   loop
                   style={{
                     width: "100%",
@@ -106,13 +93,14 @@ const ConsultUsSection: React.FC = () => {
         {/* Modal */}
         <Modal show={show} onHide={closeModal} centered size="lg">
           <Modal.Header closeButton className="form-section">
-            <Modal.Title className="form-title">{t.consultUs.modalTitle}</Modal.Title>
+            <Modal.Title className="form-title">Consult Us</Modal.Title>
           </Modal.Header>
           <Modal.Body className="form-section">
             <ConsultUsForm />
           </Modal.Body>
         </Modal>
       </section>
+
       {/* 🔥 Styled JSX for animated gradient border */}
       <style jsx>{`
         .story-underline.blue-gradient {
