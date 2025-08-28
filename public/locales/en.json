@@ -1,24 +1,58 @@
 {
-    "navbar": {
-      "home": "HOME",
-      "aboutUs": "ABOUT US",
-      "services": "SERVICES",
-      "contactUs": "CONTACT US",
-      "career": "CAREER",
-      "language": "Language"
-    },
-    "footer": {
-        "company": "Company",
-        "about": "About Us",
-        "services": "Services",
-        "contact": "Contact Us",
-        "followUs": "Follow Us",
-        "address": "123 Street Name, City, Country",
-        "phone": "+123 456 7890",
-        "email": "info@example.com",
-        "rights": "© 2025 Your Company. All Rights Reserved."
-      }
-    
-    
-  }
-  
+  "navbar": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "services": "Services",
+    "contactUs": "Contact Us",
+    "career": "Career"
+  },
+  "footer": {
+    "company": "Keep in touch",
+    "address": "Salmiya, Salem Al Mubarak St., Block 4, Omniya Centre - G Floor - Office 8",
+    "office": "Omniya Centre - G Floor - Office 8",
+    "phone": "+965 2571 3432",
+    "email": "info@leaptechkw.com",
+    "services": "Site Links",
+    "about": "Inner Links",
+    "followUs": "Follow Us",
+    "rights": "© 2025 Leap Tech KW. All Rights Reserved."
+  },
+  "heroSection": {
+    "titlePart1": "Empowering Your",
+    "titlePart2": "Digital Business",
+    "subtitle": "INNOVATE. INTEGRATE. ELEVATE.",
+    "slogan1": "We Build It. You Own It.",
+    "slogan2": "Web, Mobile, and Digital Marketing.",
+    "button": "LEARN MORE"
+  },
+  "ourStory": {
+    "title": "Our Story",
+    "description": "Leap Tech has been instrumental in transforming the digital landscape for businesses of all sizes, from ambitious startups to established enterprises. By delivering tailored Software-as-a-Service (SaaS) and Platform-as-a-Service (PaaS) solutions, the company has empowered local businesses to optimize their operations, streamline workflows, and enhance customer experiences. As a result, clients have witnessed significant revenue growth, improved efficiency, and strengthened brand loyalty. With a commitment to innovation and excellence, Leap Tech has not only enabled companies to thrive in a competitive market but has also set new benchmarks for superior customer service, fostering lasting relationships between businesses and their audiences.",
+    "readMore": "Read More",
+    "showLess": "Show Less"
+  } ,
+  "services": {
+    "title": "Our Services",
+    "webAppTitle": "Web Application",
+    "webAppDesc": "Professional websites and e-commerce platforms tailored to your brand.",
+    "eBusinessTitle": "E-Business",
+    "eBusinessDesc": "Boost brand visibility and engagement through digital strategies.",
+    "digitalMarketingTitle": "Digital Marketing",
+    "digitalMarketingDesc": "Drive growth and conversions through targeted campaigns, SEO, and data-driven digital strategies.",
+    "mobileAppTitle": "Mobile Application",
+    "mobileAppDesc": "Robust, user-friendly apps for iOS and Android platforms.",
+    "smartHomeTitle": "Smart Home",
+    "smartHomeDesc": "Enhance your living space with automated systems for security, lighting, and climate control.",
+    "cloudTitle": "Cloud Storage",
+    "cloudDesc": "Securely store and access your data anytime, anywhere with scalable and reliable cloud solutions.",
+    "finTechTitle": "FinTech",
+    "finTechDesc": "Empower your financial operations with innovative, secure, and scalable technology tailored for modern businesses."
+  },
+    "consultUs": {
+      "header1": "Need Assistance?",
+      "header2": "Schedule a Consultation",
+      "description": "Our team is always ready to support you. Get your free consultation today!",
+      "buttonText": "CONSULT US",
+      "modalTitle": "Consult Us"
+    }
+}

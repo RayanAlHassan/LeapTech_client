@@ -1,4 +1,3 @@
-
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { useState, useEffect } from "react";
@@ -11,8 +10,9 @@ import Loader from "@/components/ui/Loader";
 import Head from "next/head";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { LanguageProvider } from "@/context/LanguageContext";
 
-export default function App({ Component, pageProps }: AppProps ) {
+export default function App({ Component, pageProps }: AppProps) {
   const [navHeight, setNavHeight] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -48,7 +48,7 @@ export default function App({ Component, pageProps }: AppProps ) {
   }, [nextRouter]);
 
   return (
-    <>
+    <LanguageProvider>
       {isLoading && <Loader />}
 
       <Head>
@@ -77,6 +77,6 @@ export default function App({ Component, pageProps }: AppProps ) {
       </AnimatePresence>
 
       <Footer />
-    </>
+    </LanguageProvider>
   );
 }

@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState,useEffect } from "react";
 import PrimaryButton from "../ui/PrimaryButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 const OurStorySection: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = useLanguage(); // Use language context
+  const [mounted, setMounted] = useState(false);
+
 
   const toggleReadMore = () => {
     setIsExpanded(!isExpanded);
   };
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null; // prevent SSR mismatch
 
   return (
     <section
@@ -14,33 +24,24 @@ const OurStorySection: React.FC = () => {
         isExpanded ? "expanded-bg" : ""
       }`}
     >
+      <div className={`background-gradient ${isExpanded ? "fade-out" : "fade-in"}`} />
+      <div className={`background-solid ${isExpanded ? "fade-in" : "fade-out"}`} />
 
-<div className={`background-gradient ${isExpanded ? "fade-out" : "fade-in"}`} />
-<div className={`background-solid ${isExpanded ? "fade-in" : "fade-out"}`} />
-
-
-      <h2 className="our-story-title mb-4 text-center text-white">Our Story</h2>
+      <h2 className="our-story-title mb-4 text-center text-white">
+        {t.ourStory.title}
+      </h2>
       <div className="story-underline mx-auto mb-4"></div>
 
       <p className={`story-text mx-auto ${isExpanded ? "expanded" : "clamped"}`}>
-        {`Leap Tech has been instrumental in transforming the digital landscape for businesses
-          of all sizes, from ambitious startups to established enterprises. By delivering tailored
-          Software-as-a-Service (SaaS) and Platform-as-a-Service (PaaS) solutions, the
-          company has empowered local businesses to optimize their operations, streamline
-          workflows, and enhance customer experiences. As a result, clients have witnessed
-          significant revenue growth, improved efficiency, and strengthened brand loyalty.
-          With a commitment to innovation and excellence, Leap Tech has not only enabled
-          companies to thrive in a competitive market but has also set new benchmarks for
-          superior customer service, fostering lasting relationships between businesses and
-          their audiences.`.split(" ").map((word, i) => (
-            <span key={i} className="highlight-word">
-              {word}{" "}
-            </span>
-          ))}
+        {t.ourStory.description.split(" ").map((word, i) => (
+          <span key={i} className="highlight-word">
+            {word}{" "}
+          </span>
+        ))}
       </p>
 
-      <PrimaryButton onClick={toggleReadMore} className="btn btn-outline-light">
-        {isExpanded ? "Show Less" : "Read More"}
+      <PrimaryButton onClick={toggleReadMore} className="btn btn-outline-light mt-3">
+        {isExpanded ? t.ourStory.showLess : t.ourStory.readMore}
       </PrimaryButton>
     </section>
   );
