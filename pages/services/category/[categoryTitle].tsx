@@ -64,7 +64,7 @@ const CategoryDetailPage = () => {
     </button> */}
        {/* Back Button */}
        <div className="mb-4 text-left">
-          <button className="career-btn" onClick={() => router.push("/career")}>
+          <button className="career-btn"  onClick={() => router.back()}>
             ← Back to Careers
           </button>
         </div>
