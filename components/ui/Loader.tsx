@@ -15,7 +15,7 @@
 import React from "react";
 
 export default function Loader() {
-  const text = "LibTech";
+  const text = "LeapTech";
 
   return (
     <div className="loader-overlay d-flex justify-content-center align-items-center">
