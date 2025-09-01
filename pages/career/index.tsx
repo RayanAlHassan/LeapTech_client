@@ -65,7 +65,7 @@ const CareersPage: React.FC = () => {
     }
 
     try {
-      setSubmittingCv(true); // start loading
+      setSubmittingCv(true);
       const fd = new FormData();
       fd.append("name", cvForm.name);
       fd.append("email", cvForm.email);
@@ -86,102 +86,59 @@ const CareersPage: React.FC = () => {
       }
       setCvMsg(message);
     } finally {
-      setSubmittingCv(false); // stop loading
+      setSubmittingCv(false);
     }
   };
 
   const renderCardContent = (career: Career) => (
-    <div style={{ position: "relative", height: "100%" }}>
-      {/* Title & Date */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-        <h5 className="career-title mb-0">{career.title}</h5>
-        <span
-          className="posting-date"
-          style={{ fontSize: "0.85rem", color: "#555" }}
-        >
+    <div className="d-flex flex-column h-100 justify-content-between">
+      <div>
+        <h5 className="career-title mb-1">{career.title}</h5>
+        <span className="posting-date">
           {new Date(career.createdAt).toLocaleDateString()}
         </span>
+        <div className="career-meta mt-2">
+          {career.location && (
+            <div>
+              <strong>Location:</strong>{" "}
+              <span className="meta-text">{career.location}</span>
+            </div>
+          )}
+          {career.employmentType && (
+            <div>
+              <strong>Type:</strong>{" "}
+              <span className="meta-text">{career.employmentType}</span>
+            </div>
+          )}
+          {career.experienceLevel && (
+            <div>
+              <strong>Level:</strong>{" "}
+              <span className="meta-text">{career.experienceLevel}</span>
+            </div>
+          )}
+        </div>
+        <p className="career-desc mt-2">
+          {truncateDescription(career.description)}
+        </p>
       </div>
 
-      {/* Meta Info */}
-      <div
-        className="career-meta"
-        style={{
-          marginTop: "1rem",
-          display: "flex",
-          flexDirection: "column",
-          gap: "4px",
-          marginBottom: "1rem",
-        }}
-      >
-        {career.location && (
-          <div>
-            <strong>Location:</strong>{" "}
-            <span className="meta-text">{career.location}</span>
-          </div>
-        )}
-        {career.employmentType && (
-          <div>
-            <strong>Type:</strong>{" "}
-            <span className="meta-text">{career.employmentType}</span>
-          </div>
-        )}
-        {career.experienceLevel && (
-          <div>
-            <strong>Level:</strong>{" "}
-            <span className="meta-text">{career.experienceLevel}</span>
-          </div>
-        )}
+      <div className="text-end mt-3">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            router.push(`/career/${career._id}`);
+          }}
+          className="btn-view"
+        >
+          View
+        </button>
       </div>
-
-      {/* Description */}
-      <p className="career-desc" style={{}}>
-        {truncateDescription(career.description)}
-      </p>
-
-      {/* Fully independent View button at bottom-right */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          router.push(`/career/${career._id}`);
-        }}
-        style={{
-          all: "unset",
-          position: "absolute",
-          bottom: "15px",
-          right: "15px",
-          padding: "0.5rem 1.2rem",
-          border: "2px solid var(--navbar-bg)",
-          color: "var(--navbar-bg)",
-          backgroundColor: "transparent",
-          fontWeight: 600,
-          borderRadius: "8px",
-          textAlign: "center",
-          cursor: "pointer",
-          transition: "all 0.3s ease-in-out",
-          zIndex: 100,
-          display: "inline-block",
-        }}
-        onMouseEnter={(e) => {
-          const btn = e.currentTarget as HTMLButtonElement;
-          btn.style.backgroundColor = "var(--navbar-bg)";
-          btn.style.color = "var(--gray-bg)";
-        }}
-        onMouseLeave={(e) => {
-          const btn = e.currentTarget as HTMLButtonElement;
-          btn.style.backgroundColor = "transparent";
-          btn.style.color = "var(--navbar-bg)";
-        }}
-      >
-        View
-      </button>
     </div>
   );
 
   return (
     <section className="py-5 careers-section">
       <div className="container">
-        {/* Title with gradient underline */}
         <h2 className="contact-title mb-4 text-center">
           Careers
           <div className="underline-gradient mx-auto mt-1"></div>
@@ -198,44 +155,24 @@ const CareersPage: React.FC = () => {
             </p>
           </div>
         )}
+
         {!loading && openJobs.length > 0 && (
           <>
-            {/* Desktop Grid */}
-            <div className="d-none d-lg-flex flex-wrap gap-4 justify-content-start mb-4">
-              {openJobs.map((career) => (
-                <div
-                  key={career._id}
-                  className="career-card single_service p-3 rounded shadow flex-fill cursor-pointer"
-                  style={{ minWidth: "30%", maxWidth: "32%", height: "380px" }}
-                  onClick={() => router.push(`/career/${career._id}`)} // make entire card clickable
-                >
-                  {renderCardContent(career)}
-                </div>
-              ))}
-            </div>
+            {/* Responsive Grid */}
+            <div className="row justify-content-center gap-4 mb-4">
+  {openJobs.map((career) => (
+    <div key={career._id} className="career-card-col mb-4">
+    <div
+      className="career-card single_service p-3 rounded shadow h-100 d-flex flex-column justify-content-between cursor-pointer"
+      onClick={() => router.push(`/career/${career._id}`)}
+    >
+      {renderCardContent(career)}
+    </div>
+  </div>
+  
+  ))}
+</div>
 
-            {/* Mobile / Tablet Swiper */}
-            <div className="d-lg-none mb-4">
-              <Swiper
-                modules={[Pagination]}
-                spaceBetween={20}
-                slidesPerView={1.2}
-                centeredSlides
-                pagination={{ clickable: true }}
-              >
-                {openJobs.map((career) => (
-                  <SwiperSlide key={career._id}>
-                    <div
-                      className="career-card single_service p-3 rounded shadow cursor-pointer mx-auto"
-                      style={{ maxWidth: "90%", height: "380px" }}
-                      onClick={() => router.push(`/career/${career._id}`)}
-                    >
-                      {renderCardContent(career)}
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
           </>
         )}
 
@@ -321,38 +258,35 @@ const CareersPage: React.FC = () => {
                   </button>
                 </div>
               </form>
-        
-              {submittingCv && (
-            <div
-              style={{
-                marginTop: "20px",
-                width: "150px",
-                marginInline: "auto",
-              }}
-            >
 
-              <Lottie
-                animationData={lootie}
-                loop={true}
-                style={{ width: "150px", height: "150px" }}
-              />
-            </div>
-          )}
+              {submittingCv && (
+                <div
+                  style={{
+                    marginTop: "20px",
+                    width: "150px",
+                    marginInline: "auto",
+                  }}
+                >
+                  <Lottie
+                    animationData={lootie}
+                    loop
+                    style={{ width: "150px", height: "150px" }}
+                  />
+                </div>
+              )}
               {cvMsg && <p className="mt-3 text-center">{cvMsg}</p>}
             </div>
           </div>
         </div>
       </div>
 
-      <style jsx>{`
-        /* Background */
+      <style global>{`
         .careers-section {
           background-color: var(--gray-bg);
           min-height: 100vh;
           padding: 100px 20px;
         }
 
-        /* Title & underline */
         .contact-title {
           font-size: clamp(2.25rem, 5vw, 4.5rem);
           font-weight: 700;
@@ -360,7 +294,6 @@ const CareersPage: React.FC = () => {
           line-height: 1.3;
           position: relative;
           display: inline-block;
-          margin-bottom: 2rem;
           color: var(--navbar-bg);
         }
 
@@ -368,33 +301,18 @@ const CareersPage: React.FC = () => {
           width: 120px;
           height: 4px;
           border-radius: 5px;
-          background: linear-gradient(
-            90deg,
-            var(--navbar-bg) 0%,
-            rgba(25, 51, 93, 0.7) 50%,
-            var(--accent-blue) 100%
-          );
+          background: linear-gradient(90deg, var(--navbar-bg) 0%, rgba(25,51,93,0.7) 50%, var(--accent-blue) 100%);
           animation: underlinePulse 2s infinite ease-in-out;
           margin-top: 0.5rem;
           transform-origin: center;
         }
 
         @keyframes underlinePulse {
-          0% {
-            transform: scaleX(0);
-            opacity: 0.6;
-          }
-          50% {
-            transform: scaleX(1);
-            opacity: 1;
-          }
-          100% {
-            transform: scaleX(0);
-            opacity: 0.6;
-          }
+          0% { transform: scaleX(0); opacity: 0.6; }
+          50% { transform: scaleX(1); opacity: 1; }
+          100% { transform: scaleX(0); opacity: 0.6; }
         }
 
-        /* Card hover effect: only scale, no color change */
         .career-card.single_service {
           background-color: var(--gray-bg);
           border-radius: 12px;
@@ -404,40 +322,97 @@ const CareersPage: React.FC = () => {
           flex-direction: column;
           justify-content: space-between;
           transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-          cursor: default; /* remove pointer */
           color: var(--navbar-bg);
+          height: 100%;
         }
+
         .career-card.single_service:hover {
           box-shadow: 0 10px 24px rgba(25, 51, 93, 0.2);
           border: 1px solid var(--accent-blue);
           cursor: pointer;
         }
 
-        /* Button view */
-        /* your global CSS file */
         .btn-career {
-          background-color: transparent !important; /* main color */
-          color: var(--navbar-bg) !important; /* force white text */
+          background-color: transparent !important;
+          color: var(--navbar-bg) !important;
           border: 1px solid var(--navbar-bg) !important;
           transition: all 0.3s ease !important;
         }
 
         .btn-career:hover {
-          background-color: var(--navbar-bg) !important; /* darker shade */
+          background-color: var(--navbar-bg) !important;
           color: white !important;
         }
+
         .career-title {
           font-weight: 700;
           color: var(--navbar-bg);
         }
+
         .career-meta strong {
-          font-weight: 700; /* bold labels */
+          font-weight: 700;
           color: var(--navbar-bg);
         }
+
         .career-meta .meta-text {
-          font-weight: 400; /* regular text after colon */
+          font-weight: 400;
           color: #333;
         }
+
+        .btn-view {
+          padding: 0.5rem 1.2rem;
+          border: 2px solid var(--navbar-bg);
+          color: var(--navbar-bg);
+          background-color: transparent;
+          font-weight: 600;
+          border-radius: 8px;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.3s ease-in-out;
+        }
+
+        .btn-view:hover {
+          background-color: var(--navbar-bg);
+          color: var(--gray-bg);
+        }
+
+        @media (max-width: 991px) {
+          .btn-view {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.85rem;
+          }
+        }
+        /* Mobile: 1 column */
+        .career-card-col {
+          flex: 0 0 100%;
+          max-width: 100%;
+        }
+        
+        /* Tablet (iPad Mini & Air): 2 columns */
+        @media (min-width: 768px) and (max-width: 1024px) {
+          .career-card-col {
+            flex: 0 0 48%;
+            max-width: 48%;
+          }
+        }
+        
+        /* Desktop (iPad Pro 12.9 and bigger): 3 columns */
+        @media (min-width: 1025px) {
+          .career-card-col {
+            flex: 0 0 31%;
+            max-width: 31%;
+          }
+        }
+        
+        /* Row container flex */
+        .row-careers {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 2%;
+        }
+        
+        
       `}</style>
     </section>
   );
