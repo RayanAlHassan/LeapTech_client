@@ -221,7 +221,8 @@ const CareerDetailPage: React.FC = () => {
                     className="career-btn w-50 btn-lg"
                     disabled={submitting}
                   >
-                    {submitting ? "Submitting..." : "Submit Application"}
+                    Submit
+                    {/* {submitting ? "Submitting..." : "Submit Application"} */}
                   </button>
                 </div>
               </form>
@@ -232,14 +233,15 @@ const CareerDetailPage: React.FC = () => {
             <div
               style={{
                 marginTop: "20px",
-                width: 100,
+                width: "150px",
                 marginInline: "auto",
               }}
             >
+
               <Lottie
                 animationData={lootie}
                 loop={true}
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "150px", height: "150px" }}
               />
             </div>
           )}

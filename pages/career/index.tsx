@@ -321,18 +321,20 @@ const CareersPage: React.FC = () => {
                   </button>
                 </div>
               </form>
+        
               {submittingCv && (
             <div
               style={{
                 marginTop: "20px",
-                width: 100,
+                width: "150px",
                 marginInline: "auto",
               }}
             >
+
               <Lottie
                 animationData={lootie}
                 loop={true}
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "150px", height: "150px" }}
               />
             </div>
           )}

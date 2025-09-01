@@ -5,11 +5,11 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 // import logo from "@/public/images/leapkwlogo.png"
-import logo from "@/public/images/logonew.png"
+import logo from "@/public/images/logonew.png";
 
 // import logo from "@/public/images/WhatsApp Image 2025-07-27 at 11.09.13 AM (1).jpeg";
 import PrimaryButton from "./ui/PrimaryButton";
-import Animatedburger from "./ui/AnimatedHamburger"; 
+import Animatedburger from "./ui/AnimatedHamburger";
 
 interface NavbarProps {
   onHeightChange: (height: number) => void;
@@ -72,6 +72,10 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
     };
   }, []);
 
+  // useEffect(() => {
+  //   // Close mobile menu whenever route changes
+  //   setIsMenuOpen(false);
+  // }, [pathname]);
   return (
     <nav
       ref={navRef}
@@ -126,7 +130,7 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
               HOME
             </a>
           </Link>
-          
+
           <Link href="/AboutUs" legacyBehavior>
             <a
               className={`nav-link underline-anim ${
@@ -162,6 +166,7 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
         <div className="d-none d-lg-flex align-items-center gap-3">
           <Link href="/career">
             <button
+              onClick={toggleMenu}
               className={`btn lang-toggle-btn px-4 ${
                 pathname === "/career" ? "active-career" : ""
               }`}
@@ -232,6 +237,7 @@ const Navbar: React.FC<NavbarProps> = ({ onHeightChange }) => {
             <Link href="/career" legacyBehavior>
               <a>
                 <PrimaryButton
+                  onClick={toggleMenu}
                   className={`primary-button ${
                     pathname === "/career" ? "active-career" : ""
                   }`}
