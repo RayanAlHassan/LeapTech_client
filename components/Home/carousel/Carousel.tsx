@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 import webImage from "@/public/images/website.png";
-import socialImage from "@/public/images/digital.png";
+import socialImage from "@/public/images/eBusiness.png";
 import mobileImage from "@/public/images/mobileApps.png";
 import seo from "@/public/images/seo.png";
 import smartHome from "@/public/images/smartHomeBlue.png";

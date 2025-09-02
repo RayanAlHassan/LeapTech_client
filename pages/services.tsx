@@ -4,12 +4,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import categoryImages from "@/categoryImages";
+// import categoryImages from "@/categoryImages";
 
 interface Category {
   _id: string;
   title: string;
   description: string;
+  image: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -74,7 +75,7 @@ const CheckService = () => {
         <div className="row gy-4 justify-content-center single_service_container animated-container">
           {sortedCategories.map((category) => {
             const key = category.title.trim().toLowerCase();
-            const image = categoryImages[key] || categoryImages["web development"];
+            // const image = categoryImages[key] || categoryImages["web development"];
             const unclickableTitles = ["smart home", "cloud storage"];
             const isClickable = !unclickableTitles.includes(key);
 
@@ -99,8 +100,8 @@ const CheckService = () => {
                   <div className="top">
                     <span className="icon">
                       <Image
-                        src={image}
-                        alt={category.title}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/images/${category.image}`}
+                  alt={category.title}
                         width={60}
                         height={60}
                         style={{ width: "60px", height: "60px", objectFit: "contain" }}
