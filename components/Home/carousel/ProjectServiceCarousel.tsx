@@ -60,8 +60,8 @@ const ProjectServiceCarousel: React.FC<Props> = ({ categoryTitle }) => {
   };
 
   if (loading) return <p style={{ textAlign: "center" }}>Loading projects...</p>;
-  if (!projects.length) return <p style={{ textAlign: "center" }}>No projects found for {categoryTitle}.</p>;
-
+  // if (!projects.length) return <p style={{ textAlign: "center" }}>No projects found for {categoryTitle}.</p>;
+  if (!projects.length) return null
   return (
     <section
       className="shadow"
