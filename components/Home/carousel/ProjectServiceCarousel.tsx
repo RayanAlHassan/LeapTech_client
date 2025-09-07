@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -31,37 +30,31 @@ const ProjectServiceCarousel: React.FC<Props> = ({ categoryTitle }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Fetch projects by category
   useEffect(() => {
     if (!categoryTitle) return;
-  
     setLoading(true);
     axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/projects/category/title/${encodeURIComponent(categoryTitle)}`)
+      .get(
+        `${process.env.NEXT_PUBLIC_API_URL}/projects/category/title/${encodeURIComponent(
+          categoryTitle
+        )}`
+      )
       .then((res) => setProjects(res.data))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [categoryTitle]);
-  
-  const isSmallScreen = windowWidth < 768;
-  const isMediumScreen = windowWidth >= 768 && windowWidth < 1200;
-  const isWideScreen = windowWidth >= 1200;
-  const isMediumOrWideScreen = windowWidth >= 768;
 
   const handleCardClick = (index: number) => setActiveIndex(index);
+  const handleClose = () => setActiveIndex(null);
 
-  const handleClose = () => {
-    if (activeIndex === null) return;
-    const updated = [...projects];
-    const [closed] = updated.splice(activeIndex, 1);
-    updated.push(closed);
-    setProjects(updated);
-    setActiveIndex(null);
-  };
+  if (loading)
+    return <p style={{ textAlign: "center" }}>Loading projects...</p>;
+  if (!projects.length) return null;
 
-  if (loading) return <p style={{ textAlign: "center" }}>Loading projects...</p>;
-  // if (!projects.length) return <p style={{ textAlign: "center" }}>No projects found for {categoryTitle}.</p>;
-  if (!projects.length) return null
+  const isSmallScreen = windowWidth < 768;
+  const isMediumScreen = windowWidth >= 768 && windowWidth < 1000;
+  const isWideScreen = windowWidth >= 1200;
+
   return (
     <section
       className="shadow"
@@ -95,179 +88,133 @@ const ProjectServiceCarousel: React.FC<Props> = ({ categoryTitle }) => {
           />
         </h2>
 
-        <div
-          className="cards-wrapper"
-          style={{
-            position: "relative",
-            display: "flex",
-            flexWrap: isWideScreen ? "nowrap" : "wrap",
-            justifyContent: "center",
-            alignItems: "stretch",
-            gap: isWideScreen ? 0 : "1.5rem",
-            width: "100%",
-            padding: "1rem",
-            height: isWideScreen ? 420 : "auto",
-          }}
-        >
-          {projects.map((project, index) => {
-            const isActive = index === activeIndex;
-            if (isMediumOrWideScreen && activeIndex !== null && !isActive) return null;
+        {/* Show carousel only if no active project */}
+        {activeIndex === null && (
+          <div
+            className="cards-wrapper"
+            style={{
+              position: "relative",
+              display: "flex",
+              flexWrap: isWideScreen ? "nowrap" : "wrap",
+              justifyContent: "center",
+              alignItems: "stretch",
+              gap: isWideScreen ? 0 : "1.5rem",
+              width: "100%",
+              padding: "1rem",
+              height: isWideScreen ? 420 : "auto",
+            }}
+          >
+            {projects.map((project, index) => {
+              const offset =
+                isWideScreen && activeIndex === null
+                  ? (index - Math.floor(projects.length / 2)) * 80
+                  : 0;
 
-            const offset = isWideScreen && activeIndex === null
-              ? (index - Math.floor(projects.length / 2)) * 80
-              : 0;
-
-            return (
-              <React.Fragment key={project._id}>
+              return (
                 <motion.div
-                  onClick={() => handleCardClick(index)}
-                  style={{
-                    width: isSmallScreen ? "100%" : isMediumScreen ? "45%" : 600,
-                    height: isWideScreen && activeIndex === null ? 400 : "auto",
-                    position: isWideScreen && activeIndex === null ? "absolute" : "relative",
-                    borderRadius: 15,
-                    backgroundColor: "#fff",
-                    border: "1px solid #ccc",
-                    overflow: "hidden",
-                    boxShadow: isActive ? "0 10px 40px rgba(0,0,0,0.4)" : "none",
-                    scale: isActive ? 1.05 : 0.96,
-                    translateX: offset,
-                    cursor: "pointer",
-                  }}
-                  animate={{
-                    scale: isActive ? 1.05 : 0.96,
-                    translateX: offset,
-                    boxShadow: isActive ? "0 10px 40px rgba(0,0,0,0.4)" : "none",
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                >
-                  <div style={{ position: "relative", width: "100%", height: isWideScreen ? "100%" : 200 }}>
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/images/${project.image}`}
-                      alt={project.title}
-                      fill
-                      style={{ objectFit: "cover", pointerEvents: "none" }}
-                      draggable={false}
-                    />
-                  </div>
-                </motion.div>
+                key={project._id}
+                onClick={() => handleCardClick(index)}
+                style={{
+                  width: isSmallScreen ? "100%" : isMediumScreen ? "45%" : 600,
+                  height: isWideScreen ? 400 : 200,
+                  position: isWideScreen ? "absolute" : "relative",
+                  borderRadius: 15,
+                  overflow: "hidden",
+                  cursor: "pointer",
+                }}
+                animate={{
+                  translateX: offset,
+                  scale: 0.96,
+                }}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              >
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/images/${project.image}`}
+                  alt={project.title}
+                  fill
+                  style={{ objectFit: "cover", pointerEvents: "none" }}
+                  draggable={false}
+                />
+              </motion.div>
+              
+              );
+            })}
+          </div>
+        )}
 
-                {(isSmallScreen || isMediumScreen) && isActive && (
-                  <motion.div
-                    key="project-details"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 30 }}
-                    transition={{ duration: 0.4 }}
-                    style={{
-                      marginTop: 20,
-                      textAlign: "left",
-                      width: isSmallScreen ? "90%" : 320,
-                      color: "#19335d",
-                      backgroundColor: "#fff",
-                      borderRadius: 12,
-                      boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
-                      padding: "20px 25px",
-                      border: "1px solid #ddd",
-                      position: "relative",
-                    }}
-                  >
-                    <div style={{ position: "relative" }}>
-                      <button
-                        onClick={handleClose}
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          right: 0,
-                          background: "none",
-                          border: "none",
-                          fontSize: "1.2rem",
-                          cursor: "pointer",
-                          color: "#aaa",
-                        }}
-                        aria-label="Close"
-                      >
-                        &times;
-                      </button>
-                    </div>
-                    <h3 style={{ fontSize: "1.4rem", marginBottom: "0.5rem" }}>{project.title}</h3>
-                    <p style={{ fontSize: "0.95rem", color: "#555" }}>{project.description}</p>
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        display: "inline-block",
-                        marginTop: 10,
-                        padding: "8px 16px",
-                        backgroundColor: "#19335d",
-                        color: "white",
-                        borderRadius: 6,
-                        textDecoration: "none",
-                        fontSize: "0.9rem",
-                      }}
-                    >
-                      Visit Project
-                    </a>
-                  </motion.div>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </div>
-
+        {/* Show single full card if project is active */}
         <AnimatePresence>
-          {activeIndex !== null && !isSmallScreen && !isMediumScreen && (
+          {activeIndex !== null && (
             <motion.div
-              key="project-details"
+              key="active-project"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 30 }}
               transition={{ duration: 0.4 }}
               style={{
-                marginTop: 20,
+                marginTop: 30,
                 textAlign: "left",
-                width: isSmallScreen ? "90%" : 320,
-                position: "relative",
-                color: "#19335d",
+                width: isSmallScreen ? "95%" : "70%",
+                maxWidth: 900,
                 backgroundColor: "#fff",
-                borderRadius: 12,
-                boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
-                padding: "20px 25px",
+                borderRadius: 15,
+                boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
+                padding: "25px",
                 border: "1px solid #ddd",
+                position: "relative",
               }}
             >
               <button
                 onClick={handleClose}
                 style={{
                   position: "absolute",
-                  top: 10,
-                  right: 12,
+                  top: "0px",
+                  right: "0.2rem",
                   background: "none",
                   border: "none",
-                  fontSize: "1.2rem",
+                  fontSize: "1.75rem",
                   cursor: "pointer",
-                  color: "#aaa",
+                  color: "rgb(229 11 23)",
                 }}
                 aria-label="Close"
               >
                 &times;
               </button>
-              <h3 style={{ fontSize: "1.4rem", marginBottom: "0.5rem" }}>{projects[activeIndex].title}</h3>
-              <p style={{ fontSize: "0.95rem", color: "#555" }}>{projects[activeIndex].description}</p>
+
+              <div style={{ marginBottom: 20 }}>
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/images/${projects[activeIndex].image}`}
+                  alt={projects[activeIndex].title}
+                  width={800}
+                  height={260}
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    borderRadius: 10,
+                  }}
+                />
+              </div>
+
+              <h3 style={{ fontSize: "1.6rem", marginBottom: "0.5rem" }}>
+                {projects[activeIndex].title}
+              </h3>
+              <p style={{ fontSize: "1rem", color: "#555" }}>
+                {projects[activeIndex].description}
+              </p>
               <a
                 href={projects[activeIndex].url}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
                   display: "inline-block",
-                  marginTop: 10,
-                  padding: "8px 16px",
+                  marginTop: 15,
+                  padding: "10px 20px",
                   backgroundColor: "#19335d",
                   color: "white",
-                  borderRadius: 6,
+                  borderRadius: 8,
                   textDecoration: "none",
-                  fontSize: "0.9rem",
+                  fontSize: "1rem",
                 }}
               >
                 Visit Project
